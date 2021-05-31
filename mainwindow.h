@@ -3,11 +3,10 @@
 
 #include <QMainWindow>
 
-
-
-#include "globalvars.h"
-#include "chnlclass_simple.h"
-#include "loggerthread.h"
+#include "classes/globalvars.h"
+#include "classes/chnlclass_simple.h"
+#include "classes/loggerthread.h"
+#include "graphwin.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +22,10 @@ public:
 
 signals:
     void tx_setChannelEnable(int chnl, bool enable);
+    void tx_setSampleTime(int sec);
+
+
+
 
 public slots:
     void on_pb_Channel_Clicked();
@@ -47,6 +50,7 @@ private:
 
     loggerThread *loggerClass;
     QThread *thrd;
+    graphWin *grphW;
 
     int index_SingleShotTimer = 0;
     int index_Enabler = 0;

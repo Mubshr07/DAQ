@@ -43,7 +43,10 @@ void loggerThread::on_timer_logger_elapsed()
 }
 void loggerThread::on_timer_graphValue_elapsed()
 {
-
+    for(int i=0; i<qv_graphChannels.length(); i++)
+    {
+        emit tx_GraphChannelValue(i, qv_graphChannels.at(i), chnlArray[qv_graphChannels.at(i)].giveCurrentValue());
+    }
 }
 
 
@@ -61,12 +64,48 @@ void loggerThread::rx_loggingStartStop(bool start)
     local_logging = start;
     emit tx_loggingStarted(local_logging);
 }
-void loggerThread::rx_addGraphChannel(int index)
+
+
+void loggerThread::rx_giveMeEnablesChannels()
 {
-
+    for(int i=0; i<TOTAL_CHANNEL; i++)
+    {
+        if(chnlArray[i].isChnlEnable())
+        {
+            if(addFirstEnableChannelinGraph)
+            {
+                addFirstEnableChannelinGraph = false;
+                qv_graphChannels.append(i);
+            }
+            emit tx_EnableChannelsAre(i);
+        }
+    }
 }
-
-
+void loggerThread::rx_AddNewChannelToGraph(int chnlID)
+{
+    if(qv_graphChannels.length() >= 4)
+    {
+        qv_graphChannels.pop_back();
+        qv_graphChannels.append(chnlID);
+    }
+    else
+    {
+        qv_graphChannels.append(chnlID);
+    }
+}
+void loggerThread::rx_RemoveChannelToGraph(int chnlID)
+{
+    int indx = 0;
+    if(qv_graphChannels.length() > 0)
+    {
+        indx = qv_graphChannels.indexOf(chnlID);
+        qv_graphChannels.removeAt(indx);
+    }
+}
+void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
+{
+    graphWindowIsOpen = windOpen;
+}
 
 
 

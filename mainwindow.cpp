@@ -19,12 +19,13 @@ MainWindow::MainWindow(QWidget *parent)
     loggerClass->moveToThread(thrd);
     connect(loggerClass, SIGNAL(tx_channel_Value(int, float)), this, SLOT(rx_ChannelValue(int, float)));
     connect(this, SIGNAL(tx_setChannelEnable(int, bool)), loggerClass, SLOT(rx_setChannelEnableDisable(int, bool)));
+    connect(this, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
     thrd->start();
 
 
     timer_enabler = new QTimer(this);
     connect(timer_enabler, SIGNAL(timeout()), SLOT(on_timer_enabler_elapsed()));
-    timer_enabler->setInterval(1500);
+    timer_enabler->setInterval(100);
     timer_enabler->start();
     index_SingleShotTimer = 0;
     for(int i=0; i<TOTAL_CHANNEL; i++)
@@ -45,6 +46,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_SetConfiguration_clicked()
 {
+    grphW = new graphWin();
+    connect(grphW, SIGNAL(tx_GraphWindowIsOpen(bool)), loggerClass, SLOT(rx_GraphWindowIsOpen(bool)));
+    connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int)));
+    connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int)));
+    connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
+
+    connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), grphW, SLOT(rx_EnableChannelsAre(int)));
+    connect(loggerClass, SIGNAL(tx_GraphChannelValue(int,int,float)), grphW, SLOT(rx_GraphChannelValue(int,int,float)));
+
+
+
+
+    grphW->setModal(true);
+    grphW->exec();
 
 }
 
@@ -148,6 +163,7 @@ void MainWindow::on_timer_singleShot_elapsed()
     switch (index_SingleShotTimer) {
     case 0:{
         connectAllButtonsClickToSingleSlot();
+
         break;
     }
     case 1:{

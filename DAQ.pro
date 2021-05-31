@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,22 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addressing.cpp \
-    chnlclass_simple.cpp \
+    classes/addressing.cpp \
+    classes/chnlclass_simple.cpp \
     classes/qcustomplot.cpp \
-    globalvars.cpp \
+    classes/globalvars.cpp \
+    classes/loggerthread.cpp \
     graphwin.cpp \
-    loggerthread.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    addressing.h \
-    chnlclass_simple.h \
+    classes/addressing.h \
+    classes/chnlclass_simple.h \
     classes/qcustomplot.h \
-    globalvars.h \
+    classes/globalvars.h \
+    classes/loggerthread.h \
     graphwin.h \
-    loggerthread.h \
     mainwindow.h
 
 FORMS += \

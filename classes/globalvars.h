@@ -13,6 +13,8 @@
 #include <QFileInfoList>
 #include <QThread>
 #include <QVariant>
+#include <QVector>
+
 
 #include "qdebug.h"
 

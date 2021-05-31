@@ -21,13 +21,21 @@ signals:
     void tx_graphChnlValue(int chnl, float val);
     void tx_channelisEnabled(int chnl, bool enableVal);
 
+    void tx_EnableChannelsAre(int chnlID);
+    void tx_GraphChannelValue(int indx, int chnl, float val);
+
 
 public slots:
-
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
     void rx_setSampleTime(int sec);
     void rx_loggingStartStop(bool start);
-    void rx_addGraphChannel(int index);
+
+    void rx_AddNewChannelToGraph(int chnlID);
+    void rx_RemoveChannelToGraph(int chnlID);
+    void rx_GraphWindowIsOpen(bool windOpen);
+
+    void rx_giveMeEnablesChannels();
+
 
     void on_timer_logger_elapsed();
     void on_timer_graphValue_elapsed();
@@ -48,7 +56,10 @@ private:
     int32_t *local_ADC6_ADDRESS;
     int32_t *local_ADC7_ADDRESS;
 
-
+    QVector<int> qv_graphChannels;
+    bool graphWindowIsOpen = false;
+    bool logging_isStarted = false;
+    bool addFirstEnableChannelinGraph = true;
 
     int sampleRate_Sec = 2;
     int sampleRate_MS = 100;
