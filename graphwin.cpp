@@ -6,22 +6,25 @@ graphWin::graphWin(QWidget *parent) :
     ui(new Ui::graphWin)
 {
     ui->setupUi(this);
+    this->setFixedSize(1024, 768);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    //this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
 
     qv_EnablChannels.clear();
     qv_availableList.clear();
-    qv_graphList.clear();
     initial_bool = true;
 
-
-
     int lineSize = 2;
-    QPen plot_0(QColor(40, 110, 255));
+    QPen plot_0(plot0_Color);
     plot_0.setWidth(lineSize);
-    QPen plot_1(QColor(12, 222, 12));
+    QPen plot_1(plot1_Color);
     plot_1.setWidth(lineSize);
-    QPen plot_2(QColor(40, 222, 255));
+    QPen plot_2(plot2_Color);
     plot_2.setWidth(lineSize);
-    QPen plot_3(QColor(222, 110, 255));
+    QPen plot_3(plot3_Color);
     plot_3.setWidth(lineSize);
 
     ui->myPlot->addGraph(); // plot 0
@@ -44,55 +47,10 @@ graphWin::graphWin(QWidget *parent) :
     connect(ui->myPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->myPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->yAxis2, SLOT(setRange(QCPRange)));
 
-
-
-
-
-
-
-
-
-/*
-    ui->myPlot->addGraph();
-    ui->myPlot->graph(0)->setPen(QPen(Qt::blue)); // line color blue for first graph
-    ui->myPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20))); // first graph will be filled with translucent blue
-    ui->myPlot->addGraph();
-    ui->myPlot->graph(1)->setPen(QPen(Qt::red)); // line color red for second graph
-    // generate some points of data (y0 for first, y1 for second graph):
-    QVector<double> x(251), y0(251), y1(251);
-    for (int i=0; i<251; ++i)
-    {
-      x[i] = i;
-      y0[i] = qExp(-i/150.0)*qCos(i/10.0); // exponentially decaying cosine
-      y1[i] = qExp(-i/150.0);              // exponential envelope
-    }
-    // configure right and top axis to show ticks but no labels:
-    // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
-    ui->myPlot->xAxis2->setVisible(true);
-    ui->myPlot->xAxis2->setTickLabels(false);
-    ui->myPlot->yAxis2->setVisible(true);
-    ui->myPlot->yAxis2->setTickLabels(false);
-    // make left and bottom axes always transfer their ranges to right and top axes:
-    connect(ui->myPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->xAxis2, SLOT(setRange(QCPRange)));
-    connect(ui->myPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->yAxis2, SLOT(setRange(QCPRange)));
-    // pass data points to graphs:
-    ui->myPlot->graph(0)->setData(x, y0);
-    ui->myPlot->graph(1)->setData(x, y1);
-    // let the ranges scale themselves so graph 0 fits perfectly in the visible area:
-    ui->myPlot->graph(0)->rescaleAxes();
-    // same thing for graph 1, but only enlarge ranges (in case graph 1 is smaller than graph 0):
-    ui->myPlot->graph(1)->rescaleAxes(true);
-    // Note: we could have also just called ui->myPlot->rescaleAxes(); instead
-    // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select graphs by clicking:
-    ui->myPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-*/
-
-
-
     timer_singleShot = new QTimer(this);
     connect(timer_singleShot, SIGNAL(timeout()), this, SLOT(on_timer_singleShot_Elapsed()));
     timer_singleShot->setSingleShot(true);
-    timer_singleShot->start(150);
+    timer_singleShot->start(350);
 
 
 }
@@ -106,29 +64,38 @@ void graphWin::on_timer_singleShot_Elapsed()
 {
     emit tx_GraphWindowIsOpen(true);
     emit tx_giveMeEnablesChannels();
+
+    ui->lbl_Channel_1->setText("");
+    ui->pb_RemoveGraph_1->setEnabled(false);
+    ui->lbl_Channel_2->setText("");
+    ui->pb_RemoveGraph_2->setEnabled(false);
+    ui->lbl_Channel_3->setText("");
+    ui->pb_RemoveGraph_3->setEnabled(false);
 }
 
 
 void graphWin::rx_EnableChannelsAre(int chnlID)
 {
-    qDebug()<<" enable channel is :"<<chnlID;
+    //qDebug()<<" enable channel is :"<<chnlID;
     qv_EnablChannels.append(chnlID);
     if(initial_bool)
     {
         initial_bool = false;
-        qv_graphList.append(chnlID);
-        ui->cmb_graphList->addItem(QString::number(chnlID, 10));
+        availIndex[0] = true;
+        graphedChannels[0] = chnlID;
+        ui->lbl_Channel_0->setText(QString::number(chnlID));
+        ui->pb_RemoveGraph_0->setEnabled(true);
     }
     else
     {
-        qv_EnablChannels.append(chnlID);
+        qv_availableList.append(chnlID);
         ui->cmb_AddList->addItem(QString::number(chnlID, 10));
     }
 }
 
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
-    qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
+    //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
 
 
 
@@ -176,22 +143,174 @@ void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 }
 
 
-void graphWin::on_graphWin_destroyed()
-{
-    emit tx_GraphWindowIsOpen(false);
-}
-
 void graphWin::on_pb_Add_toGraph_clicked()
 {
     int chnlInt = ui->cmb_AddList->currentText().toInt();
-    emit tx_AddNewChannelToGraph(chnlInt);
-    ui->cmb_graphList->addItem(QString::number(chnlInt));
+    chnl4thIsAppliable = false;
+    int indx = 3;
+    for(int i=0; i<4; i++)
+    {
+        if(availIndex[i] == false)
+        {
+            indx = i;
+            if(i==3) chnl4thIsAppliable = true;
+            break;
+        }
+    }
+    //qDebug()<<" availIndex[indx] : "<<indx;
 
+    emit tx_AddNewChannelToGraph(indx, chnlInt);
+    graphedChannels[indx] = chnlInt;
+    int already4thChannelID = 66;
+    if(chnl4thIsEnable)
+    {
+      already4thChannelID = ui->lbl_Channel_3->text().toInt();
+    }
+    switch (indx) {
+    case 0: {
+        availIndex[indx] = true;
+        ui->lbl_Channel_0->setText(QString::number(chnlInt));
+        ui->pb_RemoveGraph_0->setEnabled(true);
+        ui->pb_RemoveGraph_0->setText("Remove");
+        ui->pb_RemoveGraph_0->setStyleSheet(style_removBtn_0);
+        break;
+    }
+    case 1: {
+        availIndex[indx] = true;
+        ui->lbl_Channel_1->setText(QString::number(chnlInt));
+        ui->pb_RemoveGraph_1->setEnabled(true);
+        ui->pb_RemoveGraph_1->setText("Remove");
+        ui->pb_RemoveGraph_1->setStyleSheet(style_removBtn_1);
+        break;
+    }
+    case 2: {
+        availIndex[indx] = true;
+        ui->lbl_Channel_2->setText(QString::number(chnlInt));
+        ui->pb_RemoveGraph_2->setEnabled(true);
+        ui->pb_RemoveGraph_2->setText("Remove");
+        ui->pb_RemoveGraph_2->setStyleSheet(style_removBtn_2);
+        break;
+    }
+    case 3: {
+        chnl4thIsEnable = true;
+        ui->lbl_Channel_3->setText(QString::number(chnlInt));
+        ui->pb_RemoveGraph_3->setEnabled(true);
+        ui->pb_RemoveGraph_3->setText("Remove");
+        ui->pb_RemoveGraph_3->setStyleSheet(style_removBtn_3);
+        break;
+    }
+    } // end of switch statements
+
+    int currentIndex = ui->cmb_AddList->currentIndex();
+    int totalItems = ui->cmb_AddList->count();
+    //qDebug()<<" currentIndex = "<<currentIndex<<" total: "<<totalItems;
+    totalItems -= 1;
+    qv_availableList.removeAt(currentIndex);
+
+    ui->cmb_AddList->clear();
+    for(int i=0; i<totalItems; i++)
+    {
+        ui->cmb_AddList->addItem(QString::number(qv_availableList.at(i)));
+    }
+    if(currentIndex < totalItems) ui->cmb_AddList->setCurrentIndex(currentIndex);
+
+    if(chnl4thIsEnable && chnl4thIsAppliable)
+    {
+        qv_availableList.append(already4thChannelID);
+        update_cmbBoxItems();
+    }
 }
 
-void graphWin::on_pb_RemoveFromGraph_clicked()
+
+void graphWin::on_pb_RemoveGraph_0_clicked()
 {
-    int chnlInt = ui->cmb_graphList->currentText().toInt();
-    emit tx_RemoveChannelToGraph(chnlInt);
-    ui->cmb_AddList->addItem(QString::number(chnlInt));
+    availIndex[0] = false;
+    int chnlID = ui->lbl_Channel_0->text().toInt();
+    emit tx_RemoveChannelToGraph(0, chnlID);
+    ui->lbl_Channel_0->setText("  ");
+    ui->pb_RemoveGraph_0->setText("");
+    ui->pb_RemoveGraph_0->setEnabled(false);
+    ui->pb_RemoveGraph_0->setStyleSheet(style_removBtn_Disabled);
+    ui->myPlot->graph(0)->data()->clear();
+
+    qv_availableList.append(chnlID);
+    update_cmbBoxItems();
+}
+void graphWin::on_pb_RemoveGraph_1_clicked()
+{
+    availIndex[1] = false;
+    int chnlID = ui->lbl_Channel_1->text().toInt();
+    emit tx_RemoveChannelToGraph(1, chnlID);
+    ui->lbl_Channel_1->setText("  ");
+    ui->pb_RemoveGraph_1->setText("");
+    ui->pb_RemoveGraph_1->setEnabled(false);
+    ui->pb_RemoveGraph_1->setStyleSheet(style_removBtn_Disabled);
+    ui->myPlot->graph(1)->data()->clear();
+
+    qv_availableList.append(chnlID);
+    update_cmbBoxItems();
+}
+void graphWin::on_pb_RemoveGraph_2_clicked()
+{
+    availIndex[2] = false;
+    int chnlID = ui->lbl_Channel_2->text().toInt();
+    emit tx_RemoveChannelToGraph(2, chnlID);
+    ui->lbl_Channel_2->setText("  ");
+    ui->pb_RemoveGraph_2->setText("");
+    ui->pb_RemoveGraph_2->setEnabled(false);
+    ui->pb_RemoveGraph_2->setStyleSheet(style_removBtn_Disabled);
+    ui->myPlot->graph(2)->data()->clear();
+
+    qv_availableList.append(chnlID);
+    update_cmbBoxItems();
+}
+void graphWin::on_pb_RemoveGraph_3_clicked()
+{
+    availIndex[3] = false;
+    chnl4thIsEnable = false;
+    int chnlID = ui->lbl_Channel_3->text().toInt();
+    emit tx_RemoveChannelToGraph(3, chnlID);
+    ui->lbl_Channel_3->setText("  ");
+    ui->pb_RemoveGraph_3->setText("");
+    ui->pb_RemoveGraph_3->setEnabled(false);
+    ui->pb_RemoveGraph_3->setStyleSheet(style_removBtn_Disabled);
+    ui->myPlot->graph(3)->data()->clear();
+
+    qv_availableList.append(chnlID);
+    update_cmbBoxItems();
+}
+
+void graphWin::update_cmbBoxItems()
+{
+    int tempqt, i, j;
+    for (i=0; i<qv_availableList.length(); i++)
+    {
+        for(j=(i+1); j<qv_availableList.length(); j++)
+        {
+            if (qv_availableList[i] >= qv_availableList[j])
+            {
+                tempqt = qv_availableList[i];
+                qv_availableList[i] = qv_availableList[j];
+                qv_availableList[j] = tempqt;
+            }
+        }
+    }
+
+
+
+    int currentIndex = ui->cmb_AddList->currentIndex();
+    ui->cmb_AddList->clear();
+    for(int i=0; i<qv_availableList.length(); i++)
+    {
+        ui->cmb_AddList->addItem(QString::number(qv_availableList.at(i)));
+    }
+    ui->cmb_AddList->setCurrentIndex(currentIndex);
+}
+
+
+void graphWin::on_pb_CloseWindow_clicked()
+{
+    emit tx_GraphWindowIsOpen(false);
+
+    this->close();
 }

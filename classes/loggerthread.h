@@ -30,8 +30,8 @@ public slots:
     void rx_setSampleTime(int sec);
     void rx_loggingStartStop(bool start);
 
-    void rx_AddNewChannelToGraph(int chnlID);
-    void rx_RemoveChannelToGraph(int chnlID);
+    void rx_AddNewChannelToGraph(int idx, int chnlID);
+    void rx_RemoveChannelToGraph(int idx, int chnlID);
     void rx_GraphWindowIsOpen(bool windOpen);
 
     void rx_giveMeEnablesChannels();
@@ -56,7 +56,10 @@ private:
     int32_t *local_ADC6_ADDRESS;
     int32_t *local_ADC7_ADDRESS;
 
-    QVector<int> qv_graphChannels;
+    //QVector<int> qv_graphChannels;
+    int graphChannels_idx[4] = {232, 232, 232, 232};
+    bool graphChannels_idxBool[4] = {false, false, false, false};
+
     bool graphWindowIsOpen = false;
     bool logging_isStarted = false;
     bool addFirstEnableChannelinGraph = true;

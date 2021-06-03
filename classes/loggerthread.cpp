@@ -19,6 +19,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
     timer_graphValue->start(100);
+
     timer_elapser = new QElapsedTimer();
 }
 
@@ -43,9 +44,12 @@ void loggerThread::on_timer_logger_elapsed()
 }
 void loggerThread::on_timer_graphValue_elapsed()
 {
-    for(int i=0; i<qv_graphChannels.length(); i++)
+    for(int i=0; i<4; i++)
     {
-        emit tx_GraphChannelValue(i, qv_graphChannels.at(i), chnlArray[qv_graphChannels.at(i)].giveCurrentValue());
+        if(graphChannels_idxBool[i])
+        {
+            emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].giveCurrentValue());
+        }
     }
 }
 
@@ -72,39 +76,29 @@ void loggerThread::rx_giveMeEnablesChannels()
     {
         if(chnlArray[i].isChnlEnable())
         {
-            //if(addFirstEnableChannelinGraph && i<4)
-            if(qv_graphChannels.length()<4)
+            if(addFirstEnableChannelinGraph)
             {
                 addFirstEnableChannelinGraph = false;
-                qv_graphChannels.append(i);
+                graphChannels_idx[i] = i;
+                graphChannels_idxBool[i] = true;
             }
             emit tx_EnableChannelsAre(i);
         }
     }
 }
-void loggerThread::rx_AddNewChannelToGraph(int chnlID)
+void loggerThread::rx_AddNewChannelToGraph(int idx, int chnlID)
 {
-    if(qv_graphChannels.length() >= 4)
-    {
-        qv_graphChannels.pop_back();
-        qv_graphChannels.append(chnlID);
-    }
-    else
-    {
-        qv_graphChannels.append(chnlID);
-    }
+    graphChannels_idx[idx] = chnlID;
+    graphChannels_idxBool[idx] = true;
 }
-void loggerThread::rx_RemoveChannelToGraph(int chnlID)
+void loggerThread::rx_RemoveChannelToGraph(int idx, int chnlID)
 {
-    int indx = 0;
-    if(qv_graphChannels.length() > 0)
-    {
-        indx = qv_graphChannels.indexOf(chnlID);
-        qv_graphChannels.removeAt(indx);
-    }
+    graphChannels_idx[idx] = chnlID;
+    graphChannels_idxBool[idx] = false;
 }
 void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
 {
+    //qDebug()<<" Graph Window is Open : "<<windOpen;
     graphWindowIsOpen = windOpen;
 }
 

@@ -42,6 +42,7 @@ public slots:
 
 private slots:
     void on_pb_SetConfiguration_clicked();
+    void on_pb_CloseApp_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -8,6 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(1024, 768);
 
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    //this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
+
+
     timer_singleShot= new QTimer(this);
     connect(timer_singleShot, SIGNAL(timeout()), SLOT(on_timer_singleShot_elapsed()));
     timer_singleShot->setSingleShot(true);
@@ -48,8 +54,8 @@ void MainWindow::on_pb_SetConfiguration_clicked()
 {
     grphW = new graphWin();
     connect(grphW, SIGNAL(tx_GraphWindowIsOpen(bool)), loggerClass, SLOT(rx_GraphWindowIsOpen(bool)));
-    connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int)));
-    connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int)));
+    connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int, int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int, int)));
+    connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int, int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
 
     connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), grphW, SLOT(rx_EnableChannelsAre(int)));
@@ -497,4 +503,9 @@ void MainWindow::disableLCDNumber(int indx)
     case 47: { ui->lbl_lcdNumber_47->display(""); break; }
 
     } // end of Switch statement
+}
+
+void MainWindow::on_pb_CloseApp_clicked()
+{
+    QCoreApplication::quit();
 }
