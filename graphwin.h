@@ -31,6 +31,13 @@ public slots:
 
     void on_timer_singleShot_Elapsed();
 
+private slots:
+    void on_graphWin_destroyed();
+
+    void on_pb_Add_toGraph_clicked();
+
+    void on_pb_RemoveFromGraph_clicked();
+
 private:
     Ui::graphWin *ui;
     QTimer *timer_singleShot;

@@ -184,6 +184,84 @@ void MainWindow::on_timer_enabler_elapsed()
 {
     if(index_Enabler == 0 ) timer_enabler->setInterval(100);
 
+
+    switch (index_Enabler) {
+    case 0: {
+        ui->pb_channel_0->setChecked(true); ui->pb_channel_0->clicked();
+        ui->pb_channel_12->setChecked(true); ui->pb_channel_12->clicked();
+        ui->pb_channel_24->setChecked(true); ui->pb_channel_24->clicked();
+        ui->pb_channel_36->setChecked(true); ui->pb_channel_36->clicked();
+        break; }
+    case 1: {
+        ui->pb_channel_1->setChecked(true); ui->pb_channel_1->clicked();
+        ui->pb_channel_13->setChecked(true); ui->pb_channel_13->clicked();
+        ui->pb_channel_25->setChecked(true); ui->pb_channel_25->clicked();
+        ui->pb_channel_37->setChecked(true); ui->pb_channel_37->clicked();
+        break; }
+    case 2: {
+        ui->pb_channel_2->setChecked(true); ui->pb_channel_2->clicked();
+        ui->pb_channel_14->setChecked(true); ui->pb_channel_14->clicked();
+        ui->pb_channel_26->setChecked(true); ui->pb_channel_26->clicked();
+        ui->pb_channel_38->setChecked(true); ui->pb_channel_38->clicked();
+        break; }
+    case 3: {
+        ui->pb_channel_3->setChecked(true); ui->pb_channel_3->clicked();
+        ui->pb_channel_15->setChecked(true); ui->pb_channel_15->clicked();
+        ui->pb_channel_27->setChecked(true); ui->pb_channel_27->clicked();
+        ui->pb_channel_39->setChecked(true); ui->pb_channel_39->clicked();
+        break; }
+    case 4: {
+        ui->pb_channel_4->setChecked(true); ui->pb_channel_4->clicked();
+        ui->pb_channel_16->setChecked(true); ui->pb_channel_16->clicked();
+        ui->pb_channel_28->setChecked(true); ui->pb_channel_28->clicked();
+        ui->pb_channel_40->setChecked(true); ui->pb_channel_40->clicked();
+        break; }
+    case 5: {
+        ui->pb_channel_5->setChecked(true); ui->pb_channel_5->clicked();
+        ui->pb_channel_17->setChecked(true); ui->pb_channel_17->clicked();
+        ui->pb_channel_29->setChecked(true); ui->pb_channel_29->clicked();
+        ui->pb_channel_41->setChecked(true); ui->pb_channel_41->clicked();
+        break; }
+    case 6: {
+        ui->pb_channel_6->setChecked(true); ui->pb_channel_6->clicked();
+        ui->pb_channel_18->setChecked(true); ui->pb_channel_18->clicked();
+        ui->pb_channel_30->setChecked(true); ui->pb_channel_30->clicked();
+        ui->pb_channel_42->setChecked(true); ui->pb_channel_42->clicked();
+        break; }
+    case 7: {
+        ui->pb_channel_7->setChecked(true); ui->pb_channel_7->clicked();
+        ui->pb_channel_19->setChecked(true); ui->pb_channel_19->clicked();
+        ui->pb_channel_31->setChecked(true); ui->pb_channel_31->clicked();
+        ui->pb_channel_43->setChecked(true); ui->pb_channel_43->clicked();
+        break; }
+    case 8: {
+        ui->pb_channel_8->setChecked(true); ui->pb_channel_8->clicked();
+        ui->pb_channel_20->setChecked(true); ui->pb_channel_20->clicked();
+        ui->pb_channel_32->setChecked(true); ui->pb_channel_32->clicked();
+        ui->pb_channel_44->setChecked(true); ui->pb_channel_44->clicked();
+        break; }
+    case 9: {
+        ui->pb_channel_9->setChecked(true); ui->pb_channel_9->clicked();
+        ui->pb_channel_21->setChecked(true); ui->pb_channel_21->clicked();
+        ui->pb_channel_33->setChecked(true); ui->pb_channel_33->clicked();
+        ui->pb_channel_45->setChecked(true); ui->pb_channel_45->clicked();
+        break; }
+    case 10: {
+        ui->pb_channel_10->setChecked(true); ui->pb_channel_10->clicked();
+        ui->pb_channel_22->setChecked(true); ui->pb_channel_22->clicked();
+        ui->pb_channel_34->setChecked(true); ui->pb_channel_34->clicked();
+        ui->pb_channel_46->setChecked(true); ui->pb_channel_46->clicked();
+        break; }
+    case 11: {
+        ui->pb_channel_11->setChecked(true); ui->pb_channel_11->clicked();
+        ui->pb_channel_23->setChecked(true); ui->pb_channel_23->clicked();
+        ui->pb_channel_35->setChecked(true); ui->pb_channel_35->clicked();
+        ui->pb_channel_47->setChecked(true); ui->pb_channel_47->clicked();
+        break; }
+
+    } // end of Switch statement
+
+    /*
     switch (index_Enabler) {
     case 0: { ui->pb_channel_0->setChecked(true); ui->pb_channel_0->clicked();  break; }
     case 1: { ui->pb_channel_1->setChecked(true); ui->pb_channel_1->clicked(); break; }
@@ -237,7 +315,7 @@ void MainWindow::on_timer_enabler_elapsed()
     case 45: { ui->pb_channel_45->setChecked(true); ui->pb_channel_45->clicked(); break; }
     case 46: { ui->pb_channel_46->setChecked(true); ui->pb_channel_46->clicked(); break; }
     case 47: { ui->pb_channel_47->setChecked(true); ui->pb_channel_47->clicked(); break; }
-    } // end of Switch statement
+    } */
 
 
 

@@ -10,22 +10,22 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
         chnlArray[i].setChannelAddress(i);
     }
 
-    qDebug()<<" before timer_logger initialize ";
+    //qDebug()<<" before timer_logger initialize ";
     timer_logger = new QTimer(this);
     connect(timer_logger, SIGNAL(timeout()), SLOT(on_timer_logger_elapsed()));
     timer_logger->start(sampleRate_MS);
 
-    qDebug()<<" before timer_graph initialize ";
+    //qDebug()<<" before timer_graph initialize ";
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
-    timer_graphValue->start(500);
+    timer_graphValue->start(100);
     timer_elapser = new QElapsedTimer();
 }
 
 
 void loggerThread::on_timer_logger_elapsed()
 {
-    //qDebug()<<" 111111111111 ";
+    if(graphWindowIsOpen) return;
     timer_elapser->start();
 
     for(int i=0; i<TOTAL_CHANNEL; i++)
@@ -72,7 +72,8 @@ void loggerThread::rx_giveMeEnablesChannels()
     {
         if(chnlArray[i].isChnlEnable())
         {
-            if(addFirstEnableChannelinGraph)
+            //if(addFirstEnableChannelinGraph && i<4)
+            if(qv_graphChannels.length()<4)
             {
                 addFirstEnableChannelinGraph = false;
                 qv_graphChannels.append(i);
