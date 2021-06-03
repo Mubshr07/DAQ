@@ -24,6 +24,8 @@ signals:
     void tx_EnableChannelsAre(int chnlID);
     void tx_GraphChannelValue(int indx, int chnl, float val);
 
+    void tx_ramdomOP(int idx, float val, QString str);
+
 
 public slots:
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
@@ -43,6 +45,7 @@ public slots:
 private:
     QTimer *timer_logger;
     QElapsedTimer *timer_elapser;
+    QElapsedTimer *timer_elapser2;
     QTimer *timer_graphValue;
 
     Addressing *addrss_Obj;
@@ -70,8 +73,28 @@ private:
     bool local_logging = false;
     qint64 elapsed_timeNanoSec = 0;
     int elapsed_timeMS = 0;
+    QString logStr = "";
+    long logSerialNumber = 0;
+
+    int local_logTime_MS = 0;
 
 
+
+    void initialize_Dir_FileName();
+    QString folderPath = QString(QDir::homePath()+"/DAQ_Logs");
+    QString filePath = "";
+    int LogFileNumber = 0;
+    QString logFileExtension =  ".csv";
+    QFile *logFile;
+    void writeThisToLogFile(QString str);
+
+
+
+    // ---------- Log Time spend
+    long local_log_sec = 0;
+    int local_log_min = 0;
+    int local_log_hours = 0;
+    QString local_LogTime_Str = "";
 };
 
 #endif // LOGGERTHREAD_H

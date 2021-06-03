@@ -13,13 +13,14 @@ MainWindow::MainWindow(QWidget *parent)
     //this->setWindowFlag(Qt::WindowStaysOnTopHint);
     this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
 
-
+    //qDebug()<<" debug 1";
     timer_singleShot= new QTimer(this);
     connect(timer_singleShot, SIGNAL(timeout()), SLOT(on_timer_singleShot_elapsed()));
     timer_singleShot->setSingleShot(true);
     index_SingleShotTimer = 0;
     timer_singleShot->start(50);
 
+    //qDebug()<<" debug 2";
     loggerClass = new loggerThread();
     thrd = new QThread(loggerClass);
     loggerClass->moveToThread(thrd);
@@ -29,19 +30,20 @@ MainWindow::MainWindow(QWidget *parent)
     thrd->start();
 
 
+    //qDebug()<<" debug 3";
     timer_enabler = new QTimer(this);
     connect(timer_enabler, SIGNAL(timeout()), SLOT(on_timer_enabler_elapsed()));
     timer_enabler->setInterval(100);
     timer_enabler->start();
     index_SingleShotTimer = 0;
+
+
+    //qDebug()<<" debug 4";
     for(int i=0; i<TOTAL_CHANNEL; i++)
     {
         disableLCDNumber(i);
     }
-
-
-
-
+    //qDebug()<<" debug 5 all";
 }
 
 MainWindow::~MainWindow()
@@ -52,17 +54,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_SetConfiguration_clicked()
 {
+    emit tx_setSampleTime(ui->txt_SampleTime->toPlainText().toInt());
     grphW = new graphWin();
     connect(grphW, SIGNAL(tx_GraphWindowIsOpen(bool)), loggerClass, SLOT(rx_GraphWindowIsOpen(bool)));
     connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int, int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int, int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
+    connect(grphW, SIGNAL(tx_loggingStartStop(bool)), loggerClass, SLOT(rx_loggingStartStop(bool)));
+
 
     connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), grphW, SLOT(rx_EnableChannelsAre(int)));
     connect(loggerClass, SIGNAL(tx_GraphChannelValue(int,int,float)), grphW, SLOT(rx_GraphChannelValue(int,int,float)));
-
-
-
+    connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), grphW, SLOT(rx_ramdomOP(int,float, QString)));
 
     grphW->setModal(true);
     grphW->exec();

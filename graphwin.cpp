@@ -73,7 +73,6 @@ void graphWin::on_timer_singleShot_Elapsed()
     ui->pb_RemoveGraph_3->setEnabled(false);
 }
 
-
 void graphWin::rx_EnableChannelsAre(int chnlID)
 {
     //qDebug()<<" enable channel is :"<<chnlID;
@@ -92,7 +91,6 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
         ui->cmb_AddList->addItem(QString::number(chnlID, 10));
     }
 }
-
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
     //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
@@ -141,7 +139,6 @@ void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
       frameCount = 0;
     }
 }
-
 
 void graphWin::on_pb_Add_toGraph_clicked()
 {
@@ -220,8 +217,6 @@ void graphWin::on_pb_Add_toGraph_clicked()
         update_cmbBoxItems();
     }
 }
-
-
 void graphWin::on_pb_RemoveGraph_0_clicked()
 {
     availIndex[0] = false;
@@ -306,7 +301,19 @@ void graphWin::update_cmbBoxItems()
     }
     ui->cmb_AddList->setCurrentIndex(currentIndex);
 }
-
+void graphWin::rx_ramdomOP(int idx, float val, QString str)
+{
+    switch (idx) {
+    case 0: {
+        ui->lbl_FilePath->setText(QString("PATH: "+str));
+        break;
+    }
+    case 1: {
+        ui->lbl_Time->setText(str);
+        break;
+    }
+    }
+}
 
 void graphWin::on_pb_CloseWindow_clicked()
 {
@@ -314,3 +321,13 @@ void graphWin::on_pb_CloseWindow_clicked()
 
     this->close();
 }
+void graphWin::on_pb_StartLog_clicked()
+{
+    local_loggingStarted = !local_loggingStarted;
+    emit tx_loggingStartStop(local_loggingStarted);
+
+    ui->pb_StartLog->setText(QString(local_loggingStarted? "Started":"Stoped"));
+    ui->pb_StartLog->setStyleSheet(QString(local_loggingStarted? styleLogStart : styleLogStop));
+}
+
+

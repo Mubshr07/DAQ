@@ -3,6 +3,7 @@
 chnlClass_Simple chnlArray[TOTAL_CHANNEL];
 loggerThread::loggerThread(QObject *parent) : QObject(parent)
 {
+    //qDebug()<<" debug LoggerThread start ";
     initializeHWAddresses();
     for(int i = 0; i< TOTAL_CHANNEL; i++)
     {
@@ -10,32 +11,59 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
         chnlArray[i].setChannelAddress(i);
     }
 
+    //qDebug()<<" debug LoggerThread 1 ";
+
     //qDebug()<<" before timer_logger initialize ";
     timer_logger = new QTimer(this);
     connect(timer_logger, SIGNAL(timeout()), SLOT(on_timer_logger_elapsed()));
     timer_logger->start(sampleRate_MS);
 
+    local_logging = false;
+    local_logTime_MS = 0;
+    local_log_sec = 0;
+    local_log_min = 0;
+    local_log_hours = 0;
+    //qDebug()<<" debug LoggerThread 2 ";
     //qDebug()<<" before timer_graph initialize ";
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
     timer_graphValue->start(100);
 
+    //qDebug()<<" debug LoggerThread 3 ";
     timer_elapser = new QElapsedTimer();
+    timer_elapser2 = new QElapsedTimer();
+    timer_elapser2->start();
+
+    //qDebug()<<" debug LoggerThread 4 ";
 }
 
 
 void loggerThread::on_timer_logger_elapsed()
 {
-    if(graphWindowIsOpen) return;
     timer_elapser->start();
+    logStr = QString(QString::number(logSerialNumber)+",");
+    logStr += QString(QTime::currentTime().toString("HH:mm:ss")+",");
 
     for(int i=0; i<TOTAL_CHANNEL; i++)
     {
         if(chnlArray[i].isChnlEnable())
         {
-            emit tx_channel_Value(i, chnlArray[i].giveCurrentValue());
+            if(!graphWindowIsOpen) {
+                emit tx_channel_Value(i, chnlArray[i].giveCurrentValue());
+            } else if(graphWindowIsOpen && local_logging) {
+                logStr += QString(QString::number(chnlArray[i].giveCurrentValue(), 'f', 3)+",");
+            }
         }
     }
+
+    if(local_logging)
+    {
+        logStr += "\n";
+        writeThisToLogFile(logStr);
+        logSerialNumber++;
+    }
+
+
 
     elapsed_timeNanoSec = timer_elapser->nsecsElapsed();
     sampleRate_MS_Calculated = (sampleRate_MS - (elapsed_timeNanoSec/1000000.0));
@@ -44,6 +72,7 @@ void loggerThread::on_timer_logger_elapsed()
 }
 void loggerThread::on_timer_graphValue_elapsed()
 {
+    timer_elapser2->restart();
     for(int i=0; i<4; i++)
     {
         if(graphChannels_idxBool[i])
@@ -51,6 +80,49 @@ void loggerThread::on_timer_graphValue_elapsed()
             emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].giveCurrentValue());
         }
     }
+
+
+    if(local_logging)
+    {
+        if(local_logTime_MS >= 1000)
+        {
+            local_logTime_MS -= 1000;
+            local_log_sec++;
+            if(local_log_hours<100)
+                local_LogTime_Str = QString("00"+QString::number(local_log_hours)+ ":");
+            else if(local_log_hours<10)
+                local_LogTime_Str = QString("0"+QString::number(local_log_hours)+ ":");
+            else
+                local_LogTime_Str = QString(QString::number(local_log_hours)+ ":");
+
+            if(local_log_min<10)
+                local_LogTime_Str += QString("0"+QString::number(local_log_min)+ ":");
+            else
+                local_LogTime_Str += QString(QString::number(local_log_min)+ ":");
+
+            if(local_log_sec<10)
+                local_LogTime_Str += QString("0"+QString::number(local_log_sec));
+            else
+                local_LogTime_Str += QString(QString::number(local_log_sec));
+
+            emit tx_ramdomOP(1, 1.0, local_LogTime_Str);
+        }
+        if(local_log_sec > 59)
+        {
+            local_log_sec = 0;
+            local_log_min++;
+        }
+        if(local_log_min > 59)
+        {
+            local_log_min = 0;
+            local_log_hours++;
+        }
+
+        local_logTime_MS += (timer_graphValue->interval()+timer_elapser2->elapsed());
+
+        //qDebug()<<" local_logTime_MS:: "<<local_logTime_MS;
+    }
+
 }
 
 
@@ -65,6 +137,7 @@ void loggerThread::rx_setSampleTime(int sec)
 }
 void loggerThread::rx_loggingStartStop(bool start)
 {
+    //qDebug()<<" Logging Status : "<<start;
     local_logging = start;
     emit tx_loggingStarted(local_logging);
 }
@@ -85,6 +158,7 @@ void loggerThread::rx_giveMeEnablesChannels()
             emit tx_EnableChannelsAre(i);
         }
     }
+    emit tx_ramdomOP(0, 0.0, filePath);
 }
 void loggerThread::rx_AddNewChannelToGraph(int idx, int chnlID)
 {
@@ -100,6 +174,8 @@ void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
 {
     //qDebug()<<" Graph Window is Open : "<<windOpen;
     graphWindowIsOpen = windOpen;
+    if(windOpen)
+        initialize_Dir_FileName();
 }
 
 
@@ -119,4 +195,66 @@ void loggerThread::initializeHWAddresses()
     local_ADC6_ADDRESS = addrss_Obj->givemeaddr(6);
     local_ADC7_ADDRESS = addrss_Obj->givemeaddr(7);
 
+}
+
+void loggerThread::initialize_Dir_FileName()
+{
+    //qDebug()<<"Home Directory String:: "<<LogDirPath;
+    QDir mainDir(folderPath);
+    if (!mainDir.exists())
+    {
+        mainDir.mkdir(folderPath);
+    }
+    LogFileNumber = 0;
+
+    while (true)
+    {
+        if(!(QFileInfo::exists(folderPath +"/LogFile_"+ QString::number(LogFileNumber) + logFileExtension))) {
+            filePath = QString(folderPath +"/LogFile_"+ QString::number(LogFileNumber) + logFileExtension);
+            break;
+        } else {
+            LogFileNumber++;
+        }
+    }
+
+    qDebug()<<" File Path : "<<filePath;
+
+    QString str = "S/N,";
+    str += "Log Time,";
+    //str += "Log Time,";
+
+
+    for(int i=0; i<TOTAL_CHANNEL;i++)
+    {
+        if(chnlArray[i].isChnlEnable())
+        {
+            str += QString("Ch#"+QString::number(i)+",");
+        }
+    }
+    //qDebug()<<" initialFile: "<<str;
+
+    str += "\n";
+    logFile = new QFile(filePath);
+    if(logFile->open(QIODevice::ReadWrite))
+    {
+        logFile->write(str.toUtf8());
+        logFile->close();
+    }
+    else
+    {
+        qDebug()<<"Error in open File";
+    }
+    //qDebug()<<" initial Log File Path is:  "<<localFilePath;
+}
+void loggerThread::writeThisToLogFile(QString str)
+{
+    if(logFile->open(QIODevice::Append))
+    {
+        logFile->write(str.toUtf8());
+        logFile->close();
+    }
+    else
+    {
+        qDebug()<<"Error in Writing str to File in Append mode";
+    }
 }
