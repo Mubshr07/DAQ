@@ -29,7 +29,7 @@ signals:
 
 public slots:
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
-    void rx_setSampleTime(int sec);
+    void rx_setSampleTime(int mSec);
     void rx_loggingStartStop(bool start);
 
     void rx_AddNewChannelToGraph(int idx, int chnlID);

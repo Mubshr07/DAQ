@@ -64,10 +64,16 @@ void loggerThread::on_timer_logger_elapsed()
     }
 
 
-
-    elapsed_timeNanoSec = timer_elapser->nsecsElapsed();
-    sampleRate_MS_Calculated = (sampleRate_MS - (elapsed_timeNanoSec/1000000.0));
-    timer_logger->setInterval(sampleRate_MS_Calculated);
+    if(!graphWindowIsOpen)
+    {
+           timer_logger->setInterval(300);
+    }
+    else
+    {
+        elapsed_timeNanoSec = timer_elapser->nsecsElapsed();
+        sampleRate_MS_Calculated = (sampleRate_MS - (elapsed_timeNanoSec/1000000.0));
+        timer_logger->setInterval(sampleRate_MS_Calculated);
+    }
     //qDebug()<<" 2222222222 ";
 }
 void loggerThread::on_timer_graphValue_elapsed()
@@ -130,10 +136,10 @@ void loggerThread::rx_setChannelEnableDisable(int chnlIndex, bool enable)
 {
     emit tx_channelisEnabled(chnlIndex, chnlArray[chnlIndex].setChannelEnableDisable(enable));
 }
-void loggerThread::rx_setSampleTime(int sec)
+void loggerThread::rx_setSampleTime(int mSec)
 {
-    sampleRate_Sec = sec;
-    sampleRate_MS = (sampleRate_Sec * 1000.0);
+    sampleRate_Sec = mSec/1000.0;
+    sampleRate_MS = mSec;
 }
 void loggerThread::rx_loggingStartStop(bool start)
 {
@@ -151,9 +157,10 @@ void loggerThread::rx_giveMeEnablesChannels()
         {
             if(addFirstEnableChannelinGraph)
             {
+                qDebug()<<" First channel is added "<<i;
                 addFirstEnableChannelinGraph = false;
-                graphChannels_idx[i] = i;
-                graphChannels_idxBool[i] = true;
+                graphChannels_idx[0] = i;
+                graphChannels_idxBool[0] = true;
             }
             emit tx_EnableChannelsAre(i);
         }
@@ -172,7 +179,8 @@ void loggerThread::rx_RemoveChannelToGraph(int idx, int chnlID)
 }
 void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
 {
-    //qDebug()<<" Graph Window is Open : "<<windOpen;
+    qDebug()<<" Graph Window is Open : "<<windOpen;
+    if(windOpen == false) addFirstEnableChannelinGraph = true;
     graphWindowIsOpen = windOpen;
     if(windOpen)
         initialize_Dir_FileName();

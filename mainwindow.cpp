@@ -54,7 +54,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_SetConfiguration_clicked()
 {
-    emit tx_setSampleTime(ui->txt_SampleTime->toPlainText().toInt());
+    emit tx_setSampleTime((int)(ui->txt_SampleTime->toPlainText().toInt() * 1000.0));
     grphW = new graphWin();
     connect(grphW, SIGNAL(tx_GraphWindowIsOpen(bool)), loggerClass, SLOT(rx_GraphWindowIsOpen(bool)));
     connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int, int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int, int)));

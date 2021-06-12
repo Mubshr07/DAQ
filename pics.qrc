@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>pics/DAQ Logo Design.png</file>
+        <file>pics/settings.png</file>
+        <file>pics/DAQ text.png</file>
+    </qresource>
+</RCC>

@@ -2,7 +2,6 @@
 #define GRAPHWIN_H
 
 #include <QDialog>
-
 #include "classes/globalvars.h"
 
 namespace Ui {
@@ -29,7 +28,7 @@ public slots:
     void rx_GraphChannelValue(int indx, int chnl, float val);
     void rx_ramdomOP(int idx, float val, QString str);
 
-
+    void rx_confirmationBoxClosed(bool yesBTN, int param);
 
     // ------------ Timer Slots
     void on_timer_singleShot_Elapsed();
@@ -48,6 +47,9 @@ private slots:
 private:
     Ui::graphWin *ui;
     QTimer *timer_singleShot;
+
+    ConfirmationBox *msgBox;
+
 
     QVector<int> qv_EnablChannels;
     QVector<int> qv_availableList;

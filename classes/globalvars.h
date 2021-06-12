@@ -17,7 +17,7 @@
 
 
 #include "qdebug.h"
-
+#include "confirmationbox.h"
 
 class globalVars : public QObject
 {

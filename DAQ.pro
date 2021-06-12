@@ -21,6 +21,7 @@ SOURCES += \
     classes/qcustomplot.cpp \
     classes/globalvars.cpp \
     classes/loggerthread.cpp \
+    confirmationbox.cpp \
     graphwin.cpp \
     main.cpp \
     mainwindow.cpp
@@ -31,10 +32,12 @@ HEADERS += \
     classes/qcustomplot.h \
     classes/globalvars.h \
     classes/loggerthread.h \
+    confirmationbox.h \
     graphwin.h \
     mainwindow.h
 
 FORMS += \
+    confirmationbox.ui \
     graphwin.ui \
     mainwindow.ui
 
@@ -42,3 +45,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    pics.qrc

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>768</height>
+    <height>783</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,8 +58,11 @@ QPushButton:disabled {
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="lbl_Logo">
+       <property name="toolTip">
+        <string>Data Acquisition System</string>
+       </property>
        <property name="text">
-        <string>Logo</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img height=&quot;40&quot; width=&quot;145&quot; src=&quot;:/pics/DAQ Logo Design.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -110,25 +113,29 @@ QPushButton:disabled {
          </property>
          <property name="minimumSize">
           <size>
-           <width>87</width>
-           <height>0</height>
+           <width>60</width>
+           <height>60</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>87</width>
-           <height>16777215</height>
+           <width>60</width>
+           <height>60</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Settings Window</string>
          </property>
          <property name="styleSheet">
           <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
-background-color: rgb(255, 255, 255);
+background-color: transparent;
 border: 1px solid black;
-border-radius:5px;</string>
+border-radius:5px;
+border-image: url(:/pics/settings.png);</string>
          </property>
          <property name="text">
-          <string>Close</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -213,6 +220,9 @@ border-radius:5px;</string>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="toolTip">
+          <string>Add Graph Channel</string>
+         </property>
          <property name="text">
           <string>Add</string>
          </property>
@@ -288,6 +298,9 @@ border-radius:5px;</string>
              <height>16777215</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Remove this Graph Channel</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
@@ -350,6 +363,9 @@ border-radius:5px;</string>
              <height>16777215</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Remove this Graph Channel</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
@@ -408,6 +424,9 @@ border-radius:5px;</string>
              <height>16777215</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Remove this Graph Channel</string>
+           </property>
            <property name="styleSheet">
             <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
@@ -465,6 +484,9 @@ border-radius:5px;</string>
              <width>87</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Remove this Graph Channel</string>
            </property>
            <property name="styleSheet">
             <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
@@ -541,6 +563,9 @@ border-radius:5px;</string>
          <height>16777215</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Logging Start Stop Button</string>
+       </property>
        <property name="text">
         <string>Start Log</string>
        </property>
@@ -582,6 +607,9 @@ border-radius:5px;</string>
          <width>0</width>
          <height>100</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Log File Folder path and File Name</string>
        </property>
        <property name="styleSheet">
         <string notr="true">font: 400 11pt &quot;Times New Roman&quot;;</string>

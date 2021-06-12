@@ -22,7 +22,7 @@ public:
 
 signals:
     void tx_setChannelEnable(int chnl, bool enable);
-    void tx_setSampleTime(int sec);
+    void tx_setSampleTime(int mSec);
 
 
 

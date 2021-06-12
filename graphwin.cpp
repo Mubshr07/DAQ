@@ -309,17 +309,48 @@ void graphWin::rx_ramdomOP(int idx, float val, QString str)
         break;
     }
     case 1: {
+        //qDebug()<<" Time string is:: "<<str;
         ui->lbl_Time->setText(str);
         break;
     }
     }
 }
 
+
+void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
+{
+    qDebug()<<" MessageConfirmation Slot: param:"<<param<<" Yes-Btn: "<<yesBTN;
+    if(param == 2 && yesBTN)
+    {
+        on_pb_RemoveGraph_0_clicked();
+        on_pb_RemoveGraph_1_clicked();
+        on_pb_RemoveGraph_2_clicked();
+        on_pb_RemoveGraph_3_clicked();
+        local_loggingStarted = !local_loggingStarted;
+        emit tx_loggingStartStop(local_loggingStarted);
+        emit tx_GraphWindowIsOpen(false);
+        this->close();
+    }
+}
 void graphWin::on_pb_CloseWindow_clicked()
 {
-    emit tx_GraphWindowIsOpen(false);
-
-    this->close();
+    if(local_loggingStarted)
+    {
+        msgBox = new ConfirmationBox();
+        msgBox->rx_MessageBoxVariables(2, "System in Process", "Logging process is running. DO you want to stop logging and go back to settings window?");
+        connect(msgBox, SIGNAL(tx_confirmationBoxClosed(bool, int)), this, SLOT(rx_confirmationBoxClosed(bool, int)));
+        msgBox->setModal(true);
+        msgBox->show();
+    }
+    else
+    {
+        on_pb_RemoveGraph_0_clicked();
+        on_pb_RemoveGraph_1_clicked();
+        on_pb_RemoveGraph_2_clicked();
+        on_pb_RemoveGraph_3_clicked();
+        emit tx_GraphWindowIsOpen(false);
+        this->close();
+    }
 }
 void graphWin::on_pb_StartLog_clicked()
 {
