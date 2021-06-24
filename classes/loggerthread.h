@@ -23,13 +23,15 @@ signals:
     void tx_EnableChannelsAre(int chnlID);
     void tx_GraphChannelValue(int indx, int chnl, float val);
 
+    void tx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa);
+
     void tx_ramdomOP(int idx, float val, QString str);
     void tx_ChannelOLDSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
 
 public slots:
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
     void rx_setSampleTime(int mSec);
-    void rx_loggingStartStop(bool start);
+    void rx_loggingStartStop(bool start, QString filePth);
 
     void rx_AddNewChannelToGraph(int idx, int chnlID);
     void rx_RemoveChannelToGraph(int idx, int chnlID);
@@ -37,7 +39,7 @@ public slots:
     void rx_ChannelSettingsWindowIsOpen(bool windOpen);
 
     void rx_giveMeEnablesChannels();
-
+    void rx_sendFactorsAndPGAs_AllChnls();
 
     void rx_setChannelNewSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
     void rx_giveMechannelSettings(int chnl);
@@ -106,6 +108,7 @@ private:
 
     // -------------- Log File things ------------
     void initialize_Dir_FileName();
+    void initialize_User_FileName();
     QString folderPath = QString(QDir::homePath()+"/DAQ_Logs");
     QString filePath = "";
     int LogFileNumber = 0;
@@ -119,7 +122,7 @@ private:
     long local_log_sec = 0;
     int local_log_min = 0;
     int local_log_hours = 0;
-    QString local_LogTime_Str = "";
+    QString local_LogTime_Str = "000:00:00";
 };
 
 #endif // LOGGERTHREAD_H

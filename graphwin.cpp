@@ -66,11 +66,18 @@ void graphWin::on_timer_singleShot_Elapsed()
     emit tx_giveMeEnablesChannels();
 
     ui->lbl_Channel_1->setText("");
+    ui->pb_RemoveGraph_1->setText("");
     ui->pb_RemoveGraph_1->setEnabled(false);
+    ui->pb_RemoveGraph_1->setStyleSheet(style_removBtn_Disabled);
     ui->lbl_Channel_2->setText("");
+    ui->pb_RemoveGraph_2->setText("");
     ui->pb_RemoveGraph_2->setEnabled(false);
+    ui->pb_RemoveGraph_2->setStyleSheet(style_removBtn_Disabled);
     ui->lbl_Channel_3->setText("");
+    ui->pb_RemoveGraph_3->setText("");
     ui->pb_RemoveGraph_3->setEnabled(false);
+    ui->pb_RemoveGraph_3->setStyleSheet(style_removBtn_Disabled);
+
 }
 
 void graphWin::rx_EnableChannelsAre(int chnlID)
@@ -327,7 +334,7 @@ void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
         on_pb_RemoveGraph_2_clicked();
         on_pb_RemoveGraph_3_clicked();
         local_loggingStarted = !local_loggingStarted;
-        emit tx_loggingStartStop(local_loggingStarted);
+        emit tx_loggingStartStop(local_loggingStarted, logUserFilePath);
         emit tx_GraphWindowIsOpen(false);
         emit tx_generate_ThisGUI(gui_FIRST_WIN);
         emit tx_ClosingWindow_graphWin();
@@ -357,8 +364,13 @@ void graphWin::on_pb_CloseWindow_clicked()
 }
 void graphWin::on_pb_StartLog_clicked()
 {
+    if(!local_loggingStarted) {
+        logUserFilePath = QFileDialog::getSaveFileName(this, tr("Save Log File"), QString(QDir::homePath()+"/DAQ_Logs/untitled.csv"), tr("DAC Logs (*.csv)"));
+        qDebug()<<" User setted File name is : "<<logUserFilePath;
+        ui->lbl_FilePath->setText(QString("Path: "+logUserFilePath));
+    }
     local_loggingStarted = !local_loggingStarted;
-    emit tx_loggingStartStop(local_loggingStarted);
+    emit tx_loggingStartStop(local_loggingStarted, logUserFilePath);
 
     ui->pb_StartLog->setText(QString(local_loggingStarted? "Started":"Stoped"));
     ui->pb_StartLog->setStyleSheet(QString(local_loggingStarted? styleLogStart : styleLogStop));

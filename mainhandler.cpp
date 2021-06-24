@@ -93,6 +93,10 @@ void MainHandler::generate_logConfig()
     connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), logConfig, SLOT(rx_ChannelValue(int,float,float)));
     connect(logConfig, SIGNAL(tx_setChannelEnable(int, bool)), loggerClass, SLOT(rx_setChannelEnableDisable(int, bool)));
     connect(logConfig, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
+
+    connect(logConfig, SIGNAL(tx_sendFactorsAndPGAs_AllChnls()), loggerClass, SLOT(rx_sendFactorsAndPGAs_AllChnls()));
+    connect(loggerClass, SIGNAL(tx_sendingFactorsAndPGAs(int, float, float)), logConfig, SLOT(rx_sendingFactorsAndPGAs(int, float, float)));
+
     connect(logConfig, SIGNAL(tx_ClosingWindow_logConfig()), this, SLOT(rx_ClosingWindow_logConfig()));
     connect(logConfig, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
     logConfig->show();
@@ -104,7 +108,7 @@ void MainHandler::generate_graphWin()
     connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int, int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int, int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
-    connect(grphW, SIGNAL(tx_loggingStartStop(bool)), loggerClass, SLOT(rx_loggingStartStop(bool)));
+    connect(grphW, SIGNAL(tx_loggingStartStop(bool, QString)), loggerClass, SLOT(rx_loggingStartStop(bool, QString)));
     connect(grphW, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
     connect(grphW, SIGNAL(tx_ClosingWindow_graphWin()), this, SLOT(rx_ClosingWindow_graphWin()));
 

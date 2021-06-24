@@ -21,7 +21,7 @@ signals:
     void tx_AddNewChannelToGraph(int idx, int chnlID);
     void tx_RemoveChannelToGraph(int idx, int chnlID);
     void tx_giveMeEnablesChannels();
-    void tx_loggingStartStop(bool started);
+    void tx_loggingStartStop(bool started, QString filePath);
     void tx_generate_ThisGUI(GUI_WIN guiEnum);
 
     void tx_ClosingWindow_graphWin();
@@ -79,6 +79,7 @@ private:
 
     QString style_removBtn_Disabled = "font: 500 16pt 'Times New Roman'; padding: 5px; color:black; background-color:transparent; border: 1px solid transparent; border-radius:5px;";
 
+    QString logUserFilePath = "";
 
     void update_cmbBoxItems();
 

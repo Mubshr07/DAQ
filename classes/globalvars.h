@@ -32,6 +32,7 @@ enum CHANNEL_REFERENCE {
 #include <QFile>
 #include <QFileInfo>
 #include <QFileInfoList>
+#include <QFileDialog>
 #include <QThread>
 #include <QVariant>
 #include <QVector>

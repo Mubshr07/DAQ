@@ -149,7 +149,7 @@ void MainWindow::on_timer_singleShot_elapsed()
     switch (index_SingleShotTimer) {
     case 0:{
         connectAllButtonsClickToSingleSlot();
-
+        emit tx_sendFactorsAndPGAs_AllChnls();
         break;
     }
     case 1:{
@@ -313,6 +313,66 @@ void MainWindow::on_timer_enabler_elapsed()
         timer_enabler->stop();
     }
 }
+
+void MainWindow::rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa)
+{
+    switch (chnl) {
+    case 0: { ui->lbl_factor_0->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 1: { ui->lbl_factor_1->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 2: { ui->lbl_factor_2->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 3: { ui->lbl_factor_3->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 4: { ui->lbl_factor_4->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 5: { ui->lbl_factor_5->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 6: { ui->lbl_factor_6->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 7: { ui->lbl_factor_7->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 8: { ui->lbl_factor_8->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 9: { ui->lbl_factor_9->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 10: { ui->lbl_factor_10->setText(QString::number(fac, 'f', factorPrecision)); break; }
+
+    case 11: { ui->lbl_factor_11->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 12: { ui->lbl_factor_12->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 13: { ui->lbl_factor_13->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 14: { ui->lbl_factor_14->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 15: { ui->lbl_factor_15->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 16: { ui->lbl_factor_16->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 17: { ui->lbl_factor_17->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 18: { ui->lbl_factor_18->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 19: { ui->lbl_factor_19->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 20: { ui->lbl_factor_20->setText(QString::number(fac, 'f', factorPrecision)); break; }
+
+    case 21: { ui->lbl_factor_21->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 22: { ui->lbl_factor_22->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 23: { ui->lbl_factor_23->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 24: { ui->lbl_factor_24->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 25: { ui->lbl_factor_25->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 26: { ui->lbl_factor_26->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 27: { ui->lbl_factor_27->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 28: { ui->lbl_factor_28->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 29: { ui->lbl_factor_29->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 30: { ui->lbl_factor_30->setText(QString::number(fac, 'f', factorPrecision)); break; }
+
+    case 31: { ui->lbl_factor_31->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 32: { ui->lbl_factor_32->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 33: { ui->lbl_factor_33->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 34: { ui->lbl_factor_34->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 35: { ui->lbl_factor_35->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 36: { ui->lbl_factor_36->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 37: { ui->lbl_factor_37->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 38: { ui->lbl_factor_38->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 39: { ui->lbl_factor_39->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 40: { ui->lbl_factor_40->setText(QString::number(fac, 'f', factorPrecision)); break; }
+
+    case 41: { ui->lbl_factor_41->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 42: { ui->lbl_factor_42->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 43: { ui->lbl_factor_43->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 44: { ui->lbl_factor_44->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 45: { ui->lbl_factor_45->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 46: { ui->lbl_factor_46->setText(QString::number(fac, 'f', factorPrecision)); break; }
+    case 47: { ui->lbl_factor_47->setText(QString::number(fac, 'f', factorPrecision)); break; }
+
+    }
+}
+
 
 void MainWindow::connectAllButtonsClickToSingleSlot()
 {

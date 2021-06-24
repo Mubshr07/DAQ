@@ -22,7 +22,7 @@ signals:
     void tx_setSampleTime(int mSec);
     void tx_ClosingWindow_logConfig();
     void tx_generate_ThisGUI(GUI_WIN guiEnum);
-
+    void tx_sendFactorsAndPGAs_AllChnls();
 
 public slots:
     void on_pb_Channel_Clicked();
@@ -31,7 +31,7 @@ public slots:
     void showFactorLabel(int indx);
 
     void rx_ChannelValue(int chnl, float rawVal, float val);
-
+    void rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa);
 
     void on_timer_singleShot_elapsed();
     void on_timer_enabler_elapsed();
@@ -64,6 +64,7 @@ private:
     QString style_pbChnl_Enable = "font: 600 16pt 'Times New Roman'; padding: 4px; background-color:lime; border: 2px solid white; border-radius: 5px";
     QString style_pbChnl_Disable = "font: 600 16pt 'Times New Roman'; padding: 5px; background-color: rgb(255, 255, 255); border: 1px solid red; border-radius:5px; ";
     int lcdNumberPrecision = 1;
+    int factorPrecision = 3;
 
 
 };

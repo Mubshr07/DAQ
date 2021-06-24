@@ -16,26 +16,29 @@
   <property name="styleSheet">
    <string notr="true">QDialog {color: qlineargradient(spread:pad, x1:0 y1:0, x2:1 y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));
 
- background: qlineargradient( x1:0 y1:0, x2:1 y2:0, stop:0 rgb(39, 46, 141) , stop:0.5  rgb(39, 46, 141) ,  stop:1 rgb(149, 155, 173)    );
+/* background: qlineargrad ient( x1:0 y1:0, x2:1 y2:0, stop:0 rgb(39, 46, 141) , stop:0.5  rgb(39, 46, 141) ,  stop:1 rgb(149, 155, 173)    ); */
+ background-color: rgb(58, 58, 58); 
 }
 QPushButton {
 	font: 600 20pt &quot;Times New Roman&quot;;
 	padding: 5px;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(170, 255, 255);
 	border: 1px solid black;
 	border-radius:5px;
+	color:black;
 }
 QPushButton:hover {
 	font: 600 20pt &quot;Times New Roman&quot;;
 	padding: 5px;
-	background-color: rgb(215, 215, 215);
+	background-color: rgb(202, 248, 255);
 	border: 2px solid black;
 	border-radius:5px;
+	color:red;
 }
 QLabel {
 	font: 600 18pt &quot;Times New Roman&quot;;
 	padding: 8px; 
-	color:white;
+	color:rgb(170, 255, 255);
 }
 
 QLCDNumber{
