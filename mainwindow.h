@@ -30,7 +30,7 @@ public slots:
     void disableLCDNumber(int indx);
     void showFactorLabel(int indx);
 
-    void rx_ChannelValue(int chnl, float val);
+    void rx_ChannelValue(int chnl, float rawVal, float val);
 
 
     void on_timer_singleShot_elapsed();
@@ -63,7 +63,7 @@ private:
 
     QString style_pbChnl_Enable = "font: 600 16pt 'Times New Roman'; padding: 4px; background-color:lime; border: 2px solid white; border-radius: 5px";
     QString style_pbChnl_Disable = "font: 600 16pt 'Times New Roman'; padding: 5px; background-color: rgb(255, 255, 255); border: 1px solid red; border-radius:5px; ";
-    int lcdNumberPrecision = 2;
+    int lcdNumberPrecision = 1;
 
 
 };

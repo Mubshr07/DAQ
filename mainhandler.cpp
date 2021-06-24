@@ -90,7 +90,7 @@ void MainHandler::generate_firstWindow()
 void MainHandler::generate_logConfig()
 {
     logConfig = new MainWindow();
-    connect(loggerClass, SIGNAL(tx_channel_Value(int, float)), logConfig, SLOT(rx_ChannelValue(int, float)));
+    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), logConfig, SLOT(rx_ChannelValue(int,float,float)));
     connect(logConfig, SIGNAL(tx_setChannelEnable(int, bool)), loggerClass, SLOT(rx_setChannelEnableDisable(int, bool)));
     connect(logConfig, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
     connect(logConfig, SIGNAL(tx_ClosingWindow_logConfig()), this, SLOT(rx_ClosingWindow_logConfig()));
@@ -105,15 +105,30 @@ void MainHandler::generate_graphWin()
     connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int, int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
     connect(grphW, SIGNAL(tx_loggingStartStop(bool)), loggerClass, SLOT(rx_loggingStartStop(bool)));
+    connect(grphW, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
+    connect(grphW, SIGNAL(tx_ClosingWindow_graphWin()), this, SLOT(rx_ClosingWindow_graphWin()));
+
     connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), grphW, SLOT(rx_EnableChannelsAre(int)));
     connect(loggerClass, SIGNAL(tx_GraphChannelValue(int,int,float)), grphW, SLOT(rx_GraphChannelValue(int,int,float)));
     connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), grphW, SLOT(rx_ramdomOP(int,float, QString)));
+
+
     grphW->setModal(true);
     grphW->show();
 }
 void MainHandler::generate_ConfigCHWin()
 {
     configCH = new ConfigChWin();
+
+    connect(configCH, SIGNAL(tx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), loggerClass, SLOT(rx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
+    connect(configCH, SIGNAL(tx_ClosingWindow_ConfigCHWin()), this, SLOT(rx_ClosingWindow_ConfigCHWin()));
+    connect(configCH, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
+    connect(configCH, SIGNAL(tx_giveMechannelSettings(int)), loggerClass, SLOT(rx_giveMechannelSettings(int)));
+    connect(configCH, SIGNAL(tx_ChannelSettingsWindowIsOpen(bool)), loggerClass, SLOT(rx_ChannelSettingsWindowIsOpen(bool)));
+    connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), configCH, SLOT(rx_ramdomOP(int,float, QString)));
+    connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), configCH, SLOT(rx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
+    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), configCH, SLOT(rx_ChannelValue(int,float,float)));
+
     configCH->setModal(true);
     configCH->show();
 }

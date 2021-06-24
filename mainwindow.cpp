@@ -53,7 +53,7 @@ void MainWindow::on_pb_SetConfiguration_clicked()
 }
 
 
-void MainWindow::rx_ChannelValue(int chnl, float val)
+void MainWindow::rx_ChannelValue(int chnl, float rawVal, float val)
 {
     //qDebug()<<" Value Received : Chnnel = "<<chnl<<" value = "<<val;
     switch (chnl) {

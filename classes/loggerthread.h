@@ -15,7 +15,7 @@ public:
     explicit loggerThread(QObject *parent = nullptr);
 
 signals:
-    void tx_channel_Value(int chnl, float val);
+    void tx_channel_Value(int chnl, float rawVal, float val);
     void tx_loggingStarted(bool started);
     void tx_graphChnlValue(int chnl, float val);
     void tx_channelisEnabled(int chnl, bool enableVal);
@@ -24,7 +24,7 @@ signals:
     void tx_GraphChannelValue(int indx, int chnl, float val);
 
     void tx_ramdomOP(int idx, float val, QString str);
-
+    void tx_ChannelOLDSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
 
 public slots:
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
@@ -34,8 +34,16 @@ public slots:
     void rx_AddNewChannelToGraph(int idx, int chnlID);
     void rx_RemoveChannelToGraph(int idx, int chnlID);
     void rx_GraphWindowIsOpen(bool windOpen);
+    void rx_ChannelSettingsWindowIsOpen(bool windOpen);
 
     void rx_giveMeEnablesChannels();
+
+
+    void rx_setChannelNewSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
+    void rx_giveMechannelSettings(int chnl);
+    void rx_saveChannelSettingsToFile();
+
+
 
 
     void on_timer_logger_elapsed();
@@ -47,6 +55,8 @@ private:
     QElapsedTimer *timer_elapser2;
     QTimer *timer_graphValue;
 
+    void readChannelSettingsFile();
+    void processChannelSettingsStr(QString str);
     Addressing *addrss_Obj;
     void initializeHWAddresses();
     int32_t *local_ADC0_ADDRESS;
@@ -63,6 +73,7 @@ private:
     bool graphChannels_idxBool[4] = {false, false, false, false};
 
     bool graphWindowIsOpen = false;
+    bool chnlSettingsWindowIsOpen = false;
     bool logging_isStarted = false;
     bool addFirstEnableChannelinGraph = true;
 
@@ -79,6 +90,21 @@ private:
 
 
 
+
+    // -------------- Channel settings File things ------------
+    QString dacChannelSettingsfilePath = QString(QDir::homePath()+"/settingsDAC");
+    QFile *Settingsfile;
+    bool okVariable = false;
+    int settingsCH_id = 0;
+    float settingsCH_pga = 1.1;
+    float settingsCH_factor = 1.1;
+    int settingsCH_type = 0;
+    int settingsCH_ref = 0;
+
+
+
+
+    // -------------- Log File things ------------
     void initialize_Dir_FileName();
     QString folderPath = QString(QDir::homePath()+"/DAQ_Logs");
     QString filePath = "";

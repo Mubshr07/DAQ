@@ -20,14 +20,14 @@
  background-color: rgb(58, 58, 58); 
 }
 QPushButton {
-	font: 600 20pt &quot;Times New Roman&quot;;
+	font: 600 16pt &quot;Times New Roman&quot;;
 	padding: 5px;
 	background-color: rgb(170, 255, 255);
 	border: 1px solid black;
 	border-radius:5px;
 }
 QPushButton:hover {
-	font: 600 20pt &quot;Times New Roman&quot;;
+	font: 600 16pt &quot;Times New Roman&quot;;
 	padding: 5px;
 	background-color: rgb(202, 248, 255);
 	border: 2px solid black;
@@ -54,11 +54,17 @@ QPushButton:disabled {
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="styleSheet">
       <string notr="true">color:white;
 font:700 26pt &quot;Old English Text MT &quot;;
 font:700 26pt &quot;URW Bookman [UKWN]&quot;;
-text-decoration:underline;</string>
+/*text-decoration:underline;*/</string>
      </property>
      <property name="text">
       <string>Channel Configuration Window</string>
@@ -349,7 +355,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_14">
+        <widget class="QPushButton" name="pb_channel_13">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -368,7 +374,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_74">
+        <widget class="QPushButton" name="pb_channel_14">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -387,7 +393,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_75">
+        <widget class="QPushButton" name="pb_channel_15">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -406,7 +412,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_76">
+        <widget class="QPushButton" name="pb_channel_16">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -425,7 +431,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_77">
+        <widget class="QPushButton" name="pb_channel_17">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -444,7 +450,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_78">
+        <widget class="QPushButton" name="pb_channel_18">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -463,7 +469,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_79">
+        <widget class="QPushButton" name="pb_channel_19">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -482,7 +488,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_80">
+        <widget class="QPushButton" name="pb_channel_20">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -501,7 +507,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_81">
+        <widget class="QPushButton" name="pb_channel_21">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -520,7 +526,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_82">
+        <widget class="QPushButton" name="pb_channel_22">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -539,7 +545,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_83">
+        <widget class="QPushButton" name="pb_channel_23">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -569,7 +575,7 @@ text-decoration:underline;</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
-        <widget class="QPushButton" name="pb_channel_60">
+        <widget class="QPushButton" name="pb_channel_24">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -588,7 +594,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_61">
+        <widget class="QPushButton" name="pb_channel_25">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -607,7 +613,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_62">
+        <widget class="QPushButton" name="pb_channel_26">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -626,7 +632,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_63">
+        <widget class="QPushButton" name="pb_channel_27">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -645,7 +651,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_64">
+        <widget class="QPushButton" name="pb_channel_28">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -664,7 +670,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_65">
+        <widget class="QPushButton" name="pb_channel_29">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -683,7 +689,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_66">
+        <widget class="QPushButton" name="pb_channel_30">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -702,7 +708,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_67">
+        <widget class="QPushButton" name="pb_channel_31">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -721,64 +727,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_71">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string>35</string>
-         </property>
-         <property name="text">
-          <string>36</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_channel_70">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string>34</string>
-         </property>
-         <property name="text">
-          <string>35</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_channel_69">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string>33</string>
-         </property>
-         <property name="text">
-          <string>34</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_channel_68">
+        <widget class="QPushButton" name="pb_channel_32">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -790,6 +739,63 @@ text-decoration:underline;</string>
          </property>
          <property name="text">
           <string>33</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_channel_33">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>33</string>
+         </property>
+         <property name="text">
+          <string>34</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_channel_34">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>34</string>
+         </property>
+         <property name="text">
+          <string>35</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_channel_35">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>35</string>
+         </property>
+         <property name="text">
+          <string>36</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -808,7 +814,7 @@ text-decoration:underline;</string>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
-        <widget class="QPushButton" name="pb_channel_84">
+        <widget class="QPushButton" name="pb_channel_36">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -827,7 +833,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_85">
+        <widget class="QPushButton" name="pb_channel_37">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -846,7 +852,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_86">
+        <widget class="QPushButton" name="pb_channel_38">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -865,7 +871,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_87">
+        <widget class="QPushButton" name="pb_channel_39">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -884,7 +890,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_88">
+        <widget class="QPushButton" name="pb_channel_40">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -903,7 +909,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_89">
+        <widget class="QPushButton" name="pb_channel_41">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -925,7 +931,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_90">
+        <widget class="QPushButton" name="pb_channel_42">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -944,7 +950,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_91">
+        <widget class="QPushButton" name="pb_channel_43">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -963,7 +969,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_92">
+        <widget class="QPushButton" name="pb_channel_44">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -982,45 +988,7 @@ text-decoration:underline;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_channel_95">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string>47</string>
-         </property>
-         <property name="text">
-          <string>48</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_channel_94">
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string>46</string>
-         </property>
-         <property name="text">
-          <string>47</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_channel_93">
+        <widget class="QPushButton" name="pb_channel_45">
          <property name="minimumSize">
           <size>
            <width>60</width>
@@ -1032,6 +1000,44 @@ text-decoration:underline;</string>
          </property>
          <property name="text">
           <string>46</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_channel_46">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>46</string>
+         </property>
+         <property name="text">
+          <string>47</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_channel_47">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string>47</string>
+         </property>
+         <property name="text">
+          <string>48</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1060,7 +1066,7 @@ text-decoration:underline;</string>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>30</height>
       </size>
      </property>
     </spacer>
@@ -1085,6 +1091,18 @@ text-decoration:underline;</string>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#groupBox {
+border:2px solid rgb(170, 255, 255);
+border-radius:7px;
+}</string>
+       </property>
        <property name="title">
         <string/>
        </property>
@@ -1102,7 +1120,7 @@ text-decoration:underline;</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="lbl_Channel_ID">
             <property name="text">
              <string>01</string>
             </property>
@@ -1117,6 +1135,10 @@ text-decoration:underline;</string>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255);
+color:rgb(0, 0, 0);</string>
+            </property>
             <property name="text">
              <string>Type:</string>
             </property>
@@ -1126,7 +1148,11 @@ text-decoration:underline;</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="lbl_Channel_Type">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255);
+color:rgb(0, 0, 0);</string>
+            </property>
             <property name="text">
              <string>Bridge</string>
             </property>
@@ -1136,6 +1162,13 @@ text-decoration:underline;</string>
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -1150,15 +1183,25 @@ text-decoration:underline;</string>
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+           <widget class="QDoubleSpinBox" name="sp_Channel_PGA">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="decimals">
+             <number>4</number>
             </property>
            </widget>
           </item>
@@ -1177,26 +1220,50 @@ text-decoration:underline;</string>
            </widget>
           </item>
           <item>
-           <widget class="QDoubleSpinBox" name="doubleSpinBox">
+           <widget class="QDoubleSpinBox" name="sp_Channel_Factor">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="minimum">
+             <double>1.000000000000000</double>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
+         <widget class="Line" name="line_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="label_6">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255);
+color:rgb(0, 0, 0);</string>
+            </property>
             <property name="text">
-             <string>Reference:</string>
+             <string>Current CH Ref:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1204,7 +1271,7 @@ text-decoration:underline;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pb_ChannelReferenceToggle">
             <property name="text">
              <string>Internal</string>
             </property>
@@ -1233,6 +1300,18 @@ text-decoration:underline;</string>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#groupBox_2 {
+border:2px solid  rgb(85, 170, 0);
+border-radius:7px;
+}</string>
+       </property>
        <property name="title">
         <string/>
        </property>
@@ -1241,42 +1320,13 @@ text-decoration:underline;</string>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
            <widget class="QLabel" name="label_13">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255);
+color:rgb(0, 0, 0);
+text-decoration:underline;</string>
+            </property>
             <property name="text">
-             <string>New PGA:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>01</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
-          <item>
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>New Factor:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>1.0</string>
+             <string>Channel Values</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1286,39 +1336,83 @@ text-decoration:underline;</string>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_16">
+         <widget class="Line" name="line_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_19">
           <item>
-           <widget class="QLabel" name="label_17">
+           <widget class="QLabel" name="label_20">
             <property name="text">
-             <string>Reference:</string>
+             <string>With old settings</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_12">
+           <widget class="QLCDNumber" name="lcd_Ch_Value_OLD"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_18">
+          <item>
+           <widget class="QLabel" name="label_19">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255);
+color:rgb(0, 0, 0);</string>
+            </property>
             <property name="text">
-             <string>Internal</string>
+             <string>With New Settings</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lcd_Ch_Value_New">
+            <property name="styleSheet">
+             <string notr="true">background-color:rgb(170, 255, 255); </string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pb_SaveNewSettings">
           <property name="minimumSize">
            <size>
             <width>0</width>
             <height>70</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">font: 750 24pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(170, 255, 127);
+border:2px solid rgb(85, 170, 0);
+border-radius:10px;</string>
+          </property>
           <property name="text">
-           <string>Save</string>
+           <string>Save New</string>
           </property>
          </widget>
         </item>
@@ -1354,26 +1448,65 @@ text-decoration:underline;</string>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>30</height>
       </size>
      </property>
     </spacer>
    </item>
    <item>
-    <widget class="QLabel" name="label_15">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 13pt &quot;MS Shell Dlg 2&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Status:</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 13pt &quot;MS Shell Dlg 2&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Status:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_Status">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 13pt &quot;MS Shell Dlg 2&quot;;</string>
+       </property>
+       <property name="text">
+        <string>-----------------------</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_WindowClose">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:transparent;
+color:red;
+border: 2px solid red;
+padding 10px;</string>
+       </property>
+       <property name="text">
+        <string>CLOSE</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

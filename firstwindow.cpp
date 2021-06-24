@@ -7,6 +7,13 @@ FirstWindow::FirstWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setFixedSize(1024, 768);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    //this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
+
     timer_clock = new QTimer(this);
     timer_clock->setInterval(1000);
     connect(timer_clock, SIGNAL(timeout()), this, SLOT(on_timer_clock_elapsed()));

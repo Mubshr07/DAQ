@@ -11,6 +11,15 @@ enum GUI_WIN {
     gui_LOG_CONFIG_WIN
 };
 
+enum CHANNEL_TYPE {
+    BRIDGE,
+    SINGEL_ENDED
+};
+
+enum CHANNEL_REFERENCE {
+    INTERNAL,
+    EXTERNAL
+};
 
 
 #include <QObject>
@@ -40,5 +49,8 @@ public:
     static QString logFile;
 
 };
+Q_DECLARE_METATYPE(GUI_WIN);
+Q_DECLARE_METATYPE(CHANNEL_TYPE);
+Q_DECLARE_METATYPE(CHANNEL_REFERENCE);
 
 #endif // GLOBALVARS_H

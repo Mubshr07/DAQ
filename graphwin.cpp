@@ -329,7 +329,9 @@ void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
         local_loggingStarted = !local_loggingStarted;
         emit tx_loggingStartStop(local_loggingStarted);
         emit tx_GraphWindowIsOpen(false);
-        this->close();
+        emit tx_generate_ThisGUI(gui_FIRST_WIN);
+        emit tx_ClosingWindow_graphWin();
+        //this->close();
     }
 }
 void graphWin::on_pb_CloseWindow_clicked()
@@ -349,7 +351,8 @@ void graphWin::on_pb_CloseWindow_clicked()
         on_pb_RemoveGraph_2_clicked();
         on_pb_RemoveGraph_3_clicked();
         emit tx_GraphWindowIsOpen(false);
-        this->close();
+        emit tx_generate_ThisGUI(gui_FIRST_WIN);
+        emit tx_ClosingWindow_graphWin();
     }
 }
 void graphWin::on_pb_StartLog_clicked()

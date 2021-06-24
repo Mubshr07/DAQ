@@ -22,6 +22,9 @@ signals:
     void tx_RemoveChannelToGraph(int idx, int chnlID);
     void tx_giveMeEnablesChannels();
     void tx_loggingStartStop(bool started);
+    void tx_generate_ThisGUI(GUI_WIN guiEnum);
+
+    void tx_ClosingWindow_graphWin();
 
 public slots:
     void rx_EnableChannelsAre(int chnlID);
