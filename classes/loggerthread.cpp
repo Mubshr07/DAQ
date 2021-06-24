@@ -3,7 +3,7 @@
 chnlClass_Simple chnlArray[TOTAL_CHANNEL];
 loggerThread::loggerThread(QObject *parent) : QObject(parent)
 {
-    //qDebug()<<" debug LoggerThread start ";
+    qDebug()<<" debug LoggerThread start ";
     initializeHWAddresses();
     for(int i = 0; i< TOTAL_CHANNEL; i++)
     {
@@ -11,7 +11,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
         chnlArray[i].setChannelAddress(i);
     }
 
-    //qDebug()<<" debug LoggerThread 1 ";
+    qDebug()<<" debug LoggerThread 1 ";
 
     //qDebug()<<" before timer_logger initialize ";
     timer_logger = new QTimer(this);
@@ -34,12 +34,13 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     timer_elapser2 = new QElapsedTimer();
     timer_elapser2->start();
 
-    //qDebug()<<" debug LoggerThread 4 ";
+    qDebug()<<" debug LoggerThread 4 ";
 }
 
 
 void loggerThread::on_timer_logger_elapsed()
 {
+    //qDebug()<<" debug on_timer_logger_elapsed 1 ";
     timer_elapser->start();
     logStr = QString(QString::number(logSerialNumber)+",");
     logStr += QString(QTime::currentTime().toString("HH:mm:ss")+",");

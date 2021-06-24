@@ -1,6 +1,5 @@
 #ifndef LOGGERTHREAD_H
 #define LOGGERTHREAD_H
-#define TOTAL_CHANNEL 48
 
 
 #include <QObject>

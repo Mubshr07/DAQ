@@ -21,9 +21,12 @@ SOURCES += \
     classes/qcustomplot.cpp \
     classes/globalvars.cpp \
     classes/loggerthread.cpp \
+    configchwin.cpp \
     confirmationbox.cpp \
+    firstwindow.cpp \
     graphwin.cpp \
     main.cpp \
+    mainhandler.cpp \
     mainwindow.cpp
 
 HEADERS += \
@@ -32,12 +35,17 @@ HEADERS += \
     classes/qcustomplot.h \
     classes/globalvars.h \
     classes/loggerthread.h \
+    configchwin.h \
     confirmationbox.h \
+    firstwindow.h \
     graphwin.h \
+    mainhandler.h \
     mainwindow.h
 
 FORMS += \
+    configchwin.ui \
     confirmationbox.ui \
+    firstwindow.ui \
     graphwin.ui \
     mainwindow.ui
 

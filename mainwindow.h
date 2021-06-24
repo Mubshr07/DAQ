@@ -4,9 +4,6 @@
 #include <QMainWindow>
 
 #include "classes/globalvars.h"
-#include "classes/chnlclass_simple.h"
-#include "classes/loggerthread.h"
-#include "graphwin.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,14 +20,15 @@ public:
 signals:
     void tx_setChannelEnable(int chnl, bool enable);
     void tx_setSampleTime(int mSec);
-
-
+    void tx_ClosingWindow_logConfig();
+    void tx_generate_ThisGUI(GUI_WIN guiEnum);
 
 
 public slots:
     void on_pb_Channel_Clicked();
     void connectAllButtonsClickToSingleSlot();
     void disableLCDNumber(int indx);
+    void showFactorLabel(int indx);
 
     void rx_ChannelValue(int chnl, float val);
 
@@ -43,27 +41,28 @@ public slots:
 private slots:
     void on_pb_SetConfiguration_clicked();
     void on_pb_CloseApp_clicked();
+    void on_pb_EnableAll_Bridge_clicked();
+    void on_pb_DisableAll_Bridge_clicked();
+    void on_pb_EnableAll_SingleEnded_clicked();
+    void on_pb_DisableAll_singleEnded_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTimer *timer_singleShot;
     QTimer *timer_enabler;
 
-    loggerThread *loggerClass;
-    QThread *thrd;
-    graphWin *grphW;
 
     int index_SingleShotTimer = 0;
     int index_Enabler = 0;
 
-    Qt::GlobalColor lcdNumber_colorPallet = Qt::red;
+    Qt::GlobalColor lcdNumber_colorPallet = Qt::white;
 
     int accessibleName_int = 0;
     bool okVariable = false;
     QVariant localEnable = false;
 
-    QString style_pbChnl_Enable = "font: 600 20pt 'Times New Roman'; padding: 4px; background-color:lime; border: 2px solid white; border-radius: 5px";
-    QString style_pbChnl_Disable = "font: 600 20pt 'Times New Roman'; padding: 5px; background-color: rgb(255, 255, 255); border: 1px solid red; border-radius:5px; ";
+    QString style_pbChnl_Enable = "font: 600 16pt 'Times New Roman'; padding: 4px; background-color:lime; border: 2px solid white; border-radius: 5px";
+    QString style_pbChnl_Disable = "font: 600 16pt 'Times New Roman'; padding: 5px; background-color: rgb(255, 255, 255); border: 1px solid red; border-radius:5px; ";
     int lcdNumberPrecision = 2;
 
 
