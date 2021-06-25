@@ -35,6 +35,7 @@ public slots:
 
     // ------------ Timer Slots
     void on_timer_singleShot_Elapsed();
+    void on_timer_graphPloter_Elapsed();
     void reCalculateGraphAxis();
 
 private slots:
@@ -47,10 +48,10 @@ private slots:
     void on_pb_StartLog_clicked();
 
 
-
 private:
     Ui::graphWin *ui;
     QTimer *timer_singleShot;
+    QTimer *timer_graphPloter;
 
     ConfirmationBox *msgBox;
 
@@ -84,6 +85,7 @@ private:
 
     void update_cmbBoxItems();
 
+    double graphValueArray[4] = {0.0, 0.0, 0.0, 0.0 };
 
 
 

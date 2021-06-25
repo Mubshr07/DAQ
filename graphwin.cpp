@@ -57,6 +57,9 @@ graphWin::graphWin(QWidget *parent) :
     timer_singleShot->setSingleShot(true);
     timer_singleShot->start(350);
 
+    timer_graphPloter = new QTimer(this);
+    connect(timer_graphPloter, SIGNAL(timeout()), this, SLOT(on_timer_graphPloter_Elapsed()));
+    timer_graphPloter->start(210);
 
 }
 
@@ -105,7 +108,9 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
 }
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
+    graphValueArray[indx] = val;
     //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
+    /*
     static QTime time(QTime::currentTime());
     // calculate two new data points:
     double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
@@ -146,11 +151,68 @@ void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
       lastFpsKey = key;
       frameCount = 0;
     }
+    */
 }
+
+
+void graphWin::on_timer_graphPloter_Elapsed()
+{
+    //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
+    static QTime time(QTime::currentTime());
+    // calculate two new data points:
+    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
+    static double lastPointKey = 0;
+    if (key-lastPointKey > 0.002) // at most add point every 2 ms
+    {
+        // add data to lines:
+        if(ui->pb_RemoveGraph_0->isEnabled()) {
+            ui->myPlot->graph(0)->addData(key, graphValueArray[0]);
+        }
+        if(ui->pb_RemoveGraph_1->isEnabled()) {
+            ui->myPlot->graph(1)->addData(key, graphValueArray[1]);
+        }
+        if(ui->pb_RemoveGraph_2->isEnabled()) {
+            ui->myPlot->graph(2)->addData(key, graphValueArray[2]);
+        }
+        if(ui->pb_RemoveGraph_3->isEnabled()) {
+            ui->myPlot->graph(3)->addData(key, graphValueArray[3]);
+        }
+
+        lastPointKey = key;
+        //ui->myPlot->graph(1)->addData(key, qCos(key)+qrand()/(double)RAND_MAX*0.5*qSin(key/0.4364));
+
+        // rescale value (vertical) axis to fit the current data:
+        //ui->customPlot->graph(0)->rescaleValueAxis();
+        //ui->customPlot->graph(1)->rescaleValueAxis(true);
+
+
+        ui->myPlot->graph(0)->rescaleValueAxis();
+        ui->myPlot->graph(1)->rescaleValueAxis();
+        ui->myPlot->graph(2)->rescaleValueAxis();
+        ui->myPlot->graph(3)->rescaleValueAxis();
+        ui->myPlot->rescaleAxes(true);
+        //ui->myPlot->graph(3)->rescaleValueAxis(true);
+
+    }
+    // make key axis range scroll with the data (at a constant range size of 8):
+    ui->myPlot->xAxis->setRange(key, 10, Qt::AlignRight);
+    ui->myPlot->replot();
+
+    // calculate frames per second:
+    static double lastFpsKey;
+    static int frameCount;
+    ++frameCount;
+    if (key-lastFpsKey > 2) // average fps over 2 seconds
+    {
+        lastFpsKey = key;
+        frameCount = 0;
+    }
+}
+
 
 void graphWin::on_pb_Add_toGraph_clicked()
 {
-    qDebug()<<"Number of Items are: "<<ui->cmb_AddList->count()<<" Vectors:"<<qv_availableList; //.length();
+    //qDebug()<<"Number of Items are: "<<ui->cmb_AddList->count()<<" Vectors:"<<qv_availableList; //.length();
     if(ui->cmb_AddList->count() <= 0) {
         return;
     }
@@ -173,7 +235,7 @@ void graphWin::on_pb_Add_toGraph_clicked()
     int already4thChannelID = 66;
     if(chnl4thIsEnable)
     {
-      already4thChannelID = ui->lbl_Channel_3->text().toInt();
+        already4thChannelID = ui->lbl_Channel_3->text().toInt();
     }
     switch (indx) {
     case 0: {
@@ -289,7 +351,7 @@ void graphWin::on_pb_RemoveGraph_3_clicked()
 
 void graphWin::update_cmbBoxItems()
 {
-    qDebug()<<" Vectors are:: "<<qv_availableList;
+    //qDebug()<<" Vectors are:: "<<qv_availableList;
     int tempqt, i, j;
     for (i=0; i<qv_availableList.length(); i++)
     {
