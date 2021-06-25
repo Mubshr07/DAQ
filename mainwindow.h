@@ -46,6 +46,10 @@ private slots:
     void on_pb_EnableAll_SingleEnded_clicked();
     void on_pb_DisableAll_singleEnded_clicked();
 
+    void on_slider_samplingRate_valueChanged(int value);
+
+    void on_txt_SampleTime_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer_singleShot;

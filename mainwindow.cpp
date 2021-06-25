@@ -46,7 +46,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_SetConfiguration_clicked()
 {
-    emit tx_setSampleTime((int)(ui->txt_SampleTime->toPlainText().toInt() * 1000.0));
+    //emit tx_setSampleTime((int)(ui->txt_SampleTime->toPlainText().toInt() * 1000.0));
+    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
     tx_generate_ThisGUI(gui_GRAPH_WIN);
     tx_ClosingWindow_logConfig();
     //this->close();
@@ -915,4 +916,14 @@ void MainWindow::on_pb_DisableAll_singleEnded_clicked()
     ui->pb_channel_47->setChecked(false); ui->pb_channel_47->clicked();
     ui->lbl_lcdNumber_47->display(""); ui->lbl_factor_47->setVisible(false);
 
+}
+
+void MainWindow::on_slider_samplingRate_valueChanged(int value)
+{
+    ui->txt_SampleTime->setValue(value);
+}
+
+void MainWindow::on_txt_SampleTime_valueChanged(int arg1)
+{
+    ui->slider_samplingRate->setValue(arg1);
 }

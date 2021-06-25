@@ -329,7 +329,7 @@ void loggerThread::processChannelSettingsStr(QString str)
         dataStr = str.left(indxOfComa);
         settingsCH_ref = dataStr.toInt(&okVariable, 10);
 
-        qDebug()<<" ID:"<<settingsCH_id<<" pga:"<<settingsCH_pga<<" fac:"<<settingsCH_factor<<" type:"<<settingsCH_type<<" ref:"<<settingsCH_ref;
+        //qDebug()<<" ID:"<<settingsCH_id<<" pga:"<<settingsCH_pga<<" fac:"<<settingsCH_factor<<" type:"<<settingsCH_type<<" ref:"<<settingsCH_ref;
 
         chnlArray[settingsCH_id].set_Channel_PGA(settingsCH_pga);
         chnlArray[settingsCH_id].set_Channel_Factor(settingsCH_factor);

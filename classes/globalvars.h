@@ -37,6 +37,9 @@ enum CHANNEL_REFERENCE {
 #include <QVariant>
 #include <QVector>
 
+#include <iostream>
+#include <unistd.h>
+#include <stdlib.h>
 
 #include "qdebug.h"
 #include "confirmationbox.h"

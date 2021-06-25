@@ -36,16 +36,21 @@ graphWin::graphWin(QWidget *parent) :
     ui->myPlot->addGraph(); // plot 3
     ui->myPlot->graph(3)->setPen(plot_3);
 
+    ui->myPlot->setBackgroundScaled(true);
+
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->myPlot->xAxis->setTicker(timeTicker);
     ui->myPlot->axisRect()->setupFullAxesBox();
     ui->myPlot->yAxis->setRange(-5.0, 30.2);
+    //ui->myPlot->yAxis->setScaleType(QCPAxis::ScaleType::stLinear);
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->myPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->myPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->myPlot->yAxis2, SLOT(setRange(QCPRange)));
+
+    ui->myPlot->yAxis->rescale(true);
 
     timer_singleShot = new QTimer(this);
     connect(timer_singleShot, SIGNAL(timeout()), this, SLOT(on_timer_singleShot_Elapsed()));
@@ -101,10 +106,6 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
     //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
-
-
-
-
     static QTime time(QTime::currentTime());
     // calculate two new data points:
     double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
@@ -149,6 +150,10 @@ void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 
 void graphWin::on_pb_Add_toGraph_clicked()
 {
+    qDebug()<<"Number of Items are: "<<ui->cmb_AddList->count()<<" Vectors:"<<qv_availableList; //.length();
+    if(ui->cmb_AddList->count() <= 0) {
+        return;
+    }
     int chnlInt = ui->cmb_AddList->currentText().toInt();
     chnl4thIsAppliable = false;
     int indx = 3;
@@ -284,6 +289,7 @@ void graphWin::on_pb_RemoveGraph_3_clicked()
 
 void graphWin::update_cmbBoxItems()
 {
+    qDebug()<<" Vectors are:: "<<qv_availableList;
     int tempqt, i, j;
     for (i=0; i<qv_availableList.length(); i++)
     {
@@ -299,12 +305,21 @@ void graphWin::update_cmbBoxItems()
     }
 
 
-
-    int currentIndex = ui->cmb_AddList->currentIndex();
-    ui->cmb_AddList->clear();
-    for(int i=0; i<qv_availableList.length(); i++)
+    int currentIndex  = 0;
+    if(ui->cmb_AddList->count() > 0)
     {
-        ui->cmb_AddList->addItem(QString::number(qv_availableList.at(i)));
+        currentIndex = ui->cmb_AddList->currentIndex();
+        ui->cmb_AddList->clear();
+        for(int i=0; i<qv_availableList.length(); i++) {
+            ui->cmb_AddList->addItem(QString::number(qv_availableList.at(i)));
+        }
+    }
+    else
+    {
+        ui->cmb_AddList->clear();
+        for(int i=0; i<qv_availableList.length(); i++) {
+            ui->cmb_AddList->addItem(QString::number(qv_availableList.at(i)));
+        }
     }
     ui->cmb_AddList->setCurrentIndex(currentIndex);
 }
@@ -318,11 +333,42 @@ void graphWin::rx_ramdomOP(int idx, float val, QString str)
     case 1: {
         //qDebug()<<" Time string is:: "<<str;
         ui->lbl_Time->setText(str);
+        reCalculateGraphAxis();
         break;
     }
     }
 }
+void graphWin::reCalculateGraphAxis()
+{
 
+    //ui->myPlot->graph(0)->mDataContainer->constBegin();
+    //QSharedPointer <QCPGraphDataContainer> first = ui->myPlot->graph(0)->data();
+    //double max = *std::max_element(first->mData.constBegin() , ui->myPlot->graph(0)->data()->constEnd());
+    //double min = *std::min_element(main_f_graph.constBegin(), main_f_graph.constEnd());
+
+    /*
+    double max = *std::max_element(ui->myPlot->graph(0)->data()., main_f_graph.constEnd());
+    double min = *std::min_element(main_f_graph.constBegin(), main_f_graph.constEnd());
+    max+=15;
+    min-=15;
+    if(min>-50) min = -50;
+    if(max<50) max = 50;
+    ui->plot_f->yAxis->setRange(min, max);
+    max = *std::max_element(main_v_graph.constBegin(), main_v_graph.constEnd());
+    //min = *std::min_element(main_v_graph.constBegin(), main_v_graph.constEnd());
+    max+=100;
+    //if(max<400) max = 400;
+    //min-=150;
+    ui->plot_v->yAxis->setRange(-100, max);
+    //ui->plot_v->yAxis->setRange(-50, 50);
+    //ui->plot_v->yAxis->setRange(-60, 60);
+    max = *std::max_element(main_p_graph.constBegin(), main_p_graph.constEnd());
+    //min = *std::min_element(main_p_graph.constBegin(), main_p_graph.constEnd());
+    max+=10;
+    if(max<30) max = 30;
+    //min-=10;
+    ui->plot_p->yAxis->setRange(-5, max); */
+}
 
 void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
 {

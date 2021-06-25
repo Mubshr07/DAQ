@@ -35,6 +35,7 @@ public slots:
 
     // ------------ Timer Slots
     void on_timer_singleShot_Elapsed();
+    void reCalculateGraphAxis();
 
 private slots:
     void on_pb_Add_toGraph_clicked();
