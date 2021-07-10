@@ -17,7 +17,7 @@ ConfirmationBox::ConfirmationBox(QWidget *parent) :
 
     this->setWindowFlags(Qt::FramelessWindowHint);
     //this->setWindowState(Qt::WindowFullScreen);
-    this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    //this->setWindowFlag(Qt::WindowStaysOnTopHint);
     this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
 
 

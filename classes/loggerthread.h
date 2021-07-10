@@ -61,14 +61,8 @@ private:
     void processChannelSettingsStr(QString str);
     Addressing *addrss_Obj;
     void initializeHWAddresses();
-    int32_t *local_ADC0_ADDRESS;
-    int32_t *local_ADC1_ADDRESS;
-    int32_t *local_ADC2_ADDRESS;
-    int32_t *local_ADC3_ADDRESS;
-    int32_t *local_ADC4_ADDRESS;
-    int32_t *local_ADC5_ADDRESS;
-    int32_t *local_ADC6_ADDRESS;
-    int32_t *local_ADC7_ADDRESS;
+    uint32_t *local_FPGA_ADDRESS;
+    //int32_t *local_LED_ADDRESS;
 
     //QVector<int> qv_graphChannels;
     int graphChannels_idx[4] = {232, 232, 232, 232};

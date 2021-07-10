@@ -23,11 +23,13 @@ SOURCES += \
     classes/loggerthread.cpp \
     configchwin.cpp \
     confirmationbox.cpp \
+    debugwin.cpp \
     firstwindow.cpp \
     graphwin.cpp \
     main.cpp \
     mainhandler.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newdebug.cpp
 
 HEADERS += \
     classes/addressing.h \
@@ -37,17 +39,21 @@ HEADERS += \
     classes/loggerthread.h \
     configchwin.h \
     confirmationbox.h \
+    debugwin.h \
     firstwindow.h \
     graphwin.h \
     mainhandler.h \
-    mainwindow.h
+    mainwindow.h \
+    newdebug.h
 
 FORMS += \
     configchwin.ui \
     confirmationbox.ui \
+    debugwin.ui \
     firstwindow.ui \
     graphwin.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newdebug.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -56,3 +62,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     pics.qrc
+
+
+target.path = /home/root/
+INSTALLS += target
+

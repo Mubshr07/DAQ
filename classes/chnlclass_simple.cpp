@@ -13,7 +13,6 @@ float chnlClass_Simple::giveCurrentValue()
     // -------------------  Geting Value from ADDRESS
     float rawValue = Get_RawValue_fromADDRESS();
 
-
     float calculatedWithFactorAndPGA = (rawValue * local_CH_factor);// + local_CH_PGA;
     return calculatedWithFactorAndPGA;
 }

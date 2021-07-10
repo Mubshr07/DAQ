@@ -47,6 +47,10 @@ private slots:
     void on_pb_SaveNewSettings_clicked();
     void on_pb_WindowClose_clicked();
 
+    void on_pb_PGA_Minus_clicked();
+
+    void on_pb_PGA_Plus_clicked();
+
 private:
     Ui::ConfigChWin *ui;
     QTimer *timer_singleShot;

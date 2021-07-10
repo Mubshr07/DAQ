@@ -8,7 +8,8 @@ enum GUI_WIN {
     gui_CONFIRMATION_WIN,
     gui_FIRST_WIN,
     gui_GRAPH_WIN,
-    gui_LOG_CONFIG_WIN
+    gui_LOG_CONFIG_WIN,
+    gui_DEBUG_WIN
 };
 
 enum CHANNEL_TYPE {
@@ -51,6 +52,7 @@ public:
     explicit globalVars(QObject *parent = nullptr);
 
     static QString logFile;
+    static uint32_t *global_FPGA_ADDR;
 
 };
 Q_DECLARE_METATYPE(GUI_WIN);

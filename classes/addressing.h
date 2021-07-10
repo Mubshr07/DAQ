@@ -1,7 +1,7 @@
 #ifndef ADDRESSING_H
 #define ADDRESSING_H
 
-//#include <sys/mman.h>
+#include <sys/mman.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -18,7 +18,7 @@ class Addressing
 public:
     Addressing();
     int get_address_of_peripherals();
-    int32_t* givemeaddr(int a);
+    uint32_t* givemeaddr(int a);
 };
 
 #endif // ADDRESSING_H

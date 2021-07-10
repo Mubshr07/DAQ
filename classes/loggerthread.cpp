@@ -5,6 +5,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
 {
     qDebug()<<" debug LoggerThread start ";
     initializeHWAddresses();
+
     for(int i = 0; i< TOTAL_CHANNEL; i++)
     {
         chnlArray[i].setChannelEnableDisable(false);
@@ -12,6 +13,14 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
         if(i<24) chnlArray[i].set_Channel_Type(BRIDGE);
         else chnlArray[i].set_Channel_Type(SINGEL_ENDED);
     }
+
+    uint32_t fpgaID = *(local_FPGA_ADDRESS+78);
+
+    qDebug()<<"\n\n\n";
+    qDebug()<<" FPGA Addr:"<<local_FPGA_ADDRESS <<" Value :: "<<QString::number(fpgaID,16) <<" :: "<<QString::number(*(local_FPGA_ADDRESS+0x4E),16);
+    qDebug()<<"\n\n\n";
+    globalVars::global_FPGA_ADDR = local_FPGA_ADDRESS;
+
     readChannelSettingsFile();
     qDebug()<<" debug LoggerThread 1 ";
 
@@ -347,17 +356,9 @@ void loggerThread::processChannelSettingsStr(QString str)
 void loggerThread::initializeHWAddresses()
 {
     addrss_Obj = new Addressing();
-    addrss_Obj->get_address_of_peripherals();
+    qDebug()<<" Address Generate Reply: "<<addrss_Obj->get_address_of_peripherals();
 
-    local_ADC0_ADDRESS = addrss_Obj->givemeaddr(0);
-    local_ADC1_ADDRESS = addrss_Obj->givemeaddr(1);
-    local_ADC2_ADDRESS = addrss_Obj->givemeaddr(2);
-    local_ADC3_ADDRESS = addrss_Obj->givemeaddr(3);
-    local_ADC4_ADDRESS = addrss_Obj->givemeaddr(4);
-    local_ADC5_ADDRESS = addrss_Obj->givemeaddr(5);
-    local_ADC6_ADDRESS = addrss_Obj->givemeaddr(6);
-    local_ADC7_ADDRESS = addrss_Obj->givemeaddr(7);
-
+    local_FPGA_ADDRESS = addrss_Obj->givemeaddr(0);
 }
 
 void loggerThread::initialize_Dir_FileName()

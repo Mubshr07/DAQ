@@ -11,7 +11,8 @@
 #include "mainwindow.h"
 #include "graphwin.h"
 #include "configchwin.h"
-
+#include "debugwin.h"
+#include "newdebug.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,11 +38,13 @@ public slots:
     void generate_logConfig();
     void generate_graphWin();
     void generate_ConfigCHWin();
+    void generate_DebugWin();
 
     void rx_ClosingWindow_FirstWin(bool shutDown);
     void rx_ClosingWindow_logConfig();
     void rx_ClosingWindow_graphWin();
     void rx_ClosingWindow_ConfigCHWin();
+    void rx_ClosingWindow_DebugWin();
 
 private slots:
     void on_timer_generateGUI_Elapsed();
@@ -52,6 +55,8 @@ private:
     MainWindow *logConfig;
     graphWin *GraphW;
     ConfigChWin *configCH;
+    NewDebug *debgWn;
+
 
     QTimer *timer_generateGUI;
     QTimer *timer_SingleShots;

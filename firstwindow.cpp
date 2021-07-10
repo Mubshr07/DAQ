@@ -50,3 +50,9 @@ void FirstWindow::on_timer_clock_elapsed()
     ui->lbl_Date->setText(QDate::currentDate().toString("dd-MMM-yyyy"));
     ui->lbl_Time->setText(QTime::currentTime().toString("HH:mm:ss"));
 }
+
+void FirstWindow::on_pb_DebugWindow_clicked()
+{
+   emit tx_generate_ThisGUI(gui_DEBUG_WIN);
+    emit tx_ClosingWindow_FirstWin(false);
+}

@@ -225,10 +225,13 @@ void ConfigChWin::rx_ChannelOLDSettings(int chnl, float fac, float pgaa, CHANNEL
     local_currentCH_PGA = pgaa;
     local_currentCH_type = typ;
     local_currentCH_Ref = ref;
+    if(local_currentCH_PGA < 2) local_currentCH_PGA = 2;
+    if(local_currentCH_PGA > 128 ) local_currentCH_PGA  = 128;
 
     ui->lbl_Channel_ID->setText(QString::number(local_currentCH_ID+1));
     ui->sp_Channel_Factor->setValue(local_currentCH_Factor);
-    ui->sp_Channel_PGA->setValue(local_currentCH_PGA);
+    //ui->sp_Channel_PGA->setValue(local_currentCH_PGA);
+    ui->lbl_PGA_Channel->setText(QString::number(local_currentCH_PGA));
 
     ui->lbl_Channel_Type->setText(QString(local_currentCH_type? "SINGLE ENDED":"BRIDGE"));
 
@@ -278,3 +281,17 @@ void ConfigChWin::on_pb_SaveNewSettings_clicked()
 
 
 
+
+void ConfigChWin::on_pb_PGA_Minus_clicked()
+{
+    if(local_currentCH_PGA <=2 ) {local_currentCH_PGA = 2; return; }
+    local_currentCH_PGA /= 2;
+    ui->lbl_PGA_Channel->setText(QString::number(local_currentCH_PGA));
+}
+
+void ConfigChWin::on_pb_PGA_Plus_clicked()
+{
+    if(local_currentCH_PGA >= 128 ) {local_currentCH_PGA = 128; return; }
+    local_currentCH_PGA *= 2;
+    ui->lbl_PGA_Channel->setText(QString::number(local_currentCH_PGA));
+}

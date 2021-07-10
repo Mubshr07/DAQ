@@ -28,6 +28,8 @@ private slots:
     void on_timer_clock_elapsed();
 
 
+    void on_pb_DebugWindow_clicked();
+
 private:
     Ui::FirstWindow *ui;
 

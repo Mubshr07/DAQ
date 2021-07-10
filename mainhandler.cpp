@@ -66,6 +66,10 @@ void MainHandler::on_timer_generateGUI_Elapsed()
         generate_logConfig();
         break;
     }
+    case gui_DEBUG_WIN: {
+        generate_DebugWin();
+        break;
+    }
     } // end of Switch statement
 }
 void MainHandler::rx_generate_ThisGUI(GUI_WIN guiEnum)
@@ -136,7 +140,22 @@ void MainHandler::generate_ConfigCHWin()
     configCH->setModal(true);
     configCH->show();
 }
+void MainHandler::generate_DebugWin()
+{
+    debgWn = new NewDebug();
 
+//    connect(configCH, SIGNAL(tx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), loggerClass, SLOT(rx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
+//    connect(configCH, SIGNAL(tx_ClosingWindow_ConfigCHWin()), this, SLOT(rx_ClosingWindow_ConfigCHWin()));
+//    connect(configCH, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
+//    connect(configCH, SIGNAL(tx_giveMechannelSettings(int)), loggerClass, SLOT(rx_giveMechannelSettings(int)));
+//    connect(configCH, SIGNAL(tx_ChannelSettingsWindowIsOpen(bool)), loggerClass, SLOT(rx_ChannelSettingsWindowIsOpen(bool)));
+//    connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), configCH, SLOT(rx_ramdomOP(int,float, QString)));
+//    connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), configCH, SLOT(rx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
+//    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), configCH, SLOT(rx_ChannelValue(int,float,float)));
+
+    debgWn->setModal(true);
+    debgWn->show();
+}
 
 // ----------------- Closing Windows --------------------
 void MainHandler::rx_ClosingWindow_FirstWin(bool shutDown)
@@ -162,7 +181,11 @@ void MainHandler::rx_ClosingWindow_ConfigCHWin()
     qDebug()<<" Conifg Channel Window is CLosed ";
     configCH->hide();
 }
-
+void MainHandler::rx_ClosingWindow_DebugWin()
+{
+    qDebug()<<" Debug Window is CLosed ";
+    debgWn->hide();
+}
 
 void MainHandler::GUIobjectInitializer()
 {
