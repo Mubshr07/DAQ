@@ -12,9 +12,13 @@ NewDebug::NewDebug(QWidget *parent) :
 
     timer_autoManualClick = new QTimer(this);
     connect(timer_autoManualClick, SIGNAL(timeout()), this, SLOT(on_timer_autoManualClicked()));
-    timer_autoManualClick->setInterval(500);
+    timer_autoManualClick->setInterval(100);
     //timer_autoManualClick->start();
 
+
+    timer_configRegister = new QTimer(this);
+    connect(timer_configRegister, SIGNAL(timeout()), this, SLOT(on_timer_configRegister_Elapsed()));
+    timer_configRegister->setInterval(100);
 
     *(localFPGAaddr + 0x06)  = 0x00;
 }
@@ -38,10 +42,39 @@ void NewDebug::on_pb_StartConversion_clicked()
     *(localFPGAaddr + 0x08) = 0x00;
     //qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<"\n";
 }
-void NewDebug::on_pb_ReadConversion_clicked()
+uint32_t NewDebug::on_pb_ReadConversion_clicked()
 {
+    uint16_t lsb = *(localFPGAaddr+48);
+    uint16_t msb = *(localFPGAaddr+49);
+
+    uint8_t first = 0x00;
+    uint8_t middle = 0x00;
+    uint8_t last = 0x00;
+    first = (msb & 0xFF);
+    middle = (lsb & 0xFF00) >> 8;
+    last = (lsb & 0xFF);
+
+    uint32_t endResult = 0x00000000;
+    endResult = (first<<16);
+    endResult = endResult |(middle<<8);
+    endResult = endResult |(last);
+
+
+    *(localFPGAaddr + 0x02)  = 0x03;
+    *(localFPGAaddr + 0x06)  = 0x00;
+    *(localFPGAaddr + 0x03)  = 0xFF;
+    *(localFPGAaddr + 0x08) = 0x00;     // Pulse    //qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<"\n";
+
+    *(localFPGAaddr + 0x08) = 0x01;
+    *(localFPGAaddr + 0x08) = 0x00;
+
+
+    return endResult;
+
 
 }
+
+
 void NewDebug::on_pb_ADC_Number_clicked()
 {
     *(localFPGAaddr + 0x01) = ui->sp_ADC->value();
@@ -154,6 +187,70 @@ void NewDebug::on_pb_Timer_clicked()
     }
 }
 
+int adcNumber = 0;
+
+void NewDebug::on_timer_autoManualClicked()
+{
+    if(autoMode_isEnable)
+    { // automatic
+        showValueofPCB_Channels(0, getCalculatedFromRawValue(*(localFPGAaddr+0x00)));
+        showValueofPCB_Channels(1, getCalculatedFromRawValue(*(localFPGAaddr+0x01)));
+        showValueofPCB_Channels(2, getCalculatedFromRawValue(*(localFPGAaddr+0x02)));
+        showValueofPCB_Channels(3, getCalculatedFromRawValue(*(localFPGAaddr+0x03)));
+        showValueofPCB_Channels(4, getCalculatedFromRawValue(*(localFPGAaddr+0x04)));
+        showValueofPCB_Channels(5, getCalculatedFromRawValue(*(localFPGAaddr+0x05)));
+        showValueofPCB_Channels(6, getCalculatedFromRawValue(*(localFPGAaddr+0x06)));
+        showValueofPCB_Channels(7, getCalculatedFromRawValue(*(localFPGAaddr+0x07)));
+    }
+    else
+    {
+        if(adcNumber == 8) adcNumber = 0;
+        else  adcNumber++;
+
+        //adcNumber = ui->sp_ADC->value();adcNumber
+
+        *(localFPGAaddr + 0x01) = adcNumber;
+        uint32_t rawValue = on_pb_ReadConversion_clicked();
+        usleep(10000);
+        rawValue = on_pb_ReadConversion_clicked();
+
+
+        float internalRef = 2.048;
+        double coeficient = pow(2, 24);
+        float calculatedValue = (rawValue/coeficient) * internalRef;
+
+
+        showValueofPCB_Channels(adcNumber, calculatedValue);
+    }
+
+
+    //on_pb_Write_New_clicked();
+    //on_pb_Read_New_clicked();
+    //readData();
+    //on_pb_writeRegister_1_clicked();
+    //on_pb_ReadConversion_clicked();
+    //on_pb_readRegister_clicked();
+
+
+}
+
+float NewDebug::getCalculatedFromRawValue(uint32_t raw)
+{
+    //int32_t simpleInt = (raw & 0x7FFFFF);
+    //simpleInt = simpleInt + ((raw & 0x800000)<<8); // >> 23;
+
+    float internalRef = 2.048;
+    float coeficient = pow(2, 24);
+    float calculatedValue = (raw/coeficient) * internalRef;
+    return calculatedValue;
+}
+
+
+void NewDebug::on_timer_configRegister_Elapsed()
+{
+
+}
+
 
 
 int NewDebug::writeRegister(uint8_t addr, uint8_t val)
@@ -196,14 +293,6 @@ uint32_t NewDebug::readRegister(uint8_t addr)
 }
 
 
-void NewDebug::on_timer_autoManualClicked()
-{
-    //on_pb_Write_New_clicked();
-    //on_pb_Read_New_clicked();
-    //readData();
-    on_pb_writeRegister_1_clicked();
-    //on_pb_readRegister_clicked();
-}
 
 void NewDebug::readData()
 {
@@ -223,3 +312,116 @@ void NewDebug::readData()
 
 
 
+
+void NewDebug::on_pb_readRegister_2_clicked()
+{
+    uint16_t lsb = *(localFPGAaddr+48);
+    uint16_t msb = *(localFPGAaddr+49);
+    msb = (msb & 0xFF);
+    uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
+    qDebug()<<" readRegister 2:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply;
+    ui->lbl_readRegister->setText(QString::number(reply, 16));
+
+
+}
+void NewDebug::on_pb_read_ALLChannels_clicked()
+{
+    if(timer_autoManualClick->isActive())
+    {
+        timer_autoManualClick->stop();
+        ui->pb_read_ALLChannels->setStyleSheet("background-color:red;");
+    }
+    else
+    {
+        timer_autoManualClick->start(50);
+        ui->pb_read_ALLChannels->setStyleSheet("background-color:lime;");
+    }
+
+}
+
+void NewDebug::showValueofPCB_Channels(int idx, float val)
+{
+    switch (idx) {
+    case 0: {
+        ui->lbl_Channel_1->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 1: {
+        ui->lbl_Channel_2->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 2: {
+        ui->lbl_Channel_3->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 3: {
+        ui->lbl_Channel_4->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 4: {
+        ui->lbl_Channel_5->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 5: {
+        ui->lbl_Channel_6->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 6: {
+        ui->lbl_Channel_7->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    case 7: {
+        ui->lbl_Channel_8->setText(QString::number(val, 'f', 2));
+        break;
+    }
+    }
+}
+
+void NewDebug::on_pb_ConfigAll_clicked()
+{
+    int delay = 10000;
+    for(int i=0; i<8; i++)
+    {
+        *(localFPGAaddr+0x01) = i;
+        usleep(delay);
+        on_pb_writeRegister_1_clicked();
+        usleep(delay);
+        on_pb_writeRegister_2_clicked();
+        usleep(delay);
+        on_pb_writeRegister_3_clicked();
+        usleep(delay);
+        on_pb_writeRegister_4_clicked();
+        usleep(delay);
+        on_pb_StartConversion_clicked();
+        usleep(delay);
+
+        qDebug()<<"\t" <<i <<" Channel Configured ";
+    }
+    qDebug()<<" all Channels Configured ";
+}
+void NewDebug::on_pb_read_Automatic_clicked()
+{
+
+    //if(timer_autoManualClick->isActive()) {
+    if(autoMode_isEnable) {
+
+        //timer_autoManualClick->stop();
+        ui->pb_read_Automatic->setStyleSheet("background-color:red;");
+
+
+        *(localFPGAaddr+0x06) = 0x00;
+        *(localFPGAaddr+0x07) = 0x00;
+        autoMode_isEnable = false;
+    }
+    else {
+
+        *(localFPGAaddr+0x06) = 0x01;
+
+        *(localFPGAaddr+0x07) = 0x00;
+        *(localFPGAaddr+0x07) = 0x01;
+        *(localFPGAaddr+0x07) = 0x00;
+        autoMode_isEnable = true;
+        //timer_autoManualClick->start();
+        ui->pb_read_Automatic->setStyleSheet("background-color:lime;");
+    }
+}
