@@ -6,6 +6,13 @@ NewDebug::NewDebug(QWidget *parent) :
     ui(new Ui::NewDebug)
 {
     ui->setupUi(this);
+//    this->setFixedSize(1024, 768);
+
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    //this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowFlag(Qt::WindowStaysOnTopHint);
+    this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
+
 
     localFPGAaddr = globalVars::global_FPGA_ADDR;
 
@@ -23,11 +30,18 @@ NewDebug::NewDebug(QWidget *parent) :
     *(localFPGAaddr + 0x06)  = 0x00;
 }
 
+void NewDebug::on_pb_Close_clicked()
+{
+    emit tx_generate_ThisGUI(gui_FIRST_WIN);
+    emit tx_ClosingWindow_DebugWin();
+}
+
 NewDebug::~NewDebug()
 {
     delete ui;
 }
 
+int adcNumber = 0;
 void NewDebug::on_pb_Reset_clicked()
 {
 
@@ -44,8 +58,13 @@ void NewDebug::on_pb_StartConversion_clicked()
 }
 uint32_t NewDebug::on_pb_ReadConversion_clicked()
 {
-    uint16_t lsb = *(localFPGAaddr+48);
-    uint16_t msb = *(localFPGAaddr+49);
+    int finalIndx = ui->sp_ADC->value() + adcNumber;
+
+    int PulseIndx = finalIndx/ 8;
+
+
+    uint16_t lsb = *(localFPGAaddr+((PulseIndx*5)+48));
+    uint16_t msb = *(localFPGAaddr+((PulseIndx*5)+49));
 
     uint8_t first = 0x00;
     uint8_t middle = 0x00;
@@ -63,10 +82,11 @@ uint32_t NewDebug::on_pb_ReadConversion_clicked()
     *(localFPGAaddr + 0x02)  = 0x03;
     *(localFPGAaddr + 0x06)  = 0x00;
     *(localFPGAaddr + 0x03)  = 0xFF;
-    *(localFPGAaddr + 0x08) = 0x00;     // Pulse    //qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<"\n";
 
-    *(localFPGAaddr + 0x08) = 0x01;
-    *(localFPGAaddr + 0x08) = 0x00;
+
+    *(localFPGAaddr + (PulseIndx+8)) = 0x00;     // Pulse    //qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<"\n";
+    *(localFPGAaddr + (PulseIndx+8)) = 0x01;
+    *(localFPGAaddr + (PulseIndx+8)) = 0x00;
 
 
     return endResult;
@@ -94,16 +114,20 @@ void NewDebug::on_pb_readRegister_clicked()
     val = (rReg| (addrInt<<2));
     *(localFPGAaddr + 0x03) = val;
     *(localFPGAaddr + 0x02) = 0x02;
-    *(localFPGAaddr + 0x08) = 0x00; // pulse
-    *(localFPGAaddr + 0x08) = 0x01;
-    *(localFPGAaddr + 0x08) = 0x00;
+
+    int indxx = ui->sp_ADC->value();
+    int actualIDX = indxx / 8;
+
+    *(localFPGAaddr + actualIDX+8) = 0x00; // pulse
+    *(localFPGAaddr + actualIDX+8) = 0x01;
+    *(localFPGAaddr + actualIDX+8) = 0x00;
 
 
     //usleep(100000);
-    uint16_t lsb = *(localFPGAaddr+48);
-    uint16_t msb = *(localFPGAaddr+49);
+    uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
+    uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
     uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
-    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply;
+    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
     ui->lbl_readRegister->setText(QString::number(reply, 16));
 
 
@@ -187,7 +211,6 @@ void NewDebug::on_pb_Timer_clicked()
     }
 }
 
-int adcNumber = 0;
 
 void NewDebug::on_timer_autoManualClicked()
 {
@@ -209,7 +232,7 @@ void NewDebug::on_timer_autoManualClicked()
 
         //adcNumber = ui->sp_ADC->value();adcNumber
 
-        *(localFPGAaddr + 0x01) = adcNumber;
+        *(localFPGAaddr + 0x01) = (ui->sp_ADC->value() + adcNumber);
         uint32_t rawValue = on_pb_ReadConversion_clicked();
         usleep(10000);
         rawValue = on_pb_ReadConversion_clicked();
@@ -265,10 +288,16 @@ int NewDebug::writeRegister(uint8_t addr, uint8_t val)
     *(localFPGAaddr + 0x02)  = 0x02;
     *(localFPGAaddr + 0x06)  = 0x00;
     *(localFPGAaddr + 0x03)  = sendValue;
-    *(localFPGAaddr + 0x08) = 0x00;     // Pulse
-    *(localFPGAaddr + 0x08) = 0x01;
-    *(localFPGAaddr + 0x08) = 0x00;
-    qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<"\n";
+
+    int indxx = ui->sp_ADC->value();
+
+    int actualIDX = indxx / 8;
+    actualIDX += 8;
+
+    *(localFPGAaddr + actualIDX) = 0x00;     // Pulse
+    *(localFPGAaddr + actualIDX) = 0x01;
+    *(localFPGAaddr + actualIDX) = 0x00;
+    qDebug()<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue<<" Pulse Indx:"<<actualIDX<<"\n";
     return  1;
 }
 uint32_t NewDebug::readRegister(uint8_t addr)
@@ -278,16 +307,20 @@ uint32_t NewDebug::readRegister(uint8_t addr)
     val = (rReg| (addr<<2));
     *(localFPGAaddr + 0x03) = val;
     *(localFPGAaddr + 0x02) = 0x02;
-    *(localFPGAaddr + 0x08) = 0x00; // pulse
-    *(localFPGAaddr + 0x08) = 0x01;
-    *(localFPGAaddr + 0x08) = 0x00;
+
+    int indxx = ui->sp_ADC->value();
+    int actualIDX = indxx / 8;
+
+    *(localFPGAaddr + actualIDX+8) = 0x00; // pulse
+    *(localFPGAaddr + actualIDX+8) = 0x01;
+    *(localFPGAaddr + actualIDX+8) = 0x00;
 
 
     //usleep(100000);
-    uint16_t lsb = *(localFPGAaddr+48);
-    uint16_t msb = *(localFPGAaddr+49);
+    uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
+    uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
     uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
-    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply;
+    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
 
     return reply;
 }
@@ -382,7 +415,7 @@ void NewDebug::on_pb_ConfigAll_clicked()
     int delay = 10000;
     for(int i=0; i<8; i++)
     {
-        *(localFPGAaddr+0x01) = i;
+        *(localFPGAaddr+0x01) = (ui->sp_ADC->value())+ i;
         usleep(delay);
         on_pb_writeRegister_1_clicked();
         usleep(delay);

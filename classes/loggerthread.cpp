@@ -9,9 +9,9 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     for(int i = 0; i< TOTAL_CHANNEL; i++)
     {
         chnlArray[i].setChannelEnableDisable(false);
-        chnlArray[i].setChannelAddress(i);
-        if(i<24) chnlArray[i].set_Channel_Type(BRIDGE);
-        else chnlArray[i].set_Channel_Type(SINGEL_ENDED);
+        chnlArray[i].setChannelAddress(local_FPGA_ADDRESS, i);
+        if(i<24) chnlArray[i].set_Channel_PGA_Type( CH_PGA_1, BRIDGE);
+        //else chnlArray[i].set_Channel_Type(SINGEL_ENDED);
     }
 
     uint32_t fpgaID = *(local_FPGA_ADDRESS+78);
@@ -24,10 +24,22 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     readChannelSettingsFile();
     qDebug()<<" debug LoggerThread 1 ";
 
+
+    //  ----------------------------------------------------------------
+    // -------- Set Clock
+    uint32_t setClock = 2;
+    setClock /= 0.02;
+    *(local_FPGA_ADDRESS+ 0x00) = setClock;
+    // -------- Set DataRate
+    uint32_t setRateInt = 500;
+    setRateInt /= 0.02;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    //  ----------------------------------------------------------------
+
     //qDebug()<<" before timer_logger initialize ";
     timer_logger = new QTimer(this);
     connect(timer_logger, SIGNAL(timeout()), SLOT(on_timer_logger_elapsed()));
-    timer_logger->start(sampleRate_MS);
+    //timer_logger->start(sampleRate_MS);
 
     local_logging = false;
     local_logTime_MS = 0;
@@ -38,7 +50,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     //qDebug()<<" before timer_graph initialize ";
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
-    timer_graphValue->start(100);
+    //timer_graphValue->start(100);
 
     //qDebug()<<" debug LoggerThread 3 ";
     timer_elapser = new QElapsedTimer();
@@ -61,10 +73,11 @@ void loggerThread::on_timer_logger_elapsed()
     {
         if(chnlArray[i].isChnlEnable())
         {
+            chnlArray[i].Get_RawValue_fromADDRESSAuto();
             if(!graphWindowIsOpen) {
-                emit tx_channel_Value(i, chnlArray[i].Get_RawValue_fromADDRESS(), chnlArray[i].giveCurrentValue());
+                emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
             } else if(graphWindowIsOpen && local_logging) {
-                logStr += QString(QString::number(chnlArray[i].giveCurrentValue(), 'f', 3)+",");
+                logStr += QString(QString::number(chnlArray[i].endResult_Float_Factor, 'f', 3)+",");
             }
         }
     }
@@ -92,14 +105,21 @@ void loggerThread::on_timer_logger_elapsed()
 void loggerThread::on_timer_graphValue_elapsed()
 {
     timer_elapser2->restart();
-    for(int i=0; i<4; i++)
-    {
-        if(graphChannels_idxBool[i])
+    if(graphWindowIsOpen) {
+        for(int i=0; i<4; i++)
         {
-            emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].giveCurrentValue());
+            if(graphChannels_idxBool[i])
+            {
+                chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
+                emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].endResult_Float_Factor);
+            }
         }
     }
-    if(chnlSettingsWindowIsOpen) emit tx_channel_Value(settingsCH_id, chnlArray[settingsCH_id].Get_RawValue_fromADDRESS(), chnlArray[settingsCH_id].giveCurrentValue());
+    if(chnlSettingsWindowIsOpen)
+    {
+        chnlArray[settingsCH_id].Get_RawValue_fromADDRESS();
+        emit tx_channel_Value(settingsCH_id, chnlArray[settingsCH_id].endResult, chnlArray[settingsCH_id].endResult_Float, chnlArray[settingsCH_id].endResult_Float_Factor);
+    }
 
     if(local_logging)
     {
@@ -141,7 +161,14 @@ void loggerThread::on_timer_graphValue_elapsed()
 
         //qDebug()<<" local_logTime_MS:: "<<local_logTime_MS;
     }
+    //qDebug()<<"Timer "<<timer_elapser2->elapsed();
+}
 
+
+void loggerThread::rx_startReadingTimer(bool startReading)
+{
+    if(startReading) timer_graphValue->start(200);
+    else timer_graphValue->stop();
 }
 
 
@@ -219,50 +246,78 @@ void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
     {
         initialize_Dir_FileName();
         logSerialNumber=0;
+        timer_graphValue->start(100);
+        chnlSettingsWindowIsOpen = false;
+    }
+    else {
+        timer_graphValue->stop();
     }
 }
 void loggerThread::rx_ChannelSettingsWindowIsOpen(bool windOpen)
 {
     //qDebug()<<" Channel Setting Window is Open : "<<windOpen;
     chnlSettingsWindowIsOpen = windOpen;
+    if(windOpen)
+    {
+        for(int i=0; i<TOTAL_CHANNEL; i++)
+        {
+            if(chnlArray[i].isChnlEnable())
+            {
+                emit tx_EnableChannelsAre(i);
+            }
+        }
+
+        emit tx_EnableChannelsAre(15179); // ;-)
+    }
 }
 
 
 
 // ---------------  DAC CHANNEL SETTINGS ---------------------
-void loggerThread::rx_setChannelNewSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref)
+void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref, bool Enabled)
 {
+    qDebug()<<"\n\n##################################################";
     qDebug()<<" New Chanel Settings:: ID:"<<chnl<<" fac:"<<fac<<" pgaa:"<<pgaa<<" type:"<<typ<<" ref:"<<ref;
     chnlArray[chnl].set_Channel_Factor(fac);
-    chnlArray[chnl].set_Channel_PGA(pgaa);
-    chnlArray[chnl].set_Channel_Type(typ);
+    chnlArray[chnl].set_Channel_PGA_Type(pgaa, typ);
     chnlArray[chnl].set_Channel_Reference(ref);
+    chnlArray[chnl].setChannelEnableDisable(Enabled);
+    chnlArray[chnl].reConfigFPGA_forThisChannel();
 
     rx_saveChannelSettingsToFile();
 }
 void loggerThread::rx_giveMechannelSettings(int chnl)
 {
     settingsCH_id = chnl;
-    emit tx_ChannelOLDSettings(chnl, chnlArray[chnl].give_Channel_Factor(), chnlArray[chnl].give_Channel_PGA(), chnlArray[chnl].give_Channel_Type(), chnlArray[chnl].give_Channel_Reference());
+    emit tx_ChannelOLDSettings(chnl, chnlArray[chnl].give_Channel_Factor(), chnlArray[chnl].give_Channel_PGA(), chnlArray[chnl].give_Channel_Type(), chnlArray[chnl].give_Channel_Reference(), chnlArray[chnl].isChnlEnable());
 }
 void loggerThread::rx_saveChannelSettingsToFile()
 {
     //qDebug()<<" now saving Settings to File:: "<<dacChannelSettingsfilePath;
-    QString fileData = "$chnl,$PGA,$Factor,$BridgeChnl,\n";
+    QString fileData = "$chnl,$PGA,$Factor,$Type,$Ref,$Enabled,\n";
     Settingsfile = new QFile(dacChannelSettingsfilePath);
     if(Settingsfile->open(QIODevice::WriteOnly))
     {
         for(int i=0; i<TOTAL_CHANNEL; i++)
         {
-
+            /*
+             * 1.   Channel ID      (int)
+             * 2.   Channel PGA     (int)
+             * 3.   Channel Factor  (float)
+             * 4.   Channel Type    (int)
+             * 5.   Channel Ref     (int)
+             * 6.   Channel Enable  (int)
+             * 7.
+            */
             fileData += QString(QString::number(i)+",");
-            fileData += QString(QString::number(chnlArray[i].give_Channel_PGA(), 'f', 5)+",");
+            fileData += QString(QString::number(chnlArray[i].give_Channel_PGA())+",");
             fileData += QString(QString::number(chnlArray[i].give_Channel_Factor(), 'f', 5)+",");
             fileData += QString(QString::number(chnlArray[i].give_Channel_Type())+",");
             fileData += QString(QString::number(chnlArray[i].give_Channel_Reference())+",");
+            fileData += QString(QString::number(chnlArray[i].isChnlEnable())+",");
             fileData += QString("\n");
         }
-        fileData += "$chnl,$PGA,$Factor,$BridgeChnl,\n";
+        fileData += "$chnl,$PGA,$Factor,$Type,$Ref,$Enabled,\n";
 
         Settingsfile->write(fileData.toUtf8());
         emit tx_ramdomOP(15179, 1.1, "New Settings Saved.");
@@ -315,38 +370,57 @@ void loggerThread::processChannelSettingsStr(QString str)
         settingsCH_id = dataStr.toInt(&okVariable, 10);
         str.remove(0, indxOfComa+1);
 
+        if(str.length() < 1) return;
         // -------- Channel pga
+        okVariable = false;
         indxOfComa = str.indexOf(',');
         dataStr = str.left(indxOfComa);
-        settingsCH_pga = dataStr.toFloat(&okVariable);
+        settingsCH_pga = (CHANNEL_PGA)dataStr.toInt(&okVariable);
         str.remove(0, indxOfComa+1);
 
+        if(str.length() < 1) return;
         // -------- Channel Factor
+        okVariable = false;
         indxOfComa = str.indexOf(',');
         dataStr = str.left(indxOfComa);
         settingsCH_factor = dataStr.toFloat(&okVariable);
         str.remove(0, indxOfComa+1);
 
+        if(str.length() < 1) return;
         // -------- Channel Type
+        okVariable = false;
         indxOfComa = str.indexOf(',');
         dataStr = str.left(indxOfComa);
         settingsCH_type = dataStr.toInt(&okVariable, 10);
         str.remove(0, indxOfComa+1);
 
+        if(str.length() < 1) return;
         // -------- Channel ref
+        okVariable = false;
         indxOfComa = str.indexOf(',');
         dataStr = str.left(indxOfComa);
         settingsCH_ref = dataStr.toInt(&okVariable, 10);
+        str.remove(0, indxOfComa+1);
+
+        if(str.length() < 1) return;
+        // -------- Channel Enable
+        okVariable = false;
+        indxOfComa = str.indexOf(',');
+        dataStr = str.left(indxOfComa);
+        settingsCH_isEnable = dataStr.toInt(&okVariable, 10);
+        //str.remove(0, indxOfComa+1);
+
 
         //qDebug()<<" ID:"<<settingsCH_id<<" pga:"<<settingsCH_pga<<" fac:"<<settingsCH_factor<<" type:"<<settingsCH_type<<" ref:"<<settingsCH_ref;
 
-        chnlArray[settingsCH_id].set_Channel_PGA(settingsCH_pga);
         chnlArray[settingsCH_id].set_Channel_Factor(settingsCH_factor);
-        if(settingsCH_type == 0) chnlArray[settingsCH_id].set_Channel_Type(BRIDGE);
-        else if(settingsCH_type == 1) chnlArray[settingsCH_id].set_Channel_Type(SINGEL_ENDED);
+        if(settingsCH_type == 0) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, UniPolar);
+        else if(settingsCH_type == 1) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, BiPolar);
+        else if(settingsCH_type == 2) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, BRIDGE);
 
         if(settingsCH_ref == 0) chnlArray[settingsCH_id].set_Channel_Reference(INTERNAL);
         else if(settingsCH_ref == 1) chnlArray[settingsCH_id].set_Channel_Reference(EXTERNAL);
+        if(settingsCH_isEnable == 1) chnlArray[settingsCH_id].setChannelEnableDisable(true);
 
     }
 

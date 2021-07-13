@@ -16,6 +16,10 @@ public:
     explicit NewDebug(QWidget *parent = nullptr);
     ~NewDebug();
 
+signals:
+    void tx_ClosingWindow_DebugWin();
+    void tx_generate_ThisGUI(GUI_WIN gui);
+
 private slots:
     void on_pb_Reset_clicked();
     void on_pb_StartConversion_clicked();
@@ -37,14 +41,11 @@ private slots:
 
 
     void on_pb_readRegister_clicked();
-
     void on_pb_readRegister_2_clicked();
-
     void on_pb_read_ALLChannels_clicked();
-
     void on_pb_ConfigAll_clicked();
-
     void on_pb_read_Automatic_clicked();
+    void on_pb_Close_clicked();
 
 private:
     Ui::NewDebug *ui;

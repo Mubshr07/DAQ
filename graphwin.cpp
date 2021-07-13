@@ -91,6 +91,7 @@ void graphWin::on_timer_singleShot_Elapsed()
 void graphWin::rx_EnableChannelsAre(int chnlID)
 {
     //qDebug()<<" enable channel is :"<<chnlID;
+    if(chnlID > TOTAL_CHANNEL) return;
     qv_EnablChannels.append(chnlID);
     if(initial_bool)
     {
@@ -109,7 +110,7 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
     graphValueArray[indx] = val;
-    //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
+    qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
     /*
     static QTime time(QTime::currentTime());
     // calculate two new data points:
@@ -165,6 +166,7 @@ void graphWin::on_timer_graphPloter_Elapsed()
     if (key-lastPointKey > 0.002) // at most add point every 2 ms
     {
         // add data to lines:
+        //qDebug()<<" BTN= 1:"<<ui->pb_RemoveGraph_0->isEnabled()<<" 2:"<<ui->pb_RemoveGraph_1->isEnabled()<<" 3:"<<ui->pb_RemoveGraph_2->isEnabled()<<" 4:"<<ui->pb_RemoveGraph_3->isEnabled();
         if(ui->pb_RemoveGraph_0->isEnabled()) {
             ui->myPlot->graph(0)->addData(key, graphValueArray[0]);
         }

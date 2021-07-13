@@ -36,6 +36,7 @@ void MainHandler::on_timer_SingleShot_elapsed()
     case 0: {
         GUIobjectInitializer();
         generate_firstWindow();
+        //generate_ConfigCHWin();
         break;
     }
     }
@@ -54,8 +55,10 @@ void MainHandler::on_timer_generateGUI_Elapsed()
         break;
     }
     case gui_FIRST_WIN: {
-        //generate_firstWindow();
+        //qDebug()<<" First Window Switch Statement"<<firstWin->isWidgetType();
         firstWin->show();
+        //if(firstWin->isHidden()) firstWin->show();
+        //else generate_firstWindow();
         break;
     }
     case gui_GRAPH_WIN: {
@@ -94,7 +97,7 @@ void MainHandler::generate_firstWindow()
 void MainHandler::generate_logConfig()
 {
     logConfig = new MainWindow();
-    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), logConfig, SLOT(rx_ChannelValue(int,float,float)));
+    connect(loggerClass, SIGNAL(tx_channel_Value(int,uint32_t,float,float)), logConfig, SLOT(rx_ChannelValue(int,uint32_t,float,float)));
     connect(logConfig, SIGNAL(tx_setChannelEnable(int, bool)), loggerClass, SLOT(rx_setChannelEnableDisable(int, bool)));
     connect(logConfig, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
 
@@ -126,16 +129,22 @@ void MainHandler::generate_graphWin()
 }
 void MainHandler::generate_ConfigCHWin()
 {
+
     configCH = new ConfigChWin();
 
-    connect(configCH, SIGNAL(tx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), loggerClass, SLOT(rx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
+    connect(configCH, SIGNAL(tx_setChannelNewSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)), loggerClass, SLOT(rx_setChannelNewSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)));
     connect(configCH, SIGNAL(tx_ClosingWindow_ConfigCHWin()), this, SLOT(rx_ClosingWindow_ConfigCHWin()));
     connect(configCH, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
     connect(configCH, SIGNAL(tx_giveMechannelSettings(int)), loggerClass, SLOT(rx_giveMechannelSettings(int)));
     connect(configCH, SIGNAL(tx_ChannelSettingsWindowIsOpen(bool)), loggerClass, SLOT(rx_ChannelSettingsWindowIsOpen(bool)));
+    connect(configCH, SIGNAL(tx_startReadingTimer(bool)), loggerClass, SLOT(rx_startReadingTimer(bool)));
+
+    connect(configCH, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
+
+    connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), configCH, SLOT(rx_EnableChannelsAre(int)));
     connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), configCH, SLOT(rx_ramdomOP(int,float, QString)));
-    connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), configCH, SLOT(rx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
-    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), configCH, SLOT(rx_ChannelValue(int,float,float)));
+    connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)), configCH, SLOT(rx_ChannelOLDSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)));
+    connect(loggerClass, SIGNAL(tx_channel_Value(int, uint32_t, float,float)), configCH, SLOT(rx_ChannelValue(int, uint32_t, float,float)));
 
     configCH->setModal(true);
     configCH->show();
@@ -145,13 +154,9 @@ void MainHandler::generate_DebugWin()
     debgWn = new NewDebug();
 
 //    connect(configCH, SIGNAL(tx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), loggerClass, SLOT(rx_setChannelNewSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
-//    connect(configCH, SIGNAL(tx_ClosingWindow_ConfigCHWin()), this, SLOT(rx_ClosingWindow_ConfigCHWin()));
-//    connect(configCH, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
-//    connect(configCH, SIGNAL(tx_giveMechannelSettings(int)), loggerClass, SLOT(rx_giveMechannelSettings(int)));
-//    connect(configCH, SIGNAL(tx_ChannelSettingsWindowIsOpen(bool)), loggerClass, SLOT(rx_ChannelSettingsWindowIsOpen(bool)));
-//    connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), configCH, SLOT(rx_ramdomOP(int,float, QString)));
-//    connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)), configCH, SLOT(rx_ChannelOLDSettings(int,float,float,CHANNEL_TYPE,CHANNEL_REFERENCE)));
-//    connect(loggerClass, SIGNAL(tx_channel_Value(int,float,float)), configCH, SLOT(rx_ChannelValue(int,float,float)));
+        connect(debgWn, SIGNAL(tx_ClosingWindow_DebugWin()), this, SLOT(rx_ClosingWindow_DebugWin()));
+        connect(debgWn, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
+
 
     debgWn->setModal(true);
     debgWn->show();

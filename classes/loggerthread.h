@@ -15,7 +15,7 @@ public:
     explicit loggerThread(QObject *parent = nullptr);
 
 signals:
-    void tx_channel_Value(int chnl, float rawVal, float val);
+    void tx_channel_Value(int chnl,uint32_t raw, float fVal, float facVal);
     void tx_loggingStarted(bool started);
     void tx_graphChnlValue(int chnl, float val);
     void tx_channelisEnabled(int chnl, bool enableVal);
@@ -26,7 +26,7 @@ signals:
     void tx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa);
 
     void tx_ramdomOP(int idx, float val, QString str);
-    void tx_ChannelOLDSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
+    void tx_ChannelOLDSettings(int chnl, float fac, CHANNEL_PGA pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref, bool enb);
 
 public slots:
     void rx_setChannelEnableDisable(int chnlIndex, bool enable);
@@ -41,10 +41,11 @@ public slots:
     void rx_giveMeEnablesChannels();
     void rx_sendFactorsAndPGAs_AllChnls();
 
-    void rx_setChannelNewSettings(int chnl, float fac, float pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref);
+    void rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref, bool Enabled);
     void rx_giveMechannelSettings(int chnl);
     void rx_saveChannelSettingsToFile();
 
+    void rx_startReadingTimer(bool startReading);
 
 
 
@@ -92,10 +93,11 @@ private:
     QFile *Settingsfile;
     bool okVariable = false;
     int settingsCH_id = 0;
-    float settingsCH_pga = 1.1;
+    CHANNEL_PGA settingsCH_pga = CH_PGA_1;
     float settingsCH_factor = 1.1;
     int settingsCH_type = 0;
     int settingsCH_ref = 0;
+    int settingsCH_isEnable = 0;
 
 
 

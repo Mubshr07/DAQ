@@ -30,7 +30,7 @@ public slots:
     void disableLCDNumber(int indx);
     void showFactorLabel(int indx);
 
-    void rx_ChannelValue(int chnl, float rawVal, float val);
+    void rx_ChannelValue(int chnl, uint32_t raw, float fVal, float val);
     void rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa);
 
     void on_timer_singleShot_elapsed();

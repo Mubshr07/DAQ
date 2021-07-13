@@ -13,13 +13,25 @@ enum GUI_WIN {
 };
 
 enum CHANNEL_TYPE {
-    BRIDGE,
-    SINGEL_ENDED
+    UniPolar,
+    BiPolar,
+    BRIDGE
 };
 
 enum CHANNEL_REFERENCE {
     INTERNAL,
     EXTERNAL
+};
+
+enum CHANNEL_PGA {
+    CH_PGA_1,
+    CH_PGA_2,
+    CH_PGA_4,
+    CH_PGA_8,
+    CH_PGA_16,
+    CH_PGA_32,
+    CH_PGA_64,
+    CH_PGA_128
 };
 
 
@@ -36,7 +48,9 @@ enum CHANNEL_REFERENCE {
 #include <QFileDialog>
 #include <QThread>
 #include <QVariant>
+#include <QMap>
 #include <QVector>
+#include <QMetaType>
 
 #include <iostream>
 #include <unistd.h>
@@ -55,8 +69,13 @@ public:
     static uint32_t *global_FPGA_ADDR;
 
 };
+
+Q_DECLARE_METATYPE(uint32_t);
+Q_DECLARE_METATYPE(int32_t);
+
 Q_DECLARE_METATYPE(GUI_WIN);
 Q_DECLARE_METATYPE(CHANNEL_TYPE);
 Q_DECLARE_METATYPE(CHANNEL_REFERENCE);
+Q_DECLARE_METATYPE(CHANNEL_PGA);
 
 #endif // GLOBALVARS_H
