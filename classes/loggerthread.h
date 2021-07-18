@@ -23,7 +23,7 @@ signals:
     void tx_EnableChannelsAre(int chnlID);
     void tx_GraphChannelValue(int indx, int chnl, float val);
 
-    void tx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa);
+    void tx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa, bool enabled);
 
     void tx_ramdomOP(int idx, float val, QString str);
     void tx_ChannelOLDSettings(int chnl, float fac, CHANNEL_PGA pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref, bool enb);

@@ -36,7 +36,8 @@ void MainHandler::on_timer_SingleShot_elapsed()
     case 0: {
         GUIobjectInitializer();
         //generate_firstWindow();
-        generate_ConfigCHWin();
+        //generate_ConfigCHWin();
+        generate_logConfig();
         break;
     }
     }
@@ -102,7 +103,10 @@ void MainHandler::generate_logConfig()
     connect(logConfig, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
 
     connect(logConfig, SIGNAL(tx_sendFactorsAndPGAs_AllChnls()), loggerClass, SLOT(rx_sendFactorsAndPGAs_AllChnls()));
-    connect(loggerClass, SIGNAL(tx_sendingFactorsAndPGAs(int, float, float)), logConfig, SLOT(rx_sendingFactorsAndPGAs(int, float, float)));
+    connect(loggerClass, SIGNAL(tx_sendingFactorsAndPGAs(int, float, float, bool)), logConfig, SLOT(rx_sendingFactorsAndPGAs(int, float, float, bool)));
+
+    connect(logConfig, SIGNAL(tx_loggingStartStop(bool, QString)), loggerClass, SLOT(rx_loggingStartStop(bool, QString)));
+    connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), logConfig, SLOT(rx_ramdomOP(int,float, QString)));
 
     connect(logConfig, SIGNAL(tx_ClosingWindow_logConfig()), this, SLOT(rx_ClosingWindow_logConfig()));
     connect(logConfig, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
@@ -115,8 +119,8 @@ void MainHandler::generate_graphWin()
     connect(grphW, SIGNAL(tx_AddNewChannelToGraph(int, int)), loggerClass, SLOT(rx_AddNewChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_RemoveChannelToGraph(int, int)), loggerClass, SLOT(rx_RemoveChannelToGraph(int, int)));
     connect(grphW, SIGNAL(tx_giveMeEnablesChannels()), loggerClass, SLOT(rx_giveMeEnablesChannels()));
-    connect(grphW, SIGNAL(tx_loggingStartStop(bool, QString)), loggerClass, SLOT(rx_loggingStartStop(bool, QString)));
-    connect(grphW, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
+    //connect(grphW, SIGNAL(tx_loggingStartStop(bool, QString)), loggerClass, SLOT(rx_loggingStartStop(bool, QString)));
+    //connect(grphW, SIGNAL(tx_generate_ThisGUI(GUI_WIN)), this, SLOT(rx_generate_ThisGUI(GUI_WIN)));
     connect(grphW, SIGNAL(tx_ClosingWindow_graphWin()), this, SLOT(rx_ClosingWindow_graphWin()));
 
     connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), grphW, SLOT(rx_EnableChannelsAre(int)));
@@ -180,12 +184,16 @@ void MainHandler::rx_ClosingWindow_logConfig()
 void MainHandler::rx_ClosingWindow_graphWin()
 {
     qDebug()<<" GraphWindow Window is CLosed ";
-    grphW->hide();
+    //grphW->hide();
+    grphW->~graphWin();
+    grphW = nullptr;
 }
 void MainHandler::rx_ClosingWindow_ConfigCHWin()
 {
     qDebug()<<" Conifg Channel Window is CLosed ";
-    configCH->hide();
+    //configCH->hide();
+    configCH->~ConfigChWin();
+    configCH = nullptr;
 }
 void MainHandler::rx_ClosingWindow_DebugWin()
 {

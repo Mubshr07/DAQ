@@ -52,6 +52,11 @@ graphWin::graphWin(QWidget *parent) :
 
     ui->myPlot->yAxis->rescale(true);
 
+    ui->pb_StartLog->setHidden(true);
+    ui->lbl_Time->setHidden(true);
+    ui->lbl_FilePath->setHidden(true);
+
+
     timer_singleShot = new QTimer(this);
     connect(timer_singleShot, SIGNAL(timeout()), this, SLOT(on_timer_singleShot_Elapsed()));
     timer_singleShot->setSingleShot(true);
@@ -456,6 +461,18 @@ void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
 }
 void graphWin::on_pb_CloseWindow_clicked()
 {
+
+    on_pb_RemoveGraph_0_clicked();
+    on_pb_RemoveGraph_1_clicked();
+    on_pb_RemoveGraph_2_clicked();
+    on_pb_RemoveGraph_3_clicked();
+    emit tx_GraphWindowIsOpen(false);
+    //emit tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
+    emit tx_ClosingWindow_graphWin();
+
+
+
+    /*
     if(local_loggingStarted)
     {
         msgBox = new ConfirmationBox();
@@ -471,13 +488,15 @@ void graphWin::on_pb_CloseWindow_clicked()
         on_pb_RemoveGraph_2_clicked();
         on_pb_RemoveGraph_3_clicked();
         emit tx_GraphWindowIsOpen(false);
-        emit tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
+        //emit tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
         emit tx_ClosingWindow_graphWin();
     }
+    */
 }
 void graphWin::on_pb_StartLog_clicked()
 {
-    if(!local_loggingStarted) {
+    /*
+   if(!local_loggingStarted) {
         logUserFilePath = QFileDialog::getSaveFileName(this, tr("Save Log File"), QString(QDir::homePath()+"/DAQ_Logs/untitled.csv"), tr("DAC Logs (*.csv)"));
         qDebug()<<" User setted File name is : "<<logUserFilePath;
         ui->lbl_FilePath->setText(QString("Path: "+logUserFilePath));
@@ -487,6 +506,7 @@ void graphWin::on_pb_StartLog_clicked()
 
     ui->pb_StartLog->setText(QString(local_loggingStarted? "Started":"Stoped"));
     ui->pb_StartLog->setStyleSheet(QString(local_loggingStarted? styleLogStart : styleLogStop));
+    */
 }
 
 

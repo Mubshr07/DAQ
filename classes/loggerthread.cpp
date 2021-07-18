@@ -262,7 +262,7 @@ void loggerThread::rx_sendFactorsAndPGAs_AllChnls()
 {
     for(int i=0; i<TOTAL_CHANNEL; i++)
     {
-        emit tx_sendingFactorsAndPGAs(i, chnlArray[i].give_Channel_Factor(), chnlArray[i].give_Channel_PGA());
+        emit tx_sendingFactorsAndPGAs(i, chnlArray[i].give_Channel_Factor(), chnlArray[i].give_Channel_PGA(), chnlArray[i].isChnlEnable());
     }
 }
 void loggerThread::rx_AddNewChannelToGraph(int idx, int chnlID)
@@ -310,8 +310,15 @@ void loggerThread::rx_ChannelSettingsWindowIsOpen(bool windOpen)
                 emit tx_EnableChannelsAre(i);
             }
         }
-
         emit tx_EnableChannelsAre(15179); // ;-)
+    }
+    else
+    {
+        // send channel properties to mainWindow after channelConfiguration Changed.
+        for(int i=0; i<TOTAL_CHANNEL; i++)
+        {
+            emit tx_sendingFactorsAndPGAs(i, chnlArray[i].give_Channel_Factor(), chnlArray[i].give_Channel_PGA(), chnlArray[i].isChnlEnable());
+        }
     }
 }
 

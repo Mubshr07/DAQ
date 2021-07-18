@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>883</height>
+    <height>793</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1155,10 +1155,11 @@ border-radius:7px;
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">font: 750 24pt &quot;MS Shell Dlg 2&quot;;
+             <string notr="true">font: 750 22pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(170, 255, 127);
 border:2px solid rgb(85, 170, 0);
-border-radius:10px;</string>
+border-radius:10px;
+padding:5px;</string>
             </property>
             <property name="text">
              <string>Enable</string>
@@ -1399,7 +1400,7 @@ color:rgb(0, 0, 0);</string>
             <property name="minimumSize">
              <size>
               <width>60</width>
-              <height>40</height>
+              <height>35</height>
              </size>
             </property>
             <property name="accessibleName">
@@ -1422,14 +1423,15 @@ background-color:transparent;</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>50</height>
+              <height>40</height>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">font: 750 24pt &quot;MS Shell Dlg 2&quot;;
+             <string notr="true">font: 750 22pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(170, 255, 127);
 border:2px solid rgb(85, 170, 0);
-border-radius:10px;</string>
+border-radius:10px;
+padding:5px;</string>
             </property>
             <property name="text">
              <string>Upload</string>
@@ -1620,113 +1622,6 @@ color:rgb(0, 0, 0);</string>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
-      <spacer name="horizontalSpacer_13">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_9">
-       <property name="styleSheet">
-        <string notr="true">font:800 16pt &quot;Times New Roman&quot;;
-color:white;</string>
-       </property>
-       <property name="text">
-        <string>Set Log sample rate (uSec):</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="txt_SampleTime">
-       <property name="minimumSize">
-        <size>
-         <width>120</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>100000</number>
-       </property>
-       <property name="value">
-        <number>500</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_12">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_GotoLogWindow">
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>45</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border-color:green;
-background-color: rgb(0, 85, 0);
-color:white;</string>
-       </property>
-       <property name="text">
-        <string>Go to Log Win</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -1791,7 +1686,7 @@ border: 2px solid red;
 padding 10px;</string>
        </property>
        <property name="text">
-        <string>HOME</string>
+        <string>HOME / Close</string>
        </property>
       </widget>
      </item>

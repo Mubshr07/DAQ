@@ -6,10 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(1024, 768);
+    //this->setFixedSize(1024, 768);
 
     this->setWindowFlags(Qt::FramelessWindowHint);
-    //this->setWindowState(Qt::WindowFullScreen);
+    this->setWindowState(Qt::WindowFullScreen);
     //this->setWindowFlag(Qt::WindowStaysOnTopHint);
     this->setAttribute(Qt::WA_DeleteOnClose, true); //so that it will be deleted when closed
 
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     timer_enabler = new QTimer(this);
     connect(timer_enabler, SIGNAL(timeout()), SLOT(on_timer_enabler_elapsed()));
     timer_enabler->setInterval(800);
-    timer_enabler->start();
+    //timer_enabler->start();
     index_SingleShotTimer = 0;
 
 
@@ -44,16 +44,8 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pb_SetConfiguration_clicked()
-{
-    //emit tx_setSampleTime((int)(ui->txt_SampleTime->toPlainText().toInt() * 1000.0));
-    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
-    tx_generate_ThisGUI(gui_GRAPH_WIN);
-    tx_ClosingWindow_logConfig();
-    //this->close();
-}
 
-
+// ------------------------ Thread Signals Slots ------------------
 void MainWindow::rx_ChannelValue(int chnl, uint32_t raw, float fVal, float val)
 {
     //qDebug()<<" Value Received : Chnnel = "<<chnl<<" value = "<<val;
@@ -113,38 +105,24 @@ void MainWindow::rx_ChannelValue(int chnl, uint32_t raw, float fVal, float val)
 
     } // end of Switch statement
 }
-
-void MainWindow::on_pb_Channel_Clicked()
+void MainWindow::rx_ramdomOP(int idx, float val, QString str)
 {
-    QPushButton *button = (QPushButton *)sender();
-    QString accessName = button->accessibleName();
-
-    accessibleName_int = 0;
-    okVariable = false;
-    accessibleName_int = accessName.toInt(&okVariable, 10);
-    //qDebug()<<accessName<<" Button Clicked = "<<accessibleName_int<<" checked: "<<button->property("isEnable");
-
-    if(okVariable)
-    {
-        if(button->isChecked())
-        {
-            showFactorLabel(accessibleName_int);
-            emit tx_setChannelEnable(accessibleName_int, true);
-            button->setStyleSheet(style_pbChnl_Enable);
-        }
-        else
-        {
-            disableLCDNumber(accessibleName_int);
-            emit tx_setChannelEnable(accessibleName_int, false);
-            button->setStyleSheet(style_pbChnl_Disable);
-        }
+    switch (idx) {
+    case 0: {
+        //ui->lbl_FilePath->setText(QString("PATH: "+str));
+        ui->statusbar->showMessage(QString("PATH: "+str), 5000);
+        break;
     }
-    else
-    {
-        qDebug()<<" Error in parsing accessible Name of pressed PushButton ";
+    case 1: {
+        //qDebug()<<" Time string is:: "<<str;
+        ui->lbl_Time->setText(str);
+        //ui->statusbar->showMessage(QString("PATH: "+str), 5000);
+        break;
+    }
     }
 }
 
+// ------------------------ Timers Slots ------------------
 void MainWindow::on_timer_singleShot_elapsed()
 {
     switch (index_SingleShotTimer) {
@@ -315,7 +293,10 @@ void MainWindow::on_timer_enabler_elapsed()
     }
 }
 
-void MainWindow::rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa)
+
+
+// ------------------------ Helping Methods ------------------
+void MainWindow::rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa, bool enabled)
 {
     switch (chnl) {
     case 0: { ui->lbl_factor_0->setText(QString::number(fac, 'f', factorPrecision)); break; }
@@ -370,11 +351,10 @@ void MainWindow::rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa)
     case 45: { ui->lbl_factor_45->setText(QString::number(fac, 'f', factorPrecision)); break; }
     case 46: { ui->lbl_factor_46->setText(QString::number(fac, 'f', factorPrecision)); break; }
     case 47: { ui->lbl_factor_47->setText(QString::number(fac, 'f', factorPrecision)); break; }
-
     }
+
+    setChannel_toEnabledDisable(chnl, enabled);
 }
-
-
 void MainWindow::connectAllButtonsClickToSingleSlot()
 {
     //qDebug()<<" starting button signal slots ";
@@ -603,16 +583,111 @@ void MainWindow::showFactorLabel(int indx)
 
     } // end of Switch statement
 }
-
-void MainWindow::on_pb_CloseApp_clicked()
+void MainWindow::setChannel_toEnabledDisable(int idx, bool enabled)
 {
-    emit tx_generate_ThisGUI(gui_FIRST_WIN);
-    emit tx_ClosingWindow_logConfig();
-    //QCoreApplication::quit();
+    switch (idx) {
+    case 0: { ui->pb_channel_0->setChecked(enabled); ui->pb_channel_0->clicked();  break; }
+    case 1: { ui->pb_channel_1->setChecked(enabled); ui->pb_channel_1->clicked(); break; }
+    case 2: { ui->pb_channel_2->setChecked(enabled); ui->pb_channel_2->clicked(); break; }
+    case 3: { ui->pb_channel_3->setChecked(enabled); ui->pb_channel_3->clicked(); break; }
+    case 4: { ui->pb_channel_4->setChecked(enabled); ui->pb_channel_4->clicked(); break; }
+    case 5: { ui->pb_channel_5->setChecked(enabled); ui->pb_channel_5->clicked(); break; }
+    case 6: { ui->pb_channel_6->setChecked(enabled); ui->pb_channel_6->clicked(); break; }
+    case 7: { ui->pb_channel_7->setChecked(enabled); ui->pb_channel_7->clicked(); break; }
+    case 8: { ui->pb_channel_8->setChecked(enabled); ui->pb_channel_8->clicked(); break; }
+    case 9: { ui->pb_channel_9->setChecked(enabled); ui->pb_channel_9->clicked(); break; }
+    case 10: { ui->pb_channel_10->setChecked(enabled); ui->pb_channel_10->clicked(); break; }
+    case 11: { ui->pb_channel_11->setChecked(enabled); ui->pb_channel_11->clicked(); break; }
+
+    case 12: { ui->pb_channel_12->setChecked(enabled); ui->pb_channel_12->clicked(); break; }
+    case 13: { ui->pb_channel_13->setChecked(enabled); ui->pb_channel_13->clicked(); break; }
+    case 14: { ui->pb_channel_14->setChecked(enabled); ui->pb_channel_14->clicked(); break; }
+    case 15: { ui->pb_channel_15->setChecked(enabled); ui->pb_channel_15->clicked(); break; }
+    case 16: { ui->pb_channel_16->setChecked(enabled); ui->pb_channel_16->clicked(); break; }
+    case 17: { ui->pb_channel_17->setChecked(enabled); ui->pb_channel_17->clicked(); break; }
+    case 18: { ui->pb_channel_18->setChecked(enabled); ui->pb_channel_18->clicked(); break; }
+    case 19: { ui->pb_channel_19->setChecked(enabled); ui->pb_channel_19->clicked(); break; }
+    case 20: { ui->pb_channel_20->setChecked(enabled); ui->pb_channel_20->clicked(); break; }
+    case 21: { ui->pb_channel_21->setChecked(enabled); ui->pb_channel_21->clicked(); break; }
+
+    case 22: { ui->pb_channel_22->setChecked(enabled); ui->pb_channel_22->clicked(); break; }
+    case 23: { ui->pb_channel_23->setChecked(enabled); ui->pb_channel_23->clicked(); break; }
+    case 24: { ui->pb_channel_24->setChecked(enabled); ui->pb_channel_24->clicked(); break; }
+    case 25: { ui->pb_channel_25->setChecked(enabled); ui->pb_channel_25->clicked(); break; }
+    case 26: { ui->pb_channel_26->setChecked(enabled); ui->pb_channel_26->clicked(); break; }
+    case 27: { ui->pb_channel_27->setChecked(enabled); ui->pb_channel_27->clicked(); break; }
+    case 28: { ui->pb_channel_28->setChecked(enabled); ui->pb_channel_28->clicked(); break; }
+    case 29: { ui->pb_channel_29->setChecked(enabled); ui->pb_channel_29->clicked(); break; }
+    case 30: { ui->pb_channel_30->setChecked(enabled); ui->pb_channel_30->clicked(); break; }
+    case 31: { ui->pb_channel_31->setChecked(enabled); ui->pb_channel_31->clicked(); break; }
+
+    case 32: { ui->pb_channel_32->setChecked(enabled); ui->pb_channel_32->clicked(); break; }
+    case 33: { ui->pb_channel_33->setChecked(enabled); ui->pb_channel_33->clicked(); break; }
+    case 34: { ui->pb_channel_34->setChecked(enabled); ui->pb_channel_34->clicked(); break; }
+    case 35: { ui->pb_channel_35->setChecked(enabled); ui->pb_channel_35->clicked(); break; }
+    case 36: { ui->pb_channel_36->setChecked(enabled); ui->pb_channel_36->clicked(); break; }
+    case 37: { ui->pb_channel_37->setChecked(enabled); ui->pb_channel_37->clicked(); break; }
+    case 38: { ui->pb_channel_38->setChecked(enabled); ui->pb_channel_38->clicked(); break; }
+    case 39: { ui->pb_channel_39->setChecked(enabled); ui->pb_channel_39->clicked(); break; }
+    case 40: { ui->pb_channel_40->setChecked(enabled); ui->pb_channel_40->clicked(); break; }
+    case 41: { ui->pb_channel_41->setChecked(enabled); ui->pb_channel_41->clicked(); break; }
+
+    case 42: { ui->pb_channel_42->setChecked(enabled); ui->pb_channel_42->clicked(); break; }
+    case 43: { ui->pb_channel_43->setChecked(enabled); ui->pb_channel_43->clicked(); break; }
+    case 44: { ui->pb_channel_44->setChecked(enabled); ui->pb_channel_44->clicked(); break; }
+    case 45: { ui->pb_channel_45->setChecked(enabled); ui->pb_channel_45->clicked(); break; }
+    case 46: { ui->pb_channel_46->setChecked(enabled); ui->pb_channel_46->clicked(); break; }
+    case 47: { ui->pb_channel_47->setChecked(enabled); ui->pb_channel_47->clicked(); break; }
+
+    }
+
 }
 
 
-void MainWindow::on_pb_EnableAll_Bridge_clicked()
+// ------------------------ GUI Buttons Slots ------------------
+
+void MainWindow::rx_confirmationBoxClosed(bool yesBTN, int param)
+{
+    qDebug()<<" MessageConfirmation Slot: param:"<<param<<" Yes-Btn: "<<yesBTN;
+    if(param == 2 && yesBTN)
+    {
+        local_loggingStarted = !local_loggingStarted;
+        emit tx_loggingStartStop(local_loggingStarted, logUserFilePath);
+        usleep(500000);
+        emit tx_ClosingWindow_logConfig();
+        QCoreApplication::quit();
+    }
+}
+void MainWindow::on_pb_CloseApp_clicked()
+{
+    //emit tx_generate_ThisGUI(gui_FIRST_WIN);
+    //emit tx_ClosingWindow_logConfig();
+    //QCoreApplication::quit();
+
+    if(local_loggingStarted)
+    {
+        msgBox = new ConfirmationBox();
+        msgBox->rx_MessageBoxVariables(2, "System in Process", "Logging process is running. DO you want to stop logging and go back to settings window?");
+        connect(msgBox, SIGNAL(tx_confirmationBoxClosed(bool, int)), this, SLOT(rx_confirmationBoxClosed(bool, int)));
+        msgBox->setModal(true);
+        msgBox->show();
+    }
+    else
+    {
+        emit tx_ClosingWindow_logConfig();
+        QCoreApplication::quit();
+    }
+}
+
+void MainWindow::on_slider_samplingRate_valueChanged(int value)
+{
+    ui->txt_SampleTime->setValue(value);
+}
+void MainWindow::on_txt_SampleTime_valueChanged(int arg1)
+{
+    ui->slider_samplingRate->setValue(arg1);
+}
+void MainWindow::on_pb_EnableAll_clicked()
 {
     // ---- 0
     ui->pb_channel_0->setChecked(true); ui->pb_channel_0->clicked();
@@ -686,87 +761,6 @@ void MainWindow::on_pb_EnableAll_Bridge_clicked()
     // ---- 23
     ui->pb_channel_23->setChecked(true); ui->pb_channel_23->clicked();
     ui->lbl_lcdNumber_23->display(""); ui->lbl_factor_23->setVisible(true);
-
-}
-void MainWindow::on_pb_DisableAll_Bridge_clicked()
-{
-    // ---- 0
-    ui->pb_channel_0->setChecked(false); ui->pb_channel_0->clicked();
-    ui->lbl_lcdNumber_0->display(""); ui->lbl_factor_0->setVisible(false);
-    // ---- 1
-    ui->pb_channel_1->setChecked(false); ui->pb_channel_1->clicked();
-    ui->lbl_lcdNumber_1->display(""); ui->lbl_factor_1->setVisible(false);
-    // ---- 2
-    ui->pb_channel_2->setChecked(false); ui->pb_channel_2->clicked();
-    ui->lbl_lcdNumber_2->display(""); ui->lbl_factor_2->setVisible(false);
-    // ---- 3
-    ui->pb_channel_3->setChecked(false); ui->pb_channel_3->clicked();
-    ui->lbl_lcdNumber_3->display(""); ui->lbl_factor_3->setVisible(false);
-    // ---- 4
-    ui->pb_channel_4->setChecked(false); ui->pb_channel_4->clicked();
-    ui->lbl_lcdNumber_4->display(""); ui->lbl_factor_4->setVisible(false);
-    // ---- 5
-    ui->pb_channel_5->setChecked(false); ui->pb_channel_5->clicked();
-    ui->lbl_lcdNumber_5->display(""); ui->lbl_factor_5->setVisible(false);
-    // ---- 6
-    ui->pb_channel_6->setChecked(false); ui->pb_channel_6->clicked();
-    ui->lbl_lcdNumber_6->display(""); ui->lbl_factor_6->setVisible(false);
-    // ---- 7
-    ui->pb_channel_7->setChecked(false); ui->pb_channel_7->clicked();
-    ui->lbl_lcdNumber_7->display(""); ui->lbl_factor_7->setVisible(false);
-    // ---- 8
-    ui->pb_channel_8->setChecked(false); ui->pb_channel_8->clicked();
-    ui->lbl_lcdNumber_8->display(""); ui->lbl_factor_8->setVisible(false);
-    // ---- 9
-    ui->pb_channel_9->setChecked(false); ui->pb_channel_9->clicked();
-    ui->lbl_lcdNumber_9->display(""); ui->lbl_factor_9->setVisible(false);
-    // ---- 10
-    ui->pb_channel_10->setChecked(false); ui->pb_channel_10->clicked();
-    ui->lbl_lcdNumber_10->display(""); ui->lbl_factor_10->setVisible(false);
-    // ---- 11
-    ui->pb_channel_11->setChecked(false); ui->pb_channel_11->clicked();
-    ui->lbl_lcdNumber_11->display(""); ui->lbl_factor_11->setVisible(false);
-    // ---- 12
-    ui->pb_channel_12->setChecked(false); ui->pb_channel_12->clicked();
-    ui->lbl_lcdNumber_12->display(""); ui->lbl_factor_12->setVisible(false);
-    // ---- 13
-    ui->pb_channel_13->setChecked(false); ui->pb_channel_13->clicked();
-    ui->lbl_lcdNumber_13->display(""); ui->lbl_factor_13->setVisible(false);
-    // ---- 14
-    ui->pb_channel_14->setChecked(false); ui->pb_channel_14->clicked();
-    ui->lbl_lcdNumber_14->display(""); ui->lbl_factor_14->setVisible(false);
-    // ---- 15
-    ui->pb_channel_15->setChecked(false); ui->pb_channel_15->clicked();
-    ui->lbl_lcdNumber_15->display(""); ui->lbl_factor_15->setVisible(false);
-    // ---- 16
-    ui->pb_channel_16->setChecked(false); ui->pb_channel_16->clicked();
-    ui->lbl_lcdNumber_16->display(""); ui->lbl_factor_16->setVisible(false);
-    // ---- 17
-    ui->pb_channel_17->setChecked(false); ui->pb_channel_17->clicked();
-    ui->lbl_lcdNumber_17->display(""); ui->lbl_factor_17->setVisible(false);
-    // ---- 18
-    ui->pb_channel_18->setChecked(false); ui->pb_channel_18->clicked();
-    ui->lbl_lcdNumber_18->display(""); ui->lbl_factor_18->setVisible(false);
-    // ---- 19
-    ui->pb_channel_19->setChecked(false); ui->pb_channel_19->clicked();
-    ui->lbl_lcdNumber_19->display(""); ui->lbl_factor_19->setVisible(false);
-    // ---- 20
-    ui->pb_channel_20->setChecked(false); ui->pb_channel_20->clicked();
-    ui->lbl_lcdNumber_20->display(""); ui->lbl_factor_20->setVisible(false);
-    // ---- 21
-    ui->pb_channel_21->setChecked(false); ui->pb_channel_21->clicked();
-    ui->lbl_lcdNumber_21->display(""); ui->lbl_factor_21->setVisible(false);
-    // ---- 22
-    ui->pb_channel_22->setChecked(false); ui->pb_channel_22->clicked();
-    ui->lbl_lcdNumber_22->display(""); ui->lbl_factor_22->setVisible(false);
-    // ---- 23
-    ui->pb_channel_23->setChecked(false); ui->pb_channel_23->clicked();
-    ui->lbl_lcdNumber_23->display(""); ui->lbl_factor_23->setVisible(false);
-
-}
-
-void MainWindow::on_pb_EnableAll_SingleEnded_clicked()
-{
     // ---- 24
     ui->pb_channel_24->setChecked(true); ui->pb_channel_24->clicked();
     ui->lbl_lcdNumber_24->display(""); ui->lbl_factor_24->setVisible(true);
@@ -841,8 +835,80 @@ void MainWindow::on_pb_EnableAll_SingleEnded_clicked()
     ui->lbl_lcdNumber_47->display(""); ui->lbl_factor_47->setVisible(true);
 
 }
-void MainWindow::on_pb_DisableAll_singleEnded_clicked()
+void MainWindow::on_pb_DisableAll_clicked()
 {
+    // ---- 0
+    ui->pb_channel_0->setChecked(false); ui->pb_channel_0->clicked();
+    ui->lbl_lcdNumber_0->display(""); ui->lbl_factor_0->setVisible(false);
+    // ---- 1
+    ui->pb_channel_1->setChecked(false); ui->pb_channel_1->clicked();
+    ui->lbl_lcdNumber_1->display(""); ui->lbl_factor_1->setVisible(false);
+    // ---- 2
+    ui->pb_channel_2->setChecked(false); ui->pb_channel_2->clicked();
+    ui->lbl_lcdNumber_2->display(""); ui->lbl_factor_2->setVisible(false);
+    // ---- 3
+    ui->pb_channel_3->setChecked(false); ui->pb_channel_3->clicked();
+    ui->lbl_lcdNumber_3->display(""); ui->lbl_factor_3->setVisible(false);
+    // ---- 4
+    ui->pb_channel_4->setChecked(false); ui->pb_channel_4->clicked();
+    ui->lbl_lcdNumber_4->display(""); ui->lbl_factor_4->setVisible(false);
+    // ---- 5
+    ui->pb_channel_5->setChecked(false); ui->pb_channel_5->clicked();
+    ui->lbl_lcdNumber_5->display(""); ui->lbl_factor_5->setVisible(false);
+    // ---- 6
+    ui->pb_channel_6->setChecked(false); ui->pb_channel_6->clicked();
+    ui->lbl_lcdNumber_6->display(""); ui->lbl_factor_6->setVisible(false);
+    // ---- 7
+    ui->pb_channel_7->setChecked(false); ui->pb_channel_7->clicked();
+    ui->lbl_lcdNumber_7->display(""); ui->lbl_factor_7->setVisible(false);
+    // ---- 8
+    ui->pb_channel_8->setChecked(false); ui->pb_channel_8->clicked();
+    ui->lbl_lcdNumber_8->display(""); ui->lbl_factor_8->setVisible(false);
+    // ---- 9
+    ui->pb_channel_9->setChecked(false); ui->pb_channel_9->clicked();
+    ui->lbl_lcdNumber_9->display(""); ui->lbl_factor_9->setVisible(false);
+    // ---- 10
+    ui->pb_channel_10->setChecked(false); ui->pb_channel_10->clicked();
+    ui->lbl_lcdNumber_10->display(""); ui->lbl_factor_10->setVisible(false);
+    // ---- 11
+    ui->pb_channel_11->setChecked(false); ui->pb_channel_11->clicked();
+    ui->lbl_lcdNumber_11->display(""); ui->lbl_factor_11->setVisible(false);
+    // ---- 12
+    ui->pb_channel_12->setChecked(false); ui->pb_channel_12->clicked();
+    ui->lbl_lcdNumber_12->display(""); ui->lbl_factor_12->setVisible(false);
+    // ---- 13
+    ui->pb_channel_13->setChecked(false); ui->pb_channel_13->clicked();
+    ui->lbl_lcdNumber_13->display(""); ui->lbl_factor_13->setVisible(false);
+    // ---- 14
+    ui->pb_channel_14->setChecked(false); ui->pb_channel_14->clicked();
+    ui->lbl_lcdNumber_14->display(""); ui->lbl_factor_14->setVisible(false);
+    // ---- 15
+    ui->pb_channel_15->setChecked(false); ui->pb_channel_15->clicked();
+    ui->lbl_lcdNumber_15->display(""); ui->lbl_factor_15->setVisible(false);
+    // ---- 16
+    ui->pb_channel_16->setChecked(false); ui->pb_channel_16->clicked();
+    ui->lbl_lcdNumber_16->display(""); ui->lbl_factor_16->setVisible(false);
+    // ---- 17
+    ui->pb_channel_17->setChecked(false); ui->pb_channel_17->clicked();
+    ui->lbl_lcdNumber_17->display(""); ui->lbl_factor_17->setVisible(false);
+    // ---- 18
+    ui->pb_channel_18->setChecked(false); ui->pb_channel_18->clicked();
+    ui->lbl_lcdNumber_18->display(""); ui->lbl_factor_18->setVisible(false);
+    // ---- 19
+    ui->pb_channel_19->setChecked(false); ui->pb_channel_19->clicked();
+    ui->lbl_lcdNumber_19->display(""); ui->lbl_factor_19->setVisible(false);
+    // ---- 20
+    ui->pb_channel_20->setChecked(false); ui->pb_channel_20->clicked();
+    ui->lbl_lcdNumber_20->display(""); ui->lbl_factor_20->setVisible(false);
+    // ---- 21
+    ui->pb_channel_21->setChecked(false); ui->pb_channel_21->clicked();
+    ui->lbl_lcdNumber_21->display(""); ui->lbl_factor_21->setVisible(false);
+    // ---- 22
+    ui->pb_channel_22->setChecked(false); ui->pb_channel_22->clicked();
+    ui->lbl_lcdNumber_22->display(""); ui->lbl_factor_22->setVisible(false);
+    // ---- 23
+    ui->pb_channel_23->setChecked(false); ui->pb_channel_23->clicked();
+    ui->lbl_lcdNumber_23->display(""); ui->lbl_factor_23->setVisible(false);
     // ---- 24
     ui->pb_channel_24->setChecked(false); ui->pb_channel_24->clicked();
     ui->lbl_lcdNumber_24->display(""); ui->lbl_factor_24->setVisible(false);
@@ -918,12 +984,59 @@ void MainWindow::on_pb_DisableAll_singleEnded_clicked()
 
 }
 
-void MainWindow::on_slider_samplingRate_valueChanged(int value)
+void MainWindow::on_pb_Channel_Clicked()
 {
-    ui->txt_SampleTime->setValue(value);
+    QPushButton *button = (QPushButton *)sender();
+    QString accessName = button->accessibleName();
+
+    accessibleName_int = 0;
+    okVariable = false;
+    accessibleName_int = accessName.toInt(&okVariable, 10);
+    //qDebug()<<accessName<<" Button Clicked = "<<accessibleName_int<<" checked: "<<button->property("isEnable");
+
+    if(okVariable)
+    {
+        if(button->isChecked())
+        {
+            showFactorLabel(accessibleName_int);
+            emit tx_setChannelEnable(accessibleName_int, true);
+            button->setStyleSheet(style_pbChnl_Enable);
+        }
+        else
+        {
+            disableLCDNumber(accessibleName_int);
+            emit tx_setChannelEnable(accessibleName_int, false);
+            button->setStyleSheet(style_pbChnl_Disable);
+        }
+    }
+    else
+    {
+        qDebug()<<" Error in parsing accessible Name of pressed PushButton ";
+    }
 }
 
-void MainWindow::on_txt_SampleTime_valueChanged(int arg1)
+void MainWindow::on_pb_StartLog_clicked()
 {
-    ui->slider_samplingRate->setValue(arg1);
+    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
+
+    if(!local_loggingStarted) {
+        logUserFilePath = QFileDialog::getSaveFileName(this, tr("Save Log File"), QString(QDir::homePath()+"/DAQ_Logs/untitled.csv"), tr("DAC Logs (*.csv)"));
+        qDebug()<<" User setted File name is : "<<logUserFilePath;
+        //ui->lbl_FilePath->setText(QString("Path: "+logUserFilePath));
+        ui->statusbar->showMessage(QString("Path: "+logUserFilePath), 10000);
+    }
+    local_loggingStarted = !local_loggingStarted;
+    emit tx_loggingStartStop(local_loggingStarted, logUserFilePath);
+
+    ui->pb_StartLog->setText(QString(local_loggingStarted? "Started":"Stoped"));
+    ui->pb_StartLog->setStyleSheet(QString(local_loggingStarted? styleLogStart : styleLogStop));
+}
+
+void MainWindow::on_pb_ConfigChannelSettings_clicked()
+{
+    tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
+}
+void MainWindow::on_pb_ShowGraphWin_clicked()
+{
+    tx_generate_ThisGUI(gui_GRAPH_WIN);
 }

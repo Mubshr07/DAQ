@@ -67,7 +67,7 @@ private:
     loggerThread *loggerClass;
     QThread *thrd;
 
-    GUI_WIN local_generateGUI = gui_FIRST_WIN;
+    GUI_WIN local_generateGUI = gui_LOG_CONFIG_WIN;
 };
 
 #endif // MAINHANDLER_H

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>810</height>
+    <height>734</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,7 +51,7 @@ border: 2px solid rgb(0, 85, 255) ;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_51">
+   <layout class="QVBoxLayout" name="verticalLayout_50">
     <item>
      <widget class="QLabel" name="label">
       <property name="styleSheet">
@@ -69,2331 +69,2287 @@ text-decoration:underline;</string>
      </widget>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>250</height>
-       </size>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_49">
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Bridge Channels</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QPushButton" name="pb_channel_0">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>0</string>
-             </property>
-             <property name="text">
-              <string>1</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_0">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_0">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QPushButton" name="pb_channel_1">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>1</string>
-             </property>
-             <property name="text">
-              <string>2</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_1">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_1">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QPushButton" name="pb_channel_2">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>2</string>
-             </property>
-             <property name="text">
-              <string>3</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_2">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_2">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <item>
-            <widget class="QPushButton" name="pb_channel_3">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>3</string>
-             </property>
-             <property name="text">
-              <string>4</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_3">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QPushButton" name="pb_channel_4">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>4</string>
-             </property>
-             <property name="text">
-              <string>5</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_4">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_4">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
-           <item>
-            <widget class="QPushButton" name="pb_channel_5">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>5</string>
-             </property>
-             <property name="text">
-              <string>6</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-             <property name="isEnable" stdset="0">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_5">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_5">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_7">
-           <item>
-            <widget class="QPushButton" name="pb_channel_6">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>6</string>
-             </property>
-             <property name="text">
-              <string>7</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_6">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_6">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <item>
-            <widget class="QPushButton" name="pb_channel_7">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>7</string>
-             </property>
-             <property name="text">
-              <string>8</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_7">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_7">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <item>
-            <widget class="QPushButton" name="pb_channel_8">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>8</string>
-             </property>
-             <property name="text">
-              <string>9</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_8">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_8">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <item>
-            <widget class="QPushButton" name="pb_channel_9">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>9</string>
-             </property>
-             <property name="text">
-              <string>10</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_9">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_9">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_11">
-           <item>
-            <widget class="QPushButton" name="pb_channel_10">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>10</string>
-             </property>
-             <property name="text">
-              <string>11</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_10">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_10">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
-           <item>
-            <widget class="QPushButton" name="pb_channel_11">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>11</string>
-             </property>
-             <property name="text">
-              <string>12</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_11">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_11">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_13">
-           <item>
-            <widget class="QPushButton" name="pb_channel_12">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>12</string>
-             </property>
-             <property name="text">
-              <string>13</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_12">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_12">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
-           <item>
-            <widget class="QPushButton" name="pb_channel_13">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>13</string>
-             </property>
-             <property name="text">
-              <string>14</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_13">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_13">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_15">
-           <item>
-            <widget class="QPushButton" name="pb_channel_14">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>14</string>
-             </property>
-             <property name="text">
-              <string>15</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_14">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_14">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_16">
-           <item>
-            <widget class="QPushButton" name="pb_channel_15">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>15</string>
-             </property>
-             <property name="text">
-              <string>16</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_15">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_15">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_17">
-           <item>
-            <widget class="QPushButton" name="pb_channel_16">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>16</string>
-             </property>
-             <property name="text">
-              <string>17</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_16">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_16">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_18">
-           <item>
-            <widget class="QPushButton" name="pb_channel_17">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>17</string>
-             </property>
-             <property name="text">
-              <string>18</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_17">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_17">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_19">
-           <item>
-            <widget class="QPushButton" name="pb_channel_18">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>18</string>
-             </property>
-             <property name="text">
-              <string>19</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_18">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_18">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_20">
-           <item>
-            <widget class="QPushButton" name="pb_channel_19">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>19</string>
-             </property>
-             <property name="text">
-              <string>20</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_19">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_19">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_21">
-           <item>
-            <widget class="QPushButton" name="pb_channel_20">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>20</string>
-             </property>
-             <property name="text">
-              <string>21</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_20">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_20">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_22">
-           <item>
-            <widget class="QPushButton" name="pb_channel_21">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>21</string>
-             </property>
-             <property name="text">
-              <string>22</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_21">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_21">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_23">
-           <item>
-            <widget class="QPushButton" name="pb_channel_22">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>22</string>
-             </property>
-             <property name="text">
-              <string>23</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_22">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_22">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_24">
-           <item>
-            <widget class="QPushButton" name="pb_channel_23">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>23</string>
-             </property>
-             <property name="text">
-              <string>24</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_23">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_23">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="Line" name="line_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>250</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_50">
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Single Ended Channels</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_25">
-           <item>
-            <widget class="QPushButton" name="pb_channel_24">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>24</string>
-             </property>
-             <property name="text">
-              <string>25</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_24">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_24">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_26">
-           <item>
-            <widget class="QPushButton" name="pb_channel_25">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>25</string>
-             </property>
-             <property name="text">
-              <string>26</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_25">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_25">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_27">
-           <item>
-            <widget class="QPushButton" name="pb_channel_26">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>26</string>
-             </property>
-             <property name="text">
-              <string>27</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_26">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_26">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_28">
-           <item>
-            <widget class="QPushButton" name="pb_channel_27">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>27</string>
-             </property>
-             <property name="text">
-              <string>28</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_27">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_27">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_29">
-           <item>
-            <widget class="QPushButton" name="pb_channel_28">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>28</string>
-             </property>
-             <property name="text">
-              <string>29</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_28">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_28">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_30">
-           <item>
-            <widget class="QPushButton" name="pb_channel_29">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>29</string>
-             </property>
-             <property name="text">
-              <string>30</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_29">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_29">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_31">
-           <item>
-            <widget class="QPushButton" name="pb_channel_30">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>30</string>
-             </property>
-             <property name="text">
-              <string>31</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_30">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_30">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_32">
-           <item>
-            <widget class="QPushButton" name="pb_channel_31">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>31</string>
-             </property>
-             <property name="text">
-              <string>32</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_31">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_31">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_33">
-           <item>
-            <widget class="QPushButton" name="pb_channel_32">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>32</string>
-             </property>
-             <property name="text">
-              <string>33</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_32">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_32">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_34">
-           <item>
-            <widget class="QPushButton" name="pb_channel_33">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>33</string>
-             </property>
-             <property name="text">
-              <string>34</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_33">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_33">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_35">
-           <item>
-            <widget class="QPushButton" name="pb_channel_34">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>34</string>
-             </property>
-             <property name="text">
-              <string>35</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_34">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_34">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_36">
-           <item>
-            <widget class="QPushButton" name="pb_channel_35">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>35</string>
-             </property>
-             <property name="text">
-              <string>36</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_35">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_35">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_37">
-           <item>
-            <widget class="QPushButton" name="pb_channel_36">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>36</string>
-             </property>
-             <property name="text">
-              <string>37</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_36">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_36">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_38">
-           <item>
-            <widget class="QPushButton" name="pb_channel_37">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>37</string>
-             </property>
-             <property name="text">
-              <string>38</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_37">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_37">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_39">
-           <item>
-            <widget class="QPushButton" name="pb_channel_38">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>38</string>
-             </property>
-             <property name="text">
-              <string>39</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_38">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_38">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_40">
-           <item>
-            <widget class="QPushButton" name="pb_channel_39">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>39</string>
-             </property>
-             <property name="text">
-              <string>40</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_39">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_39">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_41">
-           <item>
-            <widget class="QPushButton" name="pb_channel_40">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>40</string>
-             </property>
-             <property name="text">
-              <string>41</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_40">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_40">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_42">
-           <item>
-            <widget class="QPushButton" name="pb_channel_41">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>41</string>
-             </property>
-             <property name="accessibleDescription">
-              <string/>
-             </property>
-             <property name="text">
-              <string>42</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_41">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_41">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_43">
-           <item>
-            <widget class="QPushButton" name="pb_channel_42">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>42</string>
-             </property>
-             <property name="text">
-              <string>43</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_42">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_42">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_44">
-           <item>
-            <widget class="QPushButton" name="pb_channel_43">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>43</string>
-             </property>
-             <property name="text">
-              <string>44</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_43">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_43">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_45">
-           <item>
-            <widget class="QPushButton" name="pb_channel_44">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>44</string>
-             </property>
-             <property name="text">
-              <string>45</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_44">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_44">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_46">
-           <item>
-            <widget class="QPushButton" name="pb_channel_45">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>45</string>
-             </property>
-             <property name="text">
-              <string>46</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_45">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_45">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_47">
-           <item>
-            <widget class="QPushButton" name="pb_channel_46">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>46</string>
-             </property>
-             <property name="text">
-              <string>47</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_46">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_46">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_48">
-           <item>
-            <widget class="QPushButton" name="pb_channel_47">
-             <property name="minimumSize">
-              <size>
-               <width>60</width>
-               <height>32</height>
-              </size>
-             </property>
-             <property name="accessibleName">
-              <string>47</string>
-             </property>
-             <property name="text">
-              <string>48</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="lbl_lcdNumber_47">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>35</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lbl_factor_47">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>1.0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_49">
       <item>
-       <widget class="QPushButton" name="pb_EnableAll_Bridge">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;
-background-color:transparent; color:white; padding:5px;</string>
-        </property>
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Enable Bridged</string>
+         <string>Click on Channel to enable or disable</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pb_DisableAll_Bridge">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QPushButton" name="pb_channel_0">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>0</string>
+            </property>
+            <property name="text">
+             <string>1</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_0">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_0">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="pb_channel_1">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>1</string>
+            </property>
+            <property name="text">
+             <string>2</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_1">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_1">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPushButton" name="pb_channel_2">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>2</string>
+            </property>
+            <property name="text">
+             <string>3</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_2">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QPushButton" name="pb_channel_3">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>3</string>
+            </property>
+            <property name="text">
+             <string>4</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_3">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QPushButton" name="pb_channel_4">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>4</string>
+            </property>
+            <property name="text">
+             <string>5</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_4">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QPushButton" name="pb_channel_5">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>5</string>
+            </property>
+            <property name="text">
+             <string>6</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="isEnable" stdset="0">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_5">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_5">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QPushButton" name="pb_channel_6">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>6</string>
+            </property>
+            <property name="text">
+             <string>7</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_6">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_6">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QPushButton" name="pb_channel_7">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>7</string>
+            </property>
+            <property name="text">
+             <string>8</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_7">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_7">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QPushButton" name="pb_channel_8">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>8</string>
+            </property>
+            <property name="text">
+             <string>9</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_8">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_8">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <widget class="QPushButton" name="pb_channel_9">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>9</string>
+            </property>
+            <property name="text">
+             <string>10</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_9">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_9">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QPushButton" name="pb_channel_10">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>10</string>
+            </property>
+            <property name="text">
+             <string>11</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_10">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_10">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QPushButton" name="pb_channel_11">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>11</string>
+            </property>
+            <property name="text">
+             <string>12</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_11">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_11">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <widget class="QPushButton" name="pb_channel_12">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>12</string>
+            </property>
+            <property name="text">
+             <string>13</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_12">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_12">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <item>
+           <widget class="QPushButton" name="pb_channel_13">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>13</string>
+            </property>
+            <property name="text">
+             <string>14</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_13">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_13">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_15">
+          <item>
+           <widget class="QPushButton" name="pb_channel_14">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>14</string>
+            </property>
+            <property name="text">
+             <string>15</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_14">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_14">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_16">
+          <item>
+           <widget class="QPushButton" name="pb_channel_15">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>15</string>
+            </property>
+            <property name="text">
+             <string>16</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_15">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_15">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_17">
+          <item>
+           <widget class="QPushButton" name="pb_channel_16">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>16</string>
+            </property>
+            <property name="text">
+             <string>17</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_16">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_16">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_18">
+          <item>
+           <widget class="QPushButton" name="pb_channel_17">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>17</string>
+            </property>
+            <property name="text">
+             <string>18</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_17">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_17">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_19">
+          <item>
+           <widget class="QPushButton" name="pb_channel_18">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>18</string>
+            </property>
+            <property name="text">
+             <string>19</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_18">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_18">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_20">
+          <item>
+           <widget class="QPushButton" name="pb_channel_19">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>19</string>
+            </property>
+            <property name="text">
+             <string>20</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_19">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_19">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_21">
+          <item>
+           <widget class="QPushButton" name="pb_channel_20">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>20</string>
+            </property>
+            <property name="text">
+             <string>21</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_20">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_20">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_22">
+          <item>
+           <widget class="QPushButton" name="pb_channel_21">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>21</string>
+            </property>
+            <property name="text">
+             <string>22</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_21">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_21">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_23">
+          <item>
+           <widget class="QPushButton" name="pb_channel_22">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>22</string>
+            </property>
+            <property name="text">
+             <string>23</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_22">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_22">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_24">
+          <item>
+           <widget class="QPushButton" name="pb_channel_23">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>23</string>
+            </property>
+            <property name="text">
+             <string>24</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_23">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_23">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_25">
+          <item>
+           <widget class="QPushButton" name="pb_channel_24">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>24</string>
+            </property>
+            <property name="text">
+             <string>25</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_24">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_24">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_26">
+          <item>
+           <widget class="QPushButton" name="pb_channel_25">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>25</string>
+            </property>
+            <property name="text">
+             <string>26</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_25">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_25">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_27">
+          <item>
+           <widget class="QPushButton" name="pb_channel_26">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>26</string>
+            </property>
+            <property name="text">
+             <string>27</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_26">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_26">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_28">
+          <item>
+           <widget class="QPushButton" name="pb_channel_27">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>27</string>
+            </property>
+            <property name="text">
+             <string>28</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_27">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_27">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_29">
+          <item>
+           <widget class="QPushButton" name="pb_channel_28">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>28</string>
+            </property>
+            <property name="text">
+             <string>29</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_28">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_28">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_30">
+          <item>
+           <widget class="QPushButton" name="pb_channel_29">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>29</string>
+            </property>
+            <property name="text">
+             <string>30</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_29">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_29">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_31">
+          <item>
+           <widget class="QPushButton" name="pb_channel_30">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>30</string>
+            </property>
+            <property name="text">
+             <string>31</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_30">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_30">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_32">
+          <item>
+           <widget class="QPushButton" name="pb_channel_31">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>31</string>
+            </property>
+            <property name="text">
+             <string>32</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_31">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_31">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_33">
+          <item>
+           <widget class="QPushButton" name="pb_channel_32">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>32</string>
+            </property>
+            <property name="text">
+             <string>33</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_32">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_32">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_34">
+          <item>
+           <widget class="QPushButton" name="pb_channel_33">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>33</string>
+            </property>
+            <property name="text">
+             <string>34</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_33">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_33">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_35">
+          <item>
+           <widget class="QPushButton" name="pb_channel_34">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>34</string>
+            </property>
+            <property name="text">
+             <string>35</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_34">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_34">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_36">
+          <item>
+           <widget class="QPushButton" name="pb_channel_35">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>35</string>
+            </property>
+            <property name="text">
+             <string>36</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_35">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_35">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_37">
+          <item>
+           <widget class="QPushButton" name="pb_channel_36">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>36</string>
+            </property>
+            <property name="text">
+             <string>37</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_36">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_36">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_38">
+          <item>
+           <widget class="QPushButton" name="pb_channel_37">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>37</string>
+            </property>
+            <property name="text">
+             <string>38</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_37">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_37">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_39">
+          <item>
+           <widget class="QPushButton" name="pb_channel_38">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>38</string>
+            </property>
+            <property name="text">
+             <string>39</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_38">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_38">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_40">
+          <item>
+           <widget class="QPushButton" name="pb_channel_39">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>39</string>
+            </property>
+            <property name="text">
+             <string>40</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_39">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_39">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_41">
+          <item>
+           <widget class="QPushButton" name="pb_channel_40">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>40</string>
+            </property>
+            <property name="text">
+             <string>41</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_40">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_40">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_42">
+          <item>
+           <widget class="QPushButton" name="pb_channel_41">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>41</string>
+            </property>
+            <property name="accessibleDescription">
+             <string/>
+            </property>
+            <property name="text">
+             <string>42</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_41">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_41">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_43">
+          <item>
+           <widget class="QPushButton" name="pb_channel_42">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>42</string>
+            </property>
+            <property name="text">
+             <string>43</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_42">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_42">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_44">
+          <item>
+           <widget class="QPushButton" name="pb_channel_43">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>43</string>
+            </property>
+            <property name="text">
+             <string>44</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_43">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_43">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_45">
+          <item>
+           <widget class="QPushButton" name="pb_channel_44">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>44</string>
+            </property>
+            <property name="text">
+             <string>45</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_44">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_44">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_46">
+          <item>
+           <widget class="QPushButton" name="pb_channel_45">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>45</string>
+            </property>
+            <property name="text">
+             <string>46</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_45">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_45">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_47">
+          <item>
+           <widget class="QPushButton" name="pb_channel_46">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>46</string>
+            </property>
+            <property name="text">
+             <string>47</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_46">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_46">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_48">
+          <item>
+           <widget class="QPushButton" name="pb_channel_47">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="accessibleName">
+             <string>47</string>
+            </property>
+            <property name="text">
+             <string>48</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lbl_lcdNumber_47">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_factor_47">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>1.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <spacer name="horizontalSpacer_10">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_EnableAll">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -2401,11 +2357,34 @@ background-color:transparent; color:white; padding:5px;</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;
+         <string notr="true">font:650  14pt &quot;Times New Roman&quot;;
 background-color:transparent; color:white; padding:5px;</string>
         </property>
         <property name="text">
-         <string>Disable Bridged</string>
+         <string>Enable All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_DisableAll">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 650 14pt &quot;Times New Roman&quot;;
+background-color:transparent; color:white; padding:5px;</string>
+        </property>
+        <property name="text">
+         <string>Disable All</string>
         </property>
        </widget>
       </item>
@@ -2423,53 +2402,85 @@ background-color:transparent; color:white; padding:5px;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pb_EnableAll_SingleEnded">
+       <widget class="QPushButton" name="pb_ConfigChannelSettings">
         <property name="minimumSize">
          <size>
-          <width>120</width>
-          <height>0</height>
+          <width>180</width>
+          <height>45</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;
-background-color:transparent; color:white; padding:5px;</string>
+         <string notr="true">border-color:green;
+background-color:  rgb(0, 255, 255);
+</string>
         </property>
         <property name="text">
-         <string>Enable SingleEnded</string>
+         <string>Config Channels</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pb_DisableAll_singleEnded">
+       <spacer name="horizontalSpacer_9">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_ShowGraphWin">
         <property name="minimumSize">
          <size>
-          <width>120</width>
-          <height>0</height>
+          <width>140</width>
+          <height>45</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Times New Roman&quot;;
-background-color:transparent; color:white; padding:5px;</string>
+         <string notr="true">border-color:green;
+background-color:  rgb(0, 255, 255);
+</string>
         </property>
         <property name="text">
-         <string>Disable SingleEnded</string>
+         <string>Show Graphs</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
     <item>
-     <spacer name="verticalSpacer">
+     <widget class="Line" name="line">
       <property name="orientation">
-       <enum>Qt::Vertical</enum>
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Set Sampling Rate</string>
       </property>
-     </spacer>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QSlider" name="slider_samplingRate">
@@ -2491,27 +2502,11 @@ background-color:transparent; color:white; padding:5px;</string>
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
-       <spacer name="horizontalSpacer_13">
+       <spacer name="horizontalSpacer_12">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -2528,7 +2523,7 @@ background-color:transparent; color:white; padding:5px;</string>
 color:white;</string>
         </property>
         <property name="text">
-         <string>Set Log sample rate (sec):</string>
+         <string>Set Log sample rate (uSec):</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2565,7 +2560,44 @@ color:white;</string>
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_12">
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -2578,25 +2610,82 @@ color:white;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pb_SetConfiguration">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>45</height>
-         </size>
+       <widget class="QLabel" name="lbl_Time">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>22</pointsize>
+          <weight>62</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-color:green;
-background-color: rgb(0, 85, 0);
-color:white;</string>
+         <string notr="true">font: 500 22pt &quot;MS Shell Dlg 2&quot;;</string>
         </property>
         <property name="text">
-         <string>Config</string>
+         <string>000:00:00</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_5">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_StartLog">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Logging Start Stop Button</string>
+        </property>
+        <property name="text">
+         <string>Start Log</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -2612,7 +2701,7 @@ color:white;</string>
        <widget class="QPushButton" name="pb_CloseApp">
         <property name="minimumSize">
          <size>
-          <width>100</width>
+          <width>125</width>
           <height>40</height>
          </size>
         </property>
@@ -2620,10 +2709,12 @@ color:white;</string>
          <string>47</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">color:red;</string>
+         <string notr="true">color:red;
+border: 2px solid red;
+border-radius:8px;</string>
         </property>
         <property name="text">
-         <string>Close</string>
+         <string>ShutDown</string>
         </property>
         <property name="checkable">
          <bool>true</bool>

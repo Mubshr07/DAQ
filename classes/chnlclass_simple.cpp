@@ -67,7 +67,7 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
     endResult_Float = calculatedValue;
 
 
-    endResult_Float_Factor = endResult_Float + local_CH_factor;
+    endResult_Float_Factor = endResult_Float * local_CH_factor;
 
     //qDebug()<<"ADC:"<<local_ADCaddress<<"\t readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<endResult<<" calc:"<<calculatedValue;
     //return calculatedValue;
@@ -80,7 +80,7 @@ void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
     float coeficient = pow(2, 24);
     float calculatedValue = (autoScheme_endResult/coeficient) * internalRef;
     autoScheme_endResult_Float = calculatedValue;
-    autoScheme_endResult_Float_Factor = autoScheme_endResult_Float + local_CH_factor;
+    autoScheme_endResult_Float_Factor = autoScheme_endResult_Float * local_CH_factor;
 }
 
 

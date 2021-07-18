@@ -278,7 +278,7 @@ void ConfigChWin::rx_ChannelValue(int chnl, uint32_t raw, float fVal, float FacV
 void ConfigChWin::on_pb_WindowClose_clicked()
 {
     emit tx_ChannelSettingsWindowIsOpen(false);
-    emit tx_generate_ThisGUI(gui_FIRST_WIN);
+    //emit tx_generate_ThisGUI(gui_FIRST_WIN);
     emit tx_ClosingWindow_ConfigCHWin();
 }
 
@@ -344,10 +344,10 @@ void ConfigChWin::on_pb_StartConversion_clicked()
 }
 void ConfigChWin::on_pb_GotoLogWindow_clicked()
 {
-    emit tx_ChannelSettingsWindowIsOpen(false);
-    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
-    emit tx_generate_ThisGUI(gui_GRAPH_WIN);
-    emit tx_ClosingWindow_ConfigCHWin();
+//    emit tx_ChannelSettingsWindowIsOpen(false);
+//    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
+//    emit tx_generate_ThisGUI(gui_GRAPH_WIN);
+//    emit tx_ClosingWindow_ConfigCHWin();
 }
 void ConfigChWin::on_pb_UploadAll_clicked()
 {
