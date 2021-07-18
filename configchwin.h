@@ -78,9 +78,9 @@ private:
     int local_currentCH_ID = 0;
     float local_currentCH_Factor = 1.0;
     //float local_currentCH_PGA = 1.0;
-    CHANNEL_TYPE local_currentCH_type = BRIDGE;
+    CHANNEL_TYPE local_currentCH_type = BridgeCH;
     CHANNEL_PGA local_currentCH_PGA = CH_PGA_1;
-    CHANNEL_REFERENCE local_currentCH_Ref = INTERNAL;
+    CHANNEL_REFERENCE local_currentCH_Ref = INTERNAL_REF;
     bool local_currentCH_Enable = false;
 
     QMap<CHANNEL_PGA, int> pgaMAP;

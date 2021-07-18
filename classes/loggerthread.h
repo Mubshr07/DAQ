@@ -56,7 +56,7 @@ private:
     QTimer *timer_logger;
     QElapsedTimer *timer_elapser;
     QTimer *timer_graphValue;
-
+    int graphTimer_interval = 400;
     void readChannelSettingsFile();
     void processChannelSettingsStr(QString str);
     Addressing *addrss_Obj;

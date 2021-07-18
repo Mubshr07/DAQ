@@ -193,6 +193,7 @@ void graphWin::on_timer_graphPloter_Elapsed()
         //ui->customPlot->graph(1)->rescaleValueAxis(true);
 
 
+        ui->myPlot->yAxis->rescale(true);
         ui->myPlot->graph(0)->rescaleValueAxis();
         ui->myPlot->graph(1)->rescaleValueAxis();
         ui->myPlot->graph(2)->rescaleValueAxis();
@@ -203,6 +204,7 @@ void graphWin::on_timer_graphPloter_Elapsed()
     }
     // make key axis range scroll with the data (at a constant range size of 8):
     ui->myPlot->xAxis->setRange(key, 10, Qt::AlignRight);
+    //ui->myPlot->rescaleAxes(true);
     ui->myPlot->replot();
 
     // calculate frames per second:

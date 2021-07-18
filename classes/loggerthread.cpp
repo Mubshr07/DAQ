@@ -11,7 +11,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     {
         chnlArray[i].setChannelEnableDisable(false);
         chnlArray[i].setChannelAddress(local_FPGA_ADDRESS, i);
-        if(i<24) chnlArray[i].set_Channel_PGA_Type( CH_PGA_1, BRIDGE);
+        if(i<24) chnlArray[i].set_Channel_PGA_Type( CH_PGA_1, Accelerometer);
         //else chnlArray[i].set_Channel_Type(SINGEL_ENDED);
     }
 
@@ -46,7 +46,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     //qDebug()<<" before timer_graph initialize ";
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
-    timer_graphValue->start(200);
+    timer_graphValue->start(graphTimer_interval);
 
     //qDebug()<<" debug LoggerThread 3 ";
     timer_elapser = new QElapsedTimer();
@@ -188,7 +188,13 @@ void loggerThread::on_timer_graphValue_elapsed()
             {
                 //chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
                 //qDebug()<<" graph Channel Indx:"<<i<<" CH#"<<graphChannels_idx[i]<<" value "<<chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor;
-                emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor);
+                if(logging_isStarted)
+                    emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor);
+                else
+                {
+                    chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
+                    emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].endResult_Float_Factor);
+                }
             }
         }
     }
@@ -273,7 +279,7 @@ void loggerThread::on_timer_graphValue_elapsed()
 
 void loggerThread::rx_startReadingTimer(bool startReading)
 {
-    if(startReading) timer_graphValue->start(200);
+    if(startReading) timer_graphValue->start(graphTimer_interval);
     else timer_graphValue->stop();
 }
 
@@ -288,9 +294,9 @@ void loggerThread::rx_setSampleTime(int mSec)
     sampleRate_MS = mSec;
 
     // -------- Set DataRate
-    uint32_t setRateInt = (mSec * 1000);   // uSec
-    setRateInt /= 0.02;
-    *(local_FPGA_ADDRESS + 14) = 500;
+    uint32_t setRateInt = 50000000;   // fpga Clock
+    setRateInt /= mSec;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
 }
 void loggerThread::rx_loggingStartStop(bool start, QString filePth)
 {
@@ -364,7 +370,7 @@ void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
     }
     else {
         //timer_graphValue->stop();
-        timer_graphValue->start(200);
+        timer_graphValue->start(graphTimer_interval);
         //*(local_FPGA_ADDRESS + 0x06) = 0x00;
     }
 }
@@ -385,6 +391,7 @@ void loggerThread::rx_ChannelSettingsWindowIsOpen(bool windOpen)
     }
     else
     {
+        timer_graphValue->start(graphTimer_interval);
         // send channel properties to mainWindow after channelConfiguration Changed.
         for(int i=0; i<TOTAL_CHANNEL; i++)
         {
@@ -408,7 +415,7 @@ void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pga
     chnlArray[chnl].reConfigFPGA_forThisChannel();
 
     rx_saveChannelSettingsToFile();
-    timer_graphValue->start(200);
+    timer_graphValue->start(graphTimer_interval);
 }
 void loggerThread::rx_giveMechannelSettings(int chnl)
 {
@@ -538,12 +545,13 @@ void loggerThread::processChannelSettingsStr(QString str)
         //qDebug()<<" ID:"<<settingsCH_id<<" pga:"<<settingsCH_pga<<" fac:"<<settingsCH_factor<<" type:"<<settingsCH_type<<" ref:"<<settingsCH_ref;
 
         chnlArray[settingsCH_id].set_Channel_Factor(settingsCH_factor);
-        if(settingsCH_type == 0) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, UniPolar);
-        else if(settingsCH_type == 1) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, BiPolar);
-        else if(settingsCH_type == 2) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, BRIDGE);
+        if(settingsCH_type == 0) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, Accelerometer);
+        else if(settingsCH_type == 1) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, DT_Sensor);
+        else if(settingsCH_type == 2) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, Volts_0_10);
+        else if(settingsCH_type == 3) chnlArray[settingsCH_id].set_Channel_PGA_Type(settingsCH_pga, BridgeCH);
 
-        if(settingsCH_ref == 0) chnlArray[settingsCH_id].set_Channel_Reference(INTERNAL);
-        else if(settingsCH_ref == 1) chnlArray[settingsCH_id].set_Channel_Reference(EXTERNAL);
+        if(settingsCH_ref == 0) chnlArray[settingsCH_id].set_Channel_Reference(INTERNAL_REF);
+        else if(settingsCH_ref == 1) chnlArray[settingsCH_id].set_Channel_Reference(EXTERNAL_REF);
         if(settingsCH_isEnable == 1) chnlArray[settingsCH_id].setChannelEnableDisable(true);
 
     }

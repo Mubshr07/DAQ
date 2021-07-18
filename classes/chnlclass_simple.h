@@ -48,8 +48,8 @@ private:
     bool local_Enable = false;
     float local_CH_factor = 1.0;
     CHANNEL_PGA local_CH_PGA = CH_PGA_1;
-    CHANNEL_TYPE local_CH_Type = BRIDGE;
-    CHANNEL_REFERENCE local_CH_Reference = INTERNAL;
+    CHANNEL_TYPE local_CH_Type = BridgeCH;
+    CHANNEL_REFERENCE local_CH_Reference = INTERNAL_REF;
     int local_dataRate = 10;
 
 

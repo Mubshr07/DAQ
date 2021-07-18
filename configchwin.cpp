@@ -288,8 +288,8 @@ void ConfigChWin::on_sp_Channel_Factor_valueChanged(double arg1)
 }
 void ConfigChWin::on_pb_ChannelReferenceToggle_clicked()
 {
-    if(local_currentCH_Ref == INTERNAL) local_currentCH_Ref = EXTERNAL;
-    else local_currentCH_Ref = INTERNAL;
+    if(local_currentCH_Ref == INTERNAL_REF) local_currentCH_Ref = EXTERNAL_REF;
+    else local_currentCH_Ref = INTERNAL_REF;
 
     ui->pb_ChannelReferenceToggle->setText(QString(local_currentCH_Ref? "External":"Internal"));
 }

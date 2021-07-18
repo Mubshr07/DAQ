@@ -13,14 +13,15 @@ enum GUI_WIN {
 };
 
 enum CHANNEL_TYPE {
-    UniPolar,
-    BiPolar,
-    BRIDGE
+    Accelerometer,
+    DT_Sensor,
+    Volts_0_10,
+    BridgeCH
 };
 
 enum CHANNEL_REFERENCE {
-    INTERNAL,
-    EXTERNAL
+    INTERNAL_REF,
+    EXTERNAL_REF
 };
 
 enum CHANNEL_PGA {

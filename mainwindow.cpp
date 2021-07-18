@@ -1028,7 +1028,7 @@ void MainWindow::on_pb_Channel_Clicked()
 
 void MainWindow::on_pb_StartLog_clicked()
 {
-    emit tx_setSampleTime((int)(ui->txt_SampleTime->value() * 1000.0));
+    emit tx_setSampleTime((int)(ui->txt_SampleTime->value()));
 
     if(!local_loggingStarted) {
         logUserFilePath = QFileDialog::getSaveFileName(this, tr("Save Log File"), QString(QDir::homePath()+"/DAQ_Logs/untitled.csv"), tr("DAC Logs (*.csv)"));

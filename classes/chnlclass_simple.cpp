@@ -23,10 +23,11 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
 
 
     *(localFPGAaddr+0x01) = local_ADCaddress;
-
+    usleep(1000);
     *(localFPGAaddr + 0x02) = 0x03;
+    usleep(1000);
     *(localFPGAaddr + 0x03) = 0xFFFFFF;
-
+    usleep(1000);
     int indxx = (local_ADCaddress / 8);
 
     *(localFPGAaddr + indxx+8) = 0x00; // pulse
@@ -52,20 +53,37 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
     uint8_t lsb = 0x00;
     uint8_t msb =  0x00;
 
+    usleep(1000);
     endResult = *(localFPGAaddr+(indxx+48));
 
     lsb = (endResult & 0xFF0000)>>16;
     msb = endResult & 0xFF;
+
 
     endResult = endResult & 0xFF00;
     endResult = endResult | (lsb & 0xFF);
     endResult = endResult | (msb<<16);
 
     float internalRef = 2.048;
-    float coeficient = pow(2, 24);
-    float calculatedValue = (endResult/coeficient) * internalRef;
-    endResult_Float = calculatedValue;
+    if(local_CH_Reference == INTERNAL_REF)
+        internalRef = 2.048;
+    else if(local_CH_Reference == EXTERNAL_REF)
+        internalRef = 5.0;
 
+    int32_t endSigned = 0x00000000;
+    if(endResult >= 0x800000)
+    {
+        endSigned=  endResult - 0xFFFFFF;
+    }
+    else
+    {
+        endSigned = endResult;
+    }
+
+
+    float coeficient = pow(2, 23);
+    float calculatedValue = (endSigned/coeficient) * internalRef;
+    endResult_Float = calculatedValue;
 
     endResult_Float_Factor = endResult_Float * local_CH_factor;
 
@@ -101,9 +119,9 @@ int chnlClass_Simple::reConfigFPGA_forThisChannel()
     reg0 = ((fpga_PGA<<1) & 0x0E) | reg0;
     //qDebug()<<" 1: "<<QString::number(reg0, 16);
     switch (local_CH_Type) {
-    case UniPolar: { reg0 = reg0 | 0b10110000; break; }
-    case BiPolar: { reg0 = reg0 | 0b10000000; break; }
-    case BRIDGE: { reg0 = reg0 | 0b00110000; break; }
+    case Accelerometer: case DT_Sensor: { reg0 = reg0 | 0b10110000; break; }
+    case Volts_0_10: { reg0 = reg0 | 0b10000000; break; }
+    case BridgeCH: { reg0 = reg0 | 0b00110000; break; }
     }
 
     //qDebug()<<" 2: "<<QString::number(reg0, 16);
@@ -114,8 +132,12 @@ int chnlClass_Simple::reConfigFPGA_forThisChannel()
     usleep(10000);
 
     switch (local_CH_Reference) {
-    INTERNAL: { writeRegister(0x02, 0x00); break; }
-    EXTERNAL: { writeRegister(0x02, 0xC0); break; }
+    case INTERNAL_REF: {
+        //qDebug()<<" setting Ref Internal ";
+        writeRegister(0x02, 0x00); break; }
+    case EXTERNAL_REF: {
+        //qDebug()<<" setting Ref External ";
+        writeRegister(0x02, 0xC0); break; }
     }
     usleep(10000);
     writeRegister(0x03, 0x00);
