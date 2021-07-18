@@ -35,8 +35,8 @@ void MainHandler::on_timer_SingleShot_elapsed()
     switch (index_singleShot) {
     case 0: {
         GUIobjectInitializer();
-        generate_firstWindow();
-        //generate_ConfigCHWin();
+        //generate_firstWindow();
+        generate_ConfigCHWin();
         break;
     }
     }
@@ -56,9 +56,9 @@ void MainHandler::on_timer_generateGUI_Elapsed()
     }
     case gui_FIRST_WIN: {
         //qDebug()<<" First Window Switch Statement"<<firstWin->isWidgetType();
-        firstWin->show();
-        //if(firstWin->isHidden()) firstWin->show();
-        //else generate_firstWindow();
+        //firstWin->show();
+        if(firstWin == nullptr ) generate_firstWindow();
+        else firstWin->show();
         break;
     }
     case gui_GRAPH_WIN: {
@@ -167,6 +167,7 @@ void MainHandler::rx_ClosingWindow_FirstWin(bool shutDown)
 {
     qDebug()<<" First Window is CLosed ::"<<shutDown;
     firstWin->hide();
+
     if(shutDown) {
         QCoreApplication::quit();
     }

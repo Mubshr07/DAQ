@@ -62,7 +62,7 @@ uint32_t NewDebug::on_pb_ReadConversion_clicked()
 
     int PulseIndx = finalIndx/ 8;
 
-
+    /*
     uint16_t lsb = *(localFPGAaddr+((PulseIndx*5)+48));
     uint16_t msb = *(localFPGAaddr+((PulseIndx*5)+49));
 
@@ -72,12 +72,28 @@ uint32_t NewDebug::on_pb_ReadConversion_clicked()
     first = (msb & 0xFF);
     middle = (lsb & 0xFF00) >> 8;
     last = (lsb & 0xFF);
-
+    */
     uint32_t endResult = 0x00000000;
-    endResult = (first<<16);
-    endResult = endResult |(middle<<8);
-    endResult = endResult |(last);
+//    endResult = (first<<16);
+//    endResult = endResult |(middle<<8);
+//    endResult = endResult |(last);
 
+
+
+    uint8_t lsb = 0x00;
+    uint8_t msb =  0x00;
+
+    endResult = *(localFPGAaddr+(PulseIndx+48));
+
+    lsb = (endResult & 0xFF0000)>>16;
+    msb = endResult & 0xFF;
+
+    endResult = endResult & 0xFF00;
+    endResult = endResult | (lsb & 0xFF);
+    endResult = endResult | (msb<<16);
+
+
+    //qDebug()<<" FullPCB:: current ADC:"<<finalIndx<<" read-Addr:"<<PulseIndx+48<<" endResult (hex):"<<QString::number(endResult, 16);
 
     *(localFPGAaddr + 0x02)  = 0x03;
     *(localFPGAaddr + 0x06)  = 0x00;
@@ -124,13 +140,12 @@ void NewDebug::on_pb_readRegister_clicked()
 
 
     //usleep(100000);
-    uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
-    uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
-    uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
-    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
+    //uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
+    //uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
+    uint32_t reply = *(localFPGAaddr+(actualIDX+48));; //(msb<<16 & 0xffff0000) + (lsb & 0xffff);
+    //qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
+    qDebug()<<" readRegister::"<<reply<<" Pulse:"<<actualIDX+8<<" read-Addr:"<<indxx+48;
     ui->lbl_readRegister->setText(QString::number(reply, 16));
-
-
 
 }
 
@@ -317,10 +332,11 @@ uint32_t NewDebug::readRegister(uint8_t addr)
 
 
     //usleep(100000);
-    uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
-    uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
-    uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
-    qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
+    //uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
+    //uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
+    uint32_t reply = *(localFPGAaddr+(actualIDX+48)); //(msb<<16 & 0xffff0000) + (lsb & 0xffff);
+    //qDebug()<<" readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply<<" Pulse:"<<actualIDX+8;
+    qDebug()<<" readRegister:: "<<reply<<" Pulse:"<<actualIDX+8;
 
     return reply;
 }

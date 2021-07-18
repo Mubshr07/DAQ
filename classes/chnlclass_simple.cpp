@@ -24,34 +24,42 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
 
     *(localFPGAaddr+0x01) = local_ADCaddress;
 
-
     *(localFPGAaddr + 0x02) = 0x03;
     *(localFPGAaddr + 0x03) = 0xFFFFFF;
 
     int indxx = (local_ADCaddress / 8);
 
-
     *(localFPGAaddr + indxx+8) = 0x00; // pulse
     *(localFPGAaddr + indxx+8) = 0x01;
     *(localFPGAaddr + indxx+8) = 0x00;
 
-
+    /*
     //usleep(100000);
     uint16_t lsb = *(localFPGAaddr+((indxx*5)+48));
     uint16_t msb = *(localFPGAaddr+((indxx*5)+49));
-
-
     uint8_t first = 0x00;
     uint8_t middle = 0x00;
     uint8_t last = 0x00;
     first = (msb & 0xFF);
     middle = (lsb & 0xFF00) >> 8;
     last = (lsb & 0xFF);
-
     endResult = (first<<16);
     endResult = endResult |(middle<<8);
     endResult = endResult |(last);
+    */
 
+
+    uint8_t lsb = 0x00;
+    uint8_t msb =  0x00;
+
+    endResult = *(localFPGAaddr+(indxx+48));
+
+    lsb = (endResult & 0xFF0000)>>16;
+    msb = endResult & 0xFF;
+
+    endResult = endResult & 0xFF00;
+    endResult = endResult | (lsb & 0xFF);
+    endResult = endResult | (msb<<16);
 
     float internalRef = 2.048;
     float coeficient = pow(2, 24);
@@ -65,14 +73,14 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
     //return calculatedValue;
 
 }
-float chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
+void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
 {
-
-    float a = local_ADCaddress-2, b = local_ADCaddress+2;
-    float random = ((float) rand()) / (float) RAND_MAX;
-    float diff = b - a;
-    float r = random * diff;
-    return a+r;
+    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    float internalRef = 2.048;
+    float coeficient = pow(2, 24);
+    float calculatedValue = (autoScheme_endResult/coeficient) * internalRef;
+    autoScheme_endResult_Float = calculatedValue;
+    autoScheme_endResult_Float_Factor = autoScheme_endResult_Float + local_CH_factor;
 }
 
 
@@ -107,7 +115,7 @@ int chnlClass_Simple::reConfigFPGA_forThisChannel()
 
     switch (local_CH_Reference) {
     INTERNAL: { writeRegister(0x02, 0x00); break; }
-    EXTERNAL: { writeRegister(0x02, 0x80); break; }
+    EXTERNAL: { writeRegister(0x02, 0xC0); break; }
     }
     usleep(10000);
     writeRegister(0x03, 0x00);
@@ -170,11 +178,13 @@ uint32_t chnlClass_Simple::readRegister(uint8_t addr)
 
 
     //usleep(100000);
-    uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
-    uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
+    //uint16_t lsb = *(localFPGAaddr+((actualIDX*5)+48));
+    //uint16_t msb = *(localFPGAaddr+((actualIDX*5)+49));
 
-    uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
-    qDebug()<<"ADC:"<<local_ADCaddress<<"\t readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply;
+    uint32_t reply = *(localFPGAaddr + (actualIDX + 48));
+    //uint32_t reply = (msb<<16 & 0xffff0000) + (lsb & 0xffff);
+    //qDebug()<<"ADC:"<<local_ADCaddress<<"\t readRegister:: lsb:"<<lsb<<" MSB:"<<msb<<" both:"<<reply;
+    qDebug()<<"ADC:"<<local_ADCaddress<<"\t readRegister:: "<<reply<<" Read Addr:"<<actualIDX+48;
 
     return reply;
 }

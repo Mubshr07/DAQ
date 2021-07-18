@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>788</height>
+    <height>810</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -133,6 +133,7 @@ QPushButton:disabled {
           <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
 background-color: transparent;
+background-color: white;
 border: 1px solid black;
 border-radius:5px;
 border-image: url(:/pics/settings.png);</string>

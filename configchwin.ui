@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>881</height>
+    <height>883</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1644,7 +1644,7 @@ color:rgb(0, 0, 0);</string>
 color:white;</string>
        </property>
        <property name="text">
-        <string>Set Log sample rate (sec):</string>
+        <string>Set Log sample rate (uSec):</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1673,10 +1673,10 @@ color:white;</string>
         <number>1</number>
        </property>
        <property name="maximum">
-        <number>1000</number>
+        <number>100000</number>
        </property>
        <property name="value">
-        <number>2</number>
+        <number>500</number>
        </property>
       </widget>
      </item>
@@ -1791,7 +1791,7 @@ border: 2px solid red;
 padding 10px;</string>
        </property>
        <property name="text">
-        <string>CLOSE</string>
+        <string>HOME</string>
        </property>
       </widget>
      </item>

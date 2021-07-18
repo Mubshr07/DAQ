@@ -110,7 +110,7 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
 {
     graphValueArray[indx] = val;
-    qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
+    //qDebug()<<" index:"<<indx<<" chnlID:"<<chnl<<" value:"<<val;
     /*
     static QTime time(QTime::currentTime());
     // calculate two new data points:
@@ -221,16 +221,19 @@ void graphWin::on_pb_Add_toGraph_clicked()
     int chnlInt = ui->cmb_AddList->currentText().toInt();
     chnl4thIsAppliable = false;
     int indx = 3;
-    for(int i=0; i<4; i++)
+    int i=0;
+    //for(int i=0; i<4; i++)
+    while(i < 4)
     {
         if(availIndex[i] == false)
         {
             indx = i;
-            if(i==3) chnl4thIsAppliable = true;
+            if(i==3) {  chnl4thIsAppliable = true;}
             break;
         }
+        i++;
     }
-    //qDebug()<<" availIndex[indx] : "<<indx;
+    qDebug()<<" availIndex[indx] : "<<indx;
 
     emit tx_AddNewChannelToGraph(indx, chnlInt);
     graphedChannels[indx] = chnlInt;
@@ -287,7 +290,7 @@ void graphWin::on_pb_Add_toGraph_clicked()
     }
     if(currentIndex < totalItems) ui->cmb_AddList->setCurrentIndex(currentIndex);
 
-    if(chnl4thIsEnable && chnl4thIsAppliable)
+    if(chnl4thIsEnable && chnl4thIsAppliable && (already4thChannelID < TOTAL_CHANNEL))
     {
         qv_availableList.append(already4thChannelID);
         update_cmbBoxItems();
@@ -446,7 +449,7 @@ void graphWin::rx_confirmationBoxClosed(bool yesBTN, int param)
         local_loggingStarted = !local_loggingStarted;
         emit tx_loggingStartStop(local_loggingStarted, logUserFilePath);
         emit tx_GraphWindowIsOpen(false);
-        emit tx_generate_ThisGUI(gui_FIRST_WIN);
+        emit tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
         emit tx_ClosingWindow_graphWin();
         //this->close();
     }
@@ -468,7 +471,7 @@ void graphWin::on_pb_CloseWindow_clicked()
         on_pb_RemoveGraph_2_clicked();
         on_pb_RemoveGraph_3_clicked();
         emit tx_GraphWindowIsOpen(false);
-        emit tx_generate_ThisGUI(gui_FIRST_WIN);
+        emit tx_generate_ThisGUI(gui_CONFIG_CH_WIN);
         emit tx_ClosingWindow_graphWin();
     }
 }

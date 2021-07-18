@@ -16,7 +16,7 @@ public:
     bool isChnlEnable();
     float giveCurrentValueWithFactor();
     void Get_RawValue_fromADDRESS();
-    float Get_RawValue_fromADDRESSAuto();
+    void Get_RawValue_fromADDRESSAuto();
 
 
     int32_t get_rawValue();
@@ -35,8 +35,11 @@ public:
     int reConfigFPGA_forThisChannel();
 
     uint32_t endResult = 0x00000000;
+    uint32_t autoScheme_endResult = 0x00000000;
     float endResult_Float =0.0;
     float endResult_Float_Factor =0.0;
+    float autoScheme_endResult_Float =0.0;
+    float autoScheme_endResult_Float_Factor =0.0;
 
 
 private:

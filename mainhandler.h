@@ -51,11 +51,11 @@ private slots:
     void on_timer_SingleShot_elapsed();
 
 private:
-    FirstWindow *firstWin;
-    MainWindow *logConfig;
-    graphWin *GraphW;
-    ConfigChWin *configCH;
-    NewDebug *debgWn;
+    FirstWindow *firstWin = nullptr;
+    MainWindow *logConfig = nullptr;
+    ConfigChWin *configCH = nullptr;
+    NewDebug *debgWn = nullptr;
+    graphWin *grphW = nullptr;
 
 
     QTimer *timer_generateGUI;
@@ -66,7 +66,6 @@ private:
 
     loggerThread *loggerClass;
     QThread *thrd;
-    graphWin *grphW;
 
     GUI_WIN local_generateGUI = gui_FIRST_WIN;
 };

@@ -55,7 +55,6 @@ public slots:
 private:
     QTimer *timer_logger;
     QElapsedTimer *timer_elapser;
-    QElapsedTimer *timer_elapser2;
     QTimer *timer_graphValue;
 
     void readChannelSettingsFile();
@@ -64,6 +63,9 @@ private:
     void initializeHWAddresses();
     uint32_t *local_FPGA_ADDRESS;
     //int32_t *local_LED_ADDRESS;
+    int fpgaCounterAddr = 54;
+    uint16_t fpgaCounterValue = 0x0000;
+    uint16_t fpgaCounterValue_OLD = 0x0000;
 
     //QVector<int> qv_graphChannels;
     int graphChannels_idx[4] = {232, 232, 232, 232};
@@ -84,6 +86,7 @@ private:
     long logSerialNumber = 0;
 
     int local_logTime_MS = 0;
+    long nanoSec = 0;
 
 
 

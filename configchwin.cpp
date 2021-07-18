@@ -230,7 +230,7 @@ void ConfigChWin::rx_ramdomOP(int idx, float val, QString str)
         break;
     }
     case 1: {
-        qDebug()<<" ConfigChWin::rx_ramdomOP string is:: "<<str;
+        //qDebug()<<" ConfigChWin::rx_ramdomOP string is:: "<<str;
         break;
     }
     }
