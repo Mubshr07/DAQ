@@ -74,12 +74,12 @@ private:
     QString styleLogStop = "font: 600 20pt 'Times New Roman'; padding: 5px; background-color: rgb(255, 255, 255); border: 1px solid black; border-radius:5px; color:red;";
     QString styleLogStart = "font: 600 20pt 'Times New Roman'; padding: 5px; background-color: lime; border: 1px solid black; border-radius:5px; color:white;";
 
-    QString style_removBtn_0 = "font: 500 16pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot0_Color.name()+"; border: 1px solid black; border-radius:5px;";
-    QString style_removBtn_1 = "font: 500 16pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot1_Color.name()+"; border: 1px solid black; border-radius:5px;";
-    QString style_removBtn_2 = "font: 500 16pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot2_Color.name()+"; border: 1px solid black; border-radius:5px;";
-    QString style_removBtn_3 = QString("font: 500 16pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot3_Color.name()+"; border: 1px solid black; border-radius:5px;");
+    QString style_removBtn_0 = "font: 500 14pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot0_Color.name()+"; border: 1px solid black; border-radius:5px;";
+    QString style_removBtn_1 = "font: 500 14pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot1_Color.name()+"; border: 1px solid black; border-radius:5px;";
+    QString style_removBtn_2 = "font: 500 14pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot2_Color.name()+"; border: 1px solid black; border-radius:5px;";
+    QString style_removBtn_3 = QString("font: 500 14pt 'Times New Roman'; padding: 5px; color:white; background-color:"+ plot3_Color.name()+"; border: 1px solid black; border-radius:5px;");
 
-    QString style_removBtn_Disabled = "font: 500 16pt 'Times New Roman'; padding: 5px; color:black; background-color:transparent; border: 1px solid transparent; border-radius:5px;";
+    QString style_removBtn_Disabled = "font: 500 14pt 'Times New Roman'; padding: 5px; color:black; background-color:transparent; border: 1px solid transparent; border-radius:5px;";
 
     QString logUserFilePath = "";
 

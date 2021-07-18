@@ -24,6 +24,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     readChannelSettingsFile();
     qDebug()<<" debug LoggerThread 1 ";
 
+    initialize_Dir_FileName();
 
     //  ----------------------------------------------------------------
     // -------- Set Clock
@@ -37,7 +38,6 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     //  ----------------------------------------------------------------
 
 
-    local_logging = false;
     local_logTime_MS = 0;
     local_log_sec = 0;
     local_log_min = 0;
@@ -46,7 +46,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     //qDebug()<<" before timer_graph initialize ";
     timer_graphValue = new QTimer(this);
     connect(timer_graphValue, SIGNAL(timeout()), SLOT(on_timer_graphValue_elapsed()));
-    //timer_graphValue->start(100);
+    timer_graphValue->start(200);
 
     //qDebug()<<" debug LoggerThread 3 ";
     timer_elapser = new QElapsedTimer();
@@ -76,7 +76,7 @@ void loggerThread::on_timer_logger_elapsed()
                 chnlArray[i].Get_RawValue_fromADDRESSAuto();
             }
         }
-        if(local_logging)
+        if(logging_isStarted)
         {
             // Logging to File
             logStr = "";
@@ -101,7 +101,130 @@ void loggerThread::on_timer_logger_elapsed()
         }
     } // end of FPGA-Counter Matched
 
-    if(local_logging)
+
+    /*
+    if(logging_isStarted)
+    {
+        if(local_logTime_MS >= 1000)
+        {
+            local_logTime_MS -= 1000;
+            local_log_sec++;
+            if(local_log_hours<100)
+                local_LogTime_Str = QString("00"+QString::number(local_log_hours)+ ":");
+            else if(local_log_hours<10)
+                local_LogTime_Str = QString("0"+QString::number(local_log_hours)+ ":");
+            else
+                local_LogTime_Str = QString(QString::number(local_log_hours)+ ":");
+
+            if(local_log_min<10)
+                local_LogTime_Str += QString("0"+QString::number(local_log_min)+ ":");
+            else
+                local_LogTime_Str += QString(QString::number(local_log_min)+ ":");
+
+            if(local_log_sec<10)
+                local_LogTime_Str += QString("0"+QString::number(local_log_sec));
+            else
+                local_LogTime_Str += QString(QString::number(local_log_sec));
+
+            emit tx_ramdomOP(1, 1.0, local_LogTime_Str);
+        }
+        if(local_log_sec > 59)
+        {
+            local_log_sec = 0;
+            local_log_min++;
+        }
+        if(local_log_min > 59)
+        {
+            local_log_min = 0;
+            local_log_hours++;
+        }
+        nanoSec += timer_elapser->nsecsElapsed();
+        if(nanoSec > 1000000)
+        {
+            nanoSec -= 1000000;
+            local_logTime_MS++;
+        }
+        //qDebug()<<" local_logTime_MS:: "<<local_logTime_MS;
+    }
+    */
+
+
+
+
+
+    /*
+    timer_elapser->start();
+    for(int i=0; i<TOTAL_CHANNEL; i++)
+    {
+        if(chnlArray[i].isChnlEnable())
+        {
+            chnlArray[i].Get_RawValue_fromADDRESSAuto();
+            if(!graphWindowIsOpen) {
+                emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
+            } else if(graphWindowIsOpen && logging_isStarted) {
+                logStr += QString(QString::number(chnlArray[i].endResult_Float_Factor, 'f', 3)+",");
+            }
+        }
+    }
+    if(!graphWindowIsOpen)
+    {
+           timer_logger->setInterval(300);
+    }
+    else
+    {
+        elapsed_timeNanoSec = timer_elapser->nsecsElapsed();
+        sampleRate_MS_Calculated = (sampleRate_MS - (elapsed_timeNanoSec/1000000.0));
+        timer_logger->setInterval(sampleRate_MS_Calculated);
+    } */
+    //qDebug()<<" 2222222222 ";
+
+}
+void loggerThread::on_timer_graphValue_elapsed()
+{
+    if(graphWindowIsOpen) {
+        for(int i=0; i<4; i++)
+        {
+            if(graphChannels_idxBool[i])
+            {
+                //chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
+                //qDebug()<<" graph Channel Indx:"<<i<<" CH#"<<graphChannels_idx[i]<<" value "<<chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor;
+                emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor);
+            }
+        }
+    }
+    if(chnlSettingsWindowIsOpen)
+    {
+        chnlArray[settingsCH_id].Get_RawValue_fromADDRESS();
+        emit tx_channel_Value(settingsCH_id, chnlArray[settingsCH_id].endResult, chnlArray[settingsCH_id].endResult_Float, chnlArray[settingsCH_id].endResult_Float_Factor);
+    }
+    else if(!graphWindowIsOpen && !chnlSettingsWindowIsOpen)
+    {
+        if(logging_isStarted)
+        {
+            for(int i=0; i<TOTAL_CHANNEL; i++)
+            {
+                if(chnlArray[i].isChnlEnable())
+                {
+                    //chnlArray[i].Get_RawValue_fromADDRESSAuto();
+                    emit tx_channel_Value(i, chnlArray[i].autoScheme_endResult, chnlArray[i].autoScheme_endResult_Float, chnlArray[i].autoScheme_endResult_Float_Factor);
+                }
+            }
+        }
+        else
+        {
+            for(int i=0; i<TOTAL_CHANNEL; i++)
+            {
+                if(chnlArray[i].isChnlEnable())
+                {
+                    chnlArray[i].Get_RawValue_fromADDRESS();
+                    emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
+                }
+            }
+        }
+    }
+
+
+    if(logging_isStarted)
     {
         if(local_logTime_MS >= 1000)
         {
@@ -145,56 +268,6 @@ void loggerThread::on_timer_logger_elapsed()
         //qDebug()<<" local_logTime_MS:: "<<local_logTime_MS;
     }
 
-
-
-
-
-
-    /*
-    timer_elapser->start();
-    for(int i=0; i<TOTAL_CHANNEL; i++)
-    {
-        if(chnlArray[i].isChnlEnable())
-        {
-            chnlArray[i].Get_RawValue_fromADDRESSAuto();
-            if(!graphWindowIsOpen) {
-                emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
-            } else if(graphWindowIsOpen && local_logging) {
-                logStr += QString(QString::number(chnlArray[i].endResult_Float_Factor, 'f', 3)+",");
-            }
-        }
-    }
-    if(!graphWindowIsOpen)
-    {
-           timer_logger->setInterval(300);
-    }
-    else
-    {
-        elapsed_timeNanoSec = timer_elapser->nsecsElapsed();
-        sampleRate_MS_Calculated = (sampleRate_MS - (elapsed_timeNanoSec/1000000.0));
-        timer_logger->setInterval(sampleRate_MS_Calculated);
-    } */
-    //qDebug()<<" 2222222222 ";
-
-}
-void loggerThread::on_timer_graphValue_elapsed()
-{
-    if(graphWindowIsOpen) {
-        for(int i=0; i<4; i++)
-        {
-            if(graphChannels_idxBool[i])
-            {
-                //chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
-                //qDebug()<<" graph Channel Indx:"<<i<<" CH#"<<graphChannels_idx[i]<<" value "<<chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor;
-                emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor);
-            }
-        }
-    }
-    if(chnlSettingsWindowIsOpen)
-    {
-        chnlArray[settingsCH_id].Get_RawValue_fromADDRESS();
-        emit tx_channel_Value(settingsCH_id, chnlArray[settingsCH_id].endResult, chnlArray[settingsCH_id].endResult_Float, chnlArray[settingsCH_id].endResult_Float_Factor);
-    }
 }
 
 
@@ -215,7 +288,7 @@ void loggerThread::rx_setSampleTime(int mSec)
     sampleRate_MS = mSec;
 
     // -------- Set DataRate
-    uint32_t setRateInt = mSec;   // uSec
+    uint32_t setRateInt = (mSec * 1000);   // uSec
     setRateInt /= 0.02;
     *(local_FPGA_ADDRESS + 14) = 500;
 }
@@ -236,8 +309,7 @@ void loggerThread::rx_loggingStartStop(bool start, QString filePth)
         emit tx_ramdomOP(0, 0.0, "");
     }
 
-    local_logging = start;
-    emit tx_loggingStarted(logging_isStarted);
+    emit tx_loggingStarted_andFileOpenSuccess(logging_isStarted);
 }
 
 
@@ -282,19 +354,18 @@ void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
     graphWindowIsOpen = windOpen;
     if(windOpen)
     {
-        initialize_Dir_FileName();
         logSerialNumber=0;
-        timer_graphValue->start(100);
         chnlSettingsWindowIsOpen = false;
-        *(local_FPGA_ADDRESS + 0x06) = 0x01;
+//        *(local_FPGA_ADDRESS + 0x06) = 0x01;
 
-        *(local_FPGA_ADDRESS + 0x07) = 0x00;
-        *(local_FPGA_ADDRESS + 0x07) = 0x01;
-        *(local_FPGA_ADDRESS + 0x07) = 0x00;
+//        *(local_FPGA_ADDRESS + 0x07) = 0x00;
+//        *(local_FPGA_ADDRESS + 0x07) = 0x01;
+//        *(local_FPGA_ADDRESS + 0x07) = 0x00;
     }
     else {
-        timer_graphValue->stop();
-        *(local_FPGA_ADDRESS + 0x06) = 0x00;
+        //timer_graphValue->stop();
+        timer_graphValue->start(200);
+        //*(local_FPGA_ADDRESS + 0x06) = 0x00;
     }
 }
 void loggerThread::rx_ChannelSettingsWindowIsOpen(bool windOpen)
@@ -329,6 +400,7 @@ void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pga
 {
     qDebug()<<"\n\n##################################################";
     qDebug()<<" New Chanel Settings:: ID:"<<chnl<<" fac:"<<fac<<" pgaa:"<<pgaa<<" type:"<<typ<<" ref:"<<ref;
+    timer_graphValue->stop();
     chnlArray[chnl].set_Channel_Factor(fac);
     chnlArray[chnl].set_Channel_PGA_Type(pgaa, typ);
     chnlArray[chnl].set_Channel_Reference(ref);
@@ -336,6 +408,7 @@ void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pga
     chnlArray[chnl].reConfigFPGA_forThisChannel();
 
     rx_saveChannelSettingsToFile();
+    timer_graphValue->start(200);
 }
 void loggerThread::rx_giveMechannelSettings(int chnl)
 {
@@ -564,11 +637,18 @@ void loggerThread::initialize_User_FileName()
     if(logFile->open(QIODevice::WriteOnly))
     {
         logging_isStarted = true;
+        *(local_FPGA_ADDRESS + 0x06) = 0x01;
+
+        *(local_FPGA_ADDRESS + 0x07) = 0x00;
+        *(local_FPGA_ADDRESS + 0x07) = 0x01;
+        *(local_FPGA_ADDRESS + 0x07) = 0x00;
         logFile->write(str.toUtf8());
         logFile->close();
     }
     else
     {
+        // disable automatic system
+        *(local_FPGA_ADDRESS + 0x06) = 0x00;
         qDebug()<<"Error in open File";
     }
 }

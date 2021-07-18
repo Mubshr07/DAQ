@@ -35,7 +35,7 @@ public slots:
     void rx_sendingFactorsAndPGAs(int chnl, float fac, float pgaa, bool enabled);
 
     void rx_ramdomOP(int idx, float val, QString str);
-
+    void rx_loggingStarted_andFileOpenSuccess(bool started);
     void rx_confirmationBoxClosed(bool yesBTN, int param);
 
 

@@ -39,7 +39,7 @@ QPushButton:hover {
 	color:red;
 }
 QLabel {
-	font: 600 18pt &quot;Times New Roman&quot;;
+	font: 500 16pt &quot;Times New Roman&quot;;
 	padding: 8px; 
 	color:rgb(170, 255, 255);
 }
@@ -89,80 +89,51 @@ QPushButton:disabled {
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_CloseWindow">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>60</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>60</width>
-           <height>60</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Settings Window</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
+      <widget class="QPushButton" name="pb_CloseWindow">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>60</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Settings Window</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:transparent;
+color:red;
+border: 2px solid red;
+border-radius:8px;
+
+
+
+/*font: 500 16pt &quot;Times New Roman&quot;;
 padding: 5px;
 background-color: transparent;
 background-color: white;
 border: 1px solid black;
 border-radius:5px;
-border-image: url(:/pics/settings.png);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
+border-image: url(:/pics/settings.png);*/</string>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="Line" name="line_3">
@@ -309,7 +280,7 @@ border-image: url(:/pics/settings.png);</string>
             <string>Remove this Graph Channel</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 500 16pt &quot;Times New Roman&quot;;
+            <string notr="true">font: 500 14pt &quot;Times New Roman&quot;;
 padding: 5px;
 color:white;
 background-color:rgb(40, 110, 255);

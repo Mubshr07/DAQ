@@ -268,7 +268,7 @@ void ConfigChWin::rx_ChannelValue(int chnl, uint32_t raw, float fVal, float FacV
 {
     //qDebug()<<" Value Received : Chnnel = "<<chnl<<" value = "<<val;
 
-    float newCalcu = fVal + local_currentCH_Factor;
+    float newCalcu = fVal * local_currentCH_Factor;
     ui->lcd_Ch_Value_Raw->display(QString::number(raw, 16));
     ui->lcd_Ch_Value_floating->display(QString::number(fVal, 'f', 2));
     ui->lcd_Ch_Value_floatingFactor->display(QString::number(newCalcu, 'f', 2));

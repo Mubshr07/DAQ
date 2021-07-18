@@ -16,7 +16,7 @@ public:
 
 signals:
     void tx_channel_Value(int chnl,uint32_t raw, float fVal, float facVal);
-    void tx_loggingStarted(bool started);
+    void tx_loggingStarted_andFileOpenSuccess(bool started);
     void tx_graphChnlValue(int chnl, float val);
     void tx_channelisEnabled(int chnl, bool enableVal);
 
@@ -79,7 +79,6 @@ private:
     int sampleRate_Sec = 2;
     int sampleRate_MS = 100;
     int sampleRate_MS_Calculated = 0;
-    bool local_logging = false;
     qint64 elapsed_timeNanoSec = 0;
     int elapsed_timeMS = 0;
     QString logStr = "";
