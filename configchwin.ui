@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>787</height>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1183,12 +1183,12 @@ color:rgb(0, 0, 0);</string>
             </property>
             <item>
              <property name="text">
-              <string>ACC</string>
+              <string>Accelerometer</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>DT</string>
+              <string>DT Sensor</string>
              </property>
             </item>
             <item>
@@ -1198,7 +1198,7 @@ color:rgb(0, 0, 0);</string>
             </item>
             <item>
              <property name="text">
-              <string>Bridge</string>
+              <string>Bridge Sensor</string>
              </property>
             </item>
            </widget>

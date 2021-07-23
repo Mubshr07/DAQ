@@ -7,7 +7,7 @@ MainHandler::MainHandler(QObject *parent) : QObject(parent)
     loggerClass = new loggerThread();
     thrd = new QThread(loggerClass);
     loggerClass->moveToThread(thrd);
-    thrd->start();
+    thrd->start(QThread::HighestPriority);
 
     //qDebug()<<" debug 3";
 
@@ -101,6 +101,7 @@ void MainHandler::generate_logConfig()
     connect(loggerClass, SIGNAL(tx_channel_Value(int,uint32_t,float,float)), logConfig, SLOT(rx_ChannelValue(int,uint32_t,float,float)));
     connect(logConfig, SIGNAL(tx_setChannelEnable(int, bool)), loggerClass, SLOT(rx_setChannelEnableDisable(int, bool)));
     connect(logConfig, SIGNAL(tx_setSampleTime(int)), loggerClass, SLOT(rx_setSampleTime(int)));
+    connect(loggerClass, SIGNAL(tx_loggingStarted_andFileOpenSuccess(bool)), logConfig, SLOT(rx_loggingStarted_andFileOpenSuccess(bool)));
 
     connect(logConfig, SIGNAL(tx_sendFactorsAndPGAs_AllChnls()), loggerClass, SLOT(rx_sendFactorsAndPGAs_AllChnls()));
     connect(loggerClass, SIGNAL(tx_sendingFactorsAndPGAs(int, float, float, bool)), logConfig, SLOT(rx_sendingFactorsAndPGAs(int, float, float, bool)));
@@ -148,7 +149,7 @@ void MainHandler::generate_ConfigCHWin()
     connect(loggerClass, SIGNAL(tx_EnableChannelsAre(int)), configCH, SLOT(rx_EnableChannelsAre(int)));
     connect(loggerClass, SIGNAL(tx_ramdomOP(int,float, QString)), configCH, SLOT(rx_ramdomOP(int,float, QString)));
     connect(loggerClass, SIGNAL(tx_ChannelOLDSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)), configCH, SLOT(rx_ChannelOLDSettings(int,float,CHANNEL_PGA,CHANNEL_TYPE,CHANNEL_REFERENCE, bool)));
-    connect(loggerClass, SIGNAL(tx_channel_Value(int, uint32_t, float,float)), configCH, SLOT(rx_ChannelValue(int, uint32_t, float,float)));
+    connect(loggerClass, SIGNAL(tx_channel_Value_Config(int, uint32_t, float,float)), configCH, SLOT(rx_ChannelValue_Config(int, uint32_t, float,float)));
 
     configCH->setModal(true);
     configCH->show();

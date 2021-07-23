@@ -11,7 +11,7 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     {
         chnlArray[i].setChannelEnableDisable(false);
         chnlArray[i].setChannelAddress(local_FPGA_ADDRESS, i);
-        if(i<24) chnlArray[i].set_Channel_PGA_Type( CH_PGA_1, Accelerometer);
+        chnlArray[i].set_Channel_PGA_Type( CH_PGA_1, Accelerometer);
         //else chnlArray[i].set_Channel_Type(SINGEL_ENDED);
     }
 
@@ -27,14 +27,32 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     initialize_Dir_FileName();
 
     //  ----------------------------------------------------------------
+    *(local_FPGA_ADDRESS + 0x06) = 0x00;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x00;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x01;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x00;
+    usleep(10000);
     // -------- Set Clock
     uint32_t setClock = 2;
     setClock /= 0.02;
     *(local_FPGA_ADDRESS+ 0x00) = setClock;
+    usleep(10000);
     // -------- Set DataRate
     uint32_t setRateInt = 500;   // uSec
     setRateInt /= 0.02;
     *(local_FPGA_ADDRESS + 14) = setRateInt;
+    usleep(10000);
+    *(local_FPGA_ADDRESS + 0x06) = 0x00;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x00;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x01;
+    usleep(8000);
+    *(local_FPGA_ADDRESS + 0x07) = 0x00;
+    usleep(10000);
     //  ----------------------------------------------------------------
 
 
@@ -55,32 +73,32 @@ loggerThread::loggerThread(QObject *parent) : QObject(parent)
     //qDebug()<<" before timer_logger initialize ";
     timer_logger = new QTimer(this);
     connect(timer_logger, SIGNAL(timeout()), SLOT(on_timer_logger_elapsed()));
-    timer_logger->start(0);
+    timer_logger->start(loggerTimer_interval);
 
     //qDebug()<<" debug LoggerThread 4 ";
+    logging_isStarted = false;
 }
 
 
 void loggerThread::on_timer_logger_elapsed()
 {
-    timer_elapser->restart();
     //qDebug()<<" debug on_timer_logger_elapsed 1 ";
     fpgaCounterValue = *(local_FPGA_ADDRESS + fpgaCounterAddr);
     if(fpgaCounterValue != fpgaCounterValue_OLD)
     {
         fpgaCounterValue_OLD = fpgaCounterValue;
-        for(int i=0; i<TOTAL_CHANNEL; i++)
+        /* for(int i=0; i<TOTAL_CHANNEL; i++)
         {
             if(chnlArray[i].isChnlEnable())
             {
                 chnlArray[i].Get_RawValue_fromADDRESSAuto();
             }
-        }
+        } */
         if(logging_isStarted)
         {
             // Logging to File
             logStr = "";
-            //logStr = QString(QString::number(logSerialNumber)+",");
+            logStr = QString(QString::number(logSerialNumber)+",");
             //logStr += QString(QTime::currentTime().toString("HH:mm:ss")+",");
             //logStr += QString(local_LogTime_Str+",");
 
@@ -92,14 +110,45 @@ void loggerThread::on_timer_logger_elapsed()
             {
                 if(chnlArray[i].isChnlEnable())
                 {
+                    chnlArray[i].Get_RawValue_fromADDRESSAuto();
                     logStr += QString(QString::number(chnlArray[i].autoScheme_endResult_Float_Factor, 'f', 3)+",");
+                    emit tx_channel_Value(i, chnlArray[i].autoScheme_endResult, chnlArray[i].autoScheme_endResult_Float, chnlArray[i].autoScheme_endResult_Float_Factor);
                 }
             }
             logStr += "\n";
             writeThisToLogFile(logStr);
-            //logSerialNumber++;
+            logSerialNumber++;
         }
+        else // Manual Methods
+        {
+            for(int i=0; i<TOTAL_CHANNEL; i++)
+            {
+                if(chnlArray[i].isChnlEnable())
+                {
+                    chnlArray[i].Get_RawValue_fromADDRESS();
+                    emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
+                }
+            }
+        }
+
+
     } // end of FPGA-Counter Matched
+    else
+    {
+        //qDebug()<<" Counter Value: "<<fpgaCounterValue;
+        if(!logging_isStarted)
+        {
+            for(int i=0; i<TOTAL_CHANNEL; i++)
+            {
+                if(chnlArray[i].isChnlEnable())
+                {
+                    chnlArray[i].Get_RawValue_fromADDRESS();
+                    emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
+                    usleep(100);
+                }
+            }
+        }
+    }
 
 
     /*
@@ -181,6 +230,8 @@ void loggerThread::on_timer_logger_elapsed()
 }
 void loggerThread::on_timer_graphValue_elapsed()
 {
+    timer_elapser->restart();
+
     if(graphWindowIsOpen) {
         for(int i=0; i<4; i++)
         {
@@ -192,7 +243,7 @@ void loggerThread::on_timer_graphValue_elapsed()
                     emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].autoScheme_endResult_Float_Factor);
                 else
                 {
-                    chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
+                    //chnlArray[graphChannels_idx[i]].Get_RawValue_fromADDRESS();
                     emit tx_GraphChannelValue(i, graphChannels_idx[i], chnlArray[graphChannels_idx[i]].endResult_Float_Factor);
                 }
             }
@@ -200,34 +251,34 @@ void loggerThread::on_timer_graphValue_elapsed()
     }
     if(chnlSettingsWindowIsOpen)
     {
-        chnlArray[settingsCH_id].Get_RawValue_fromADDRESS();
-        emit tx_channel_Value(settingsCH_id, chnlArray[settingsCH_id].endResult, chnlArray[settingsCH_id].endResult_Float, chnlArray[settingsCH_id].endResult_Float_Factor);
+        //chnlArray[settingsCH_id].Get_RawValue_fromADDRESS();
+        emit tx_channel_Value_Config(settingsCH_id, chnlArray[settingsCH_id].endResult, chnlArray[settingsCH_id].endResult_Float, chnlArray[settingsCH_id].endResult_Float_Factor);
     }
-    else if(!graphWindowIsOpen && !chnlSettingsWindowIsOpen)
-    {
-        if(logging_isStarted)
-        {
-            for(int i=0; i<TOTAL_CHANNEL; i++)
-            {
-                if(chnlArray[i].isChnlEnable())
-                {
-                    //chnlArray[i].Get_RawValue_fromADDRESSAuto();
-                    emit tx_channel_Value(i, chnlArray[i].autoScheme_endResult, chnlArray[i].autoScheme_endResult_Float, chnlArray[i].autoScheme_endResult_Float_Factor);
-                }
-            }
-        }
-        else
-        {
-            for(int i=0; i<TOTAL_CHANNEL; i++)
-            {
-                if(chnlArray[i].isChnlEnable())
-                {
-                    chnlArray[i].Get_RawValue_fromADDRESS();
-                    emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
-                }
-            }
-        }
-    }
+//    else if(!graphWindowIsOpen && !chnlSettingsWindowIsOpen)
+//    {
+//        if(logging_isStarted)
+//        {
+//            for(int i=0; i<TOTAL_CHANNEL; i++)
+//            {
+//                if(chnlArray[i].isChnlEnable())
+//                {
+//                    //chnlArray[i].Get_RawValue_fromADDRESSAuto();
+//                    emit tx_channel_Value(i, chnlArray[i].autoScheme_endResult, chnlArray[i].autoScheme_endResult_Float, chnlArray[i].autoScheme_endResult_Float_Factor);
+//                }
+//            }
+//        }
+//        else
+//        {
+//            for(int i=0; i<TOTAL_CHANNEL; i++)
+//            {
+//                if(chnlArray[i].isChnlEnable())
+//                {
+//                    chnlArray[i].Get_RawValue_fromADDRESS();
+//                    emit tx_channel_Value(i, chnlArray[i].endResult, chnlArray[i].endResult_Float, chnlArray[i].endResult_Float_Factor);
+//                }
+//            }
+//        }
+//    }
 
 
     if(logging_isStarted)
@@ -271,6 +322,7 @@ void loggerThread::on_timer_graphValue_elapsed()
             nanoSec -= 1000000;
             local_logTime_MS++;
         }
+        local_logTime_MS += +timer_graphValue->interval();
         //qDebug()<<" local_logTime_MS:: "<<local_logTime_MS;
     }
 
@@ -290,13 +342,25 @@ void loggerThread::rx_setChannelEnableDisable(int chnlIndex, bool enable)
 }
 void loggerThread::rx_setSampleTime(int mSec)
 {
-    sampleRate_Sec = mSec/1000.0;
-    sampleRate_MS = mSec;
+    //sampleRate_Sec = mSec/1000.0;
+    //sampleRate_MS = mSec;
 
     // -------- Set DataRate
-    uint32_t setRateInt = 50000000;   // fpga Clock
-    setRateInt /= mSec;
+    //uint32_t setRateInt = 50000000;   // fpga Clock
+
+
+    uint32_t setRateInt = 100000 / mSec / 0.02;   // fpga Clock
+    //setRateInt /= mSec;
     *(local_FPGA_ADDRESS + 14) = setRateInt;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    usleep(10000);
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    *(local_FPGA_ADDRESS + 14) = setRateInt;
+    usleep(10000);
+
+    qDebug()<<" passing Rate : "<<mSec<<" make: "<<setRateInt;
 }
 void loggerThread::rx_loggingStartStop(bool start, QString filePth)
 {
@@ -313,6 +377,10 @@ void loggerThread::rx_loggingStartStop(bool start, QString filePth)
     else
     {
         emit tx_ramdomOP(0, 0.0, "");
+        // disable automatic system
+        *(local_FPGA_ADDRESS + 0x06) = 0x00;
+        *(local_FPGA_ADDRESS + 0x07) = 0x00;
+        usleep(5000);
     }
 
     emit tx_loggingStarted_andFileOpenSuccess(logging_isStarted);
@@ -360,7 +428,6 @@ void loggerThread::rx_GraphWindowIsOpen(bool windOpen)
     graphWindowIsOpen = windOpen;
     if(windOpen)
     {
-        logSerialNumber=0;
         chnlSettingsWindowIsOpen = false;
 //        *(local_FPGA_ADDRESS + 0x06) = 0x01;
 
@@ -408,6 +475,7 @@ void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pga
     qDebug()<<"\n\n##################################################";
     qDebug()<<" New Chanel Settings:: ID:"<<chnl<<" fac:"<<fac<<" pgaa:"<<pgaa<<" type:"<<typ<<" ref:"<<ref;
     timer_graphValue->stop();
+    timer_logger->stop();
     chnlArray[chnl].set_Channel_Factor(fac);
     chnlArray[chnl].set_Channel_PGA_Type(pgaa, typ);
     chnlArray[chnl].set_Channel_Reference(ref);
@@ -416,6 +484,7 @@ void loggerThread::rx_setChannelNewSettings(int chnl, float fac, CHANNEL_PGA pga
 
     rx_saveChannelSettingsToFile();
     timer_graphValue->start(graphTimer_interval);
+    timer_logger->start(loggerTimer_interval);
 }
 void loggerThread::rx_giveMechannelSettings(int chnl)
 {
@@ -626,7 +695,8 @@ void loggerThread::initialize_User_FileName()
     str += "Log Time,";
 
 
-    str = "Addr:81,";
+    str = "S/N,";
+    str += "Addr:81,";
     str += "Counter,";
 
 
@@ -644,20 +714,28 @@ void loggerThread::initialize_User_FileName()
     logFile = new QFile(filePath);
     if(logFile->open(QIODevice::WriteOnly))
     {
-        logging_isStarted = true;
         *(local_FPGA_ADDRESS + 0x06) = 0x01;
-
+        usleep(10000);
         *(local_FPGA_ADDRESS + 0x07) = 0x00;
+        usleep(10000);
         *(local_FPGA_ADDRESS + 0x07) = 0x01;
+        usleep(10000);
         *(local_FPGA_ADDRESS + 0x07) = 0x00;
+        usleep(10000);
+        qDebug()<<"\n\n *********************\n \t AUTOMATIC TESTING \n *********************\n\n\n";
         logFile->write(str.toUtf8());
         logFile->close();
+
+        logging_isStarted = true;
     }
     else
     {
         // disable automatic system
         *(local_FPGA_ADDRESS + 0x06) = 0x00;
-        qDebug()<<"Error in open File";
+        usleep(10000);
+        *(local_FPGA_ADDRESS + 0x07) = 0x00;
+        usleep(10000);
+        qDebug()<<"\n\n *********************\n \t Error in open File \n *********************\n\n\n";
     }
 }
 void loggerThread::writeThisToLogFile(QString str)

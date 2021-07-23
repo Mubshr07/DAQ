@@ -16,6 +16,7 @@ public:
 
 signals:
     void tx_channel_Value(int chnl,uint32_t raw, float fVal, float facVal);
+    void tx_channel_Value_Config(int chnl,uint32_t raw, float fVal, float facVal);
     void tx_loggingStarted_andFileOpenSuccess(bool started);
     void tx_graphChnlValue(int chnl, float val);
     void tx_channelisEnabled(int chnl, bool enableVal);
@@ -57,6 +58,7 @@ private:
     QElapsedTimer *timer_elapser;
     QTimer *timer_graphValue;
     int graphTimer_interval = 400;
+    int loggerTimer_interval = 0;
     void readChannelSettingsFile();
     void processChannelSettingsStr(QString str);
     Addressing *addrss_Obj;

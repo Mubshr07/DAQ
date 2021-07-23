@@ -23,7 +23,13 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
 
 
     *(localFPGAaddr+0x01) = local_ADCaddress;
+    *(localFPGAaddr+0x01) = local_ADCaddress;
+    *(localFPGAaddr+0x01) = local_ADCaddress;
+    usleep(10000);
+    *(localFPGAaddr+0x01) = local_ADCaddress;
+    *(localFPGAaddr+0x01) = local_ADCaddress;
     usleep(1000);
+
     *(localFPGAaddr + 0x02) = 0x03;
     usleep(1000);
     *(localFPGAaddr + 0x03) = 0xFFFFFF;
@@ -94,8 +100,38 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
 void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
 {
     autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    //usleep(5000);
+    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    //usleep(1000);
+
+
+    /*
+    uint8_t lsb = 0x00;
+    uint8_t msb =  0x00;
+    lsb = (autoScheme_endResult & 0xFF0000)>>16;
+    msb = autoScheme_endResult & 0xFF;
+    autoScheme_endResult = autoScheme_endResult & 0xFF00;
+    autoScheme_endResult = autoScheme_endResult | (lsb & 0xFF);
+    autoScheme_endResult = autoScheme_endResult | (msb<<16);
     float internalRef = 2.048;
-    float coeficient = pow(2, 24);
+    if(local_CH_Reference == INTERNAL_REF) internalRef = 2.048;
+    else if(local_CH_Reference == EXTERNAL_REF) internalRef = 5.0;
+
+    int32_t endSigned = 0x00000000;
+    if(autoScheme_endResult >= 0x800000) {
+        endSigned=  autoScheme_endResult - 0xFFFFFF;
+    } else {
+        endSigned = autoScheme_endResult;
+    }
+    */
+    float internalRef = 2.048;
+    if(local_CH_Reference == INTERNAL_REF) internalRef = 2.048;
+    else if(local_CH_Reference == EXTERNAL_REF) internalRef = 5.0;
+
+    float coeficient = pow(2, 23);
+    //float calculatedValue = (endSigned/coeficient) * internalRef;
     float calculatedValue = (autoScheme_endResult/coeficient) * internalRef;
     autoScheme_endResult_Float = calculatedValue;
     autoScheme_endResult_Float_Factor = autoScheme_endResult_Float * local_CH_factor;
@@ -119,7 +155,8 @@ int chnlClass_Simple::reConfigFPGA_forThisChannel()
     reg0 = ((fpga_PGA<<1) & 0x0E) | reg0;
     //qDebug()<<" 1: "<<QString::number(reg0, 16);
     switch (local_CH_Type) {
-    case Accelerometer: case DT_Sensor: { reg0 = reg0 | 0b10110000; break; }
+    case Accelerometer:{ reg0 = reg0 | 0b10110000; break; }
+    case DT_Sensor: { reg0 = reg0 | 0b10110000; break; }
     case Volts_0_10: { reg0 = reg0 | 0b10000000; break; }
     case BridgeCH: { reg0 = reg0 | 0b00110000; break; }
     }
@@ -128,7 +165,8 @@ int chnlClass_Simple::reConfigFPGA_forThisChannel()
     usleep(10000);
     writeRegister(0x00, reg0);
     usleep(10000);
-    writeRegister(0x01, 0xC4);
+    //writeRegister(0x01, 0xC4); // Original old
+    writeRegister(0x01, 0xB4); // new 23July2021
     usleep(10000);
 
     switch (local_CH_Reference) {

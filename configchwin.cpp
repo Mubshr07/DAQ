@@ -74,6 +74,7 @@ void ConfigChWin::rx_EnableChannelsAre(int chnlID)
         {
             normal_Button_Color(i);
         }
+        ui->pb_channel_0->setStyleSheet(style_pbChnl_Enable);
     }
 }
 
@@ -264,7 +265,7 @@ void ConfigChWin::rx_ChannelOLDSettings(int chnl, float fac, CHANNEL_PGA pgaa, C
     ui->lbl_Status->setText("New Settings loaded of channel ID: "+QString::number(local_currentCH_ID+1));
 }
 
-void ConfigChWin::rx_ChannelValue(int chnl, uint32_t raw, float fVal, float FacVal)
+void ConfigChWin::rx_ChannelValue_Config(int chnl, uint32_t raw, float fVal, float FacVal)
 {
     //qDebug()<<" Value Received : Chnnel = "<<chnl<<" value = "<<val;
 

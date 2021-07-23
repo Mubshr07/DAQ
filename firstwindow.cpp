@@ -18,7 +18,7 @@ FirstWindow::FirstWindow(QWidget *parent) :
     timer_clock->setInterval(1000);
     connect(timer_clock, SIGNAL(timeout()), this, SLOT(on_timer_clock_elapsed()));
     timer_clock->start();
-
+    ui->pb_Config_Factors->hide();
 }
 
 FirstWindow::~FirstWindow()

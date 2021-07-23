@@ -33,7 +33,7 @@ public slots:
 
     void rx_ChannelOLDSettings(int chnl, float fac, CHANNEL_PGA pgaa, CHANNEL_TYPE typ, CHANNEL_REFERENCE ref, bool enb);
     void rx_ramdomOP(int idx, float val, QString str);
-    void rx_ChannelValue(int chnl, uint32_t raw, float fVal, float FacVal);
+    void rx_ChannelValue_Config(int chnl, uint32_t raw, float fVal, float FacVal);
 
     void rx_EnableChannelsAre(int chnlID);
 
