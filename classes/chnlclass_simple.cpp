@@ -100,12 +100,8 @@ void chnlClass_Simple::Get_RawValue_fromADDRESS()
 void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
 {
     autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
+    //usleep(5);
     autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
-    //usleep(5000);
-    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
-    autoScheme_endResult = *(localFPGAaddr + local_ADCaddress);
-    //usleep(1000);
-
 
     /*
     uint8_t lsb = 0x00;
@@ -115,6 +111,8 @@ void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
     autoScheme_endResult = autoScheme_endResult & 0xFF00;
     autoScheme_endResult = autoScheme_endResult | (lsb & 0xFF);
     autoScheme_endResult = autoScheme_endResult | (msb<<16);
+    */
+
     float internalRef = 2.048;
     if(local_CH_Reference == INTERNAL_REF) internalRef = 2.048;
     else if(local_CH_Reference == EXTERNAL_REF) internalRef = 5.0;
@@ -125,14 +123,11 @@ void chnlClass_Simple::Get_RawValue_fromADDRESSAuto()
     } else {
         endSigned = autoScheme_endResult;
     }
-    */
-    float internalRef = 2.048;
-    if(local_CH_Reference == INTERNAL_REF) internalRef = 2.048;
-    else if(local_CH_Reference == EXTERNAL_REF) internalRef = 5.0;
+
 
     float coeficient = pow(2, 23);
-    //float calculatedValue = (endSigned/coeficient) * internalRef;
-    float calculatedValue = (autoScheme_endResult/coeficient) * internalRef;
+    float calculatedValue = (endSigned/coeficient) * internalRef;
+    //float calculatedValue = (autoScheme_endResult/coeficient) * internalRef;
     autoScheme_endResult_Float = calculatedValue;
     autoScheme_endResult_Float_Factor = autoScheme_endResult_Float * local_CH_factor;
 }
@@ -219,7 +214,7 @@ int chnlClass_Simple::writeRegister(uint8_t addr, uint8_t val)
     *(localFPGAaddr + actualIDX) = 0x00;
 
 
-    qDebug()<<"ADC:"<<local_ADCaddress<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue; //<<"\n";
+    //qDebug()<<"ADC:"<<local_ADCaddress<<"\t\t WriteRegister Method: Addr: "<<address<<" val: "<<val<<" mosi:"<<sendValue; //<<"\n";
     return  1;
 }
 uint32_t chnlClass_Simple::readRegister(uint8_t addr)

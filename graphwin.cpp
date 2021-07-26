@@ -97,19 +97,19 @@ void graphWin::rx_EnableChannelsAre(int chnlID)
 {
     //qDebug()<<" enable channel is :"<<chnlID;
     if(chnlID > TOTAL_CHANNEL) return;
-    qv_EnablChannels.append(chnlID);
+    qv_EnablChannels.append(chnlID+1);
     if(initial_bool)
     {
         initial_bool = false;
         availIndex[0] = true;
-        graphedChannels[0] = chnlID;
-        ui->lbl_Channel_0->setText(QString::number(chnlID));
+        graphedChannels[0] = chnlID+1;
+        ui->lbl_Channel_0->setText(QString::number(chnlID+1));
         ui->pb_RemoveGraph_0->setEnabled(true);
     }
     else
     {
-        qv_availableList.append(chnlID);
-        ui->cmb_AddList->addItem(QString::number(chnlID, 10));
+        qv_availableList.append(chnlID+1);
+        ui->cmb_AddList->addItem(QString::number((chnlID+1), 10));
     }
 }
 void graphWin::rx_GraphChannelValue(int indx, int chnl, float val)
@@ -242,8 +242,8 @@ void graphWin::on_pb_Add_toGraph_clicked()
     }
     qDebug()<<" availIndex[indx] : "<<indx;
 
-    emit tx_AddNewChannelToGraph(indx, chnlInt);
-    graphedChannels[indx] = chnlInt;
+    emit tx_AddNewChannelToGraph(indx, chnlInt-1);
+    graphedChannels[indx] = chnlInt-1;
     int already4thChannelID = 66;
     if(chnl4thIsEnable)
     {
@@ -307,7 +307,7 @@ void graphWin::on_pb_RemoveGraph_0_clicked()
 {
     availIndex[0] = false;
     int chnlID = ui->lbl_Channel_0->text().toInt();
-    emit tx_RemoveChannelToGraph(0, chnlID);
+    emit tx_RemoveChannelToGraph(0, (chnlID-1));
     ui->lbl_Channel_0->setText("  ");
     ui->pb_RemoveGraph_0->setText("");
     ui->pb_RemoveGraph_0->setEnabled(false);
@@ -321,7 +321,7 @@ void graphWin::on_pb_RemoveGraph_1_clicked()
 {
     availIndex[1] = false;
     int chnlID = ui->lbl_Channel_1->text().toInt();
-    emit tx_RemoveChannelToGraph(1, chnlID);
+    emit tx_RemoveChannelToGraph(1, (chnlID-1));
     ui->lbl_Channel_1->setText("  ");
     ui->pb_RemoveGraph_1->setText("");
     ui->pb_RemoveGraph_1->setEnabled(false);
@@ -335,7 +335,7 @@ void graphWin::on_pb_RemoveGraph_2_clicked()
 {
     availIndex[2] = false;
     int chnlID = ui->lbl_Channel_2->text().toInt();
-    emit tx_RemoveChannelToGraph(2, chnlID);
+    emit tx_RemoveChannelToGraph(2, (chnlID-1));
     ui->lbl_Channel_2->setText("  ");
     ui->pb_RemoveGraph_2->setText("");
     ui->pb_RemoveGraph_2->setEnabled(false);
@@ -350,7 +350,7 @@ void graphWin::on_pb_RemoveGraph_3_clicked()
     availIndex[3] = false;
     chnl4thIsEnable = false;
     int chnlID = ui->lbl_Channel_3->text().toInt();
-    emit tx_RemoveChannelToGraph(3, chnlID);
+    emit tx_RemoveChannelToGraph(3, (chnlID-1));
     ui->lbl_Channel_3->setText("  ");
     ui->pb_RemoveGraph_3->setText("");
     ui->pb_RemoveGraph_3->setEnabled(false);

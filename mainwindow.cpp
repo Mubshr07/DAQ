@@ -128,6 +128,24 @@ void MainWindow::rx_loggingStarted_andFileOpenSuccess(bool started)
     ui->pb_StartLog->setText(QString(local_loggingStarted? "Started":"Stoped"));
     ui->pb_StartLog->setStyleSheet(QString(local_loggingStarted? styleLogStart : styleLogStop));
 
+    ui->pb_EnableAll->setEnabled(!started);
+    ui->pb_DisableAll->setEnabled(!started);
+    ui->pb_ConfigChannelSettings->setEnabled(!started);
+    ui->pb_ShowGraphWin->setEnabled(!started);
+    ui->pb_CloseApp->setEnabled(!started);
+    ui->txt_SampleTime->setEnabled(!started);
+
+    ui->slider_samplingRate->setEnabled(!started);
+
+//    ui->pb_EnableAll->setStyleSheet(QString(started? "font:650 14pt 'Times New Roman'; background-color:transparent; color:transparent; padding:5px;" : "font:650 14pt 'Times New Roman'; background-color:transparent; color:white; padding:5px;"));
+//    ui->pb_DisableAll->setStyleSheet(QString(started? "font:650 14pt 'Times New Roman'; background-color:transparent; color:transparent; padding:5px;" : "font:650 14pt 'Times New Roman'; background-color:transparent; color:white; padding:5px;"));
+//    ui->pb_ConfigChannelSettings->setStyleSheet(QString(started? "border-color:transparent; background-color:transparent; color: transparent;" : "color: black; border-color:green; background-color:  rgb(0, 255, 255);"));
+//    ui->pb_ShowGraphWin->setStyleSheet(QString(started? "border-color:transparent; background-color:transparent; color: transparent;" : "color: black; border-color:green; background-color:  rgb(0, 255, 255);"));
+//    ui->pb_CloseApp->setStyleSheet(QString(started? "color:transparent; border: 2px solid tranparent; border-radius:8px;  background-color:transparent;" : "color:red; border: 2px solid red; border-radius:8px; background-color:rgb(0,255, 255);"));
+
+
+
+
 }
 
 

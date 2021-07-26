@@ -3,11 +3,30 @@
 MainHandler::MainHandler(QObject *parent) : QObject(parent)
 {
 
+
+
     //qDebug()<<" debug 2";
     loggerClass = new loggerThread();
     thrd = new QThread(loggerClass);
     loggerClass->moveToThread(thrd);
     thrd->start(QThread::HighestPriority);
+
+    QProcess process;
+    process.start("mount /dev/mmcblk0p4 /home/root/DAQ_Logs/");
+    process.waitForFinished();
+
+
+
+//    QProcess process2;
+//    process2.setWorkingDirectory("/home/grullo");
+//    QString Command;    //Contains the command to be executed
+//    QStringList args;   //Contains arguments of the command
+//    Command = "ls";
+//    args<<"-l"<<"/home/root/DAQ_Logs";
+//    process2.start(Command, args, QIODevice::ReadOnly); //Starts execution of command
+
+//    process2.waitForFinished();
+
 
     //qDebug()<<" debug 3";
 
