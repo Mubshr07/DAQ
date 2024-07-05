@@ -1,5 +1,5 @@
 
-# Project: 5.	Data Acquisition System and Logging (DAQ)
+# Project: Data Acquisition System and Logging (DAQ)
 DAQ software is developed to monitor the vibration of structure and evaluate it's strength on different loads/weights.
 
 ## Design and Developed By:
