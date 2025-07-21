@@ -3,10 +3,12 @@
 DAQ software is developed to monitor the vibration of structure and evaluate it's strength on different loads/weights.
 
 ## Design and Developed By:
-	Name: 	Mubashir Iqbal | AI Researcher | System Engineer | Software Engineer
+	Mubashir Iqbal | Lecturer | Data Science Research | Artificial Intelligence | System Engineering & Automation
 
 <img src="https://avatars.githubusercontent.com/u/34352213?v=4" width="150" height="150" alt="mubshr07@gmail.com" align="right" style="margin-left:10px;margin-right:10px;   border: 2px solid #555; border-top-left-radius:15px; border-bottom-right-radius:15px; ">
-I am a versatile Software Engineer with expertise in developing top-tier software for desktop, Windows, Linux, and embedded Linux environments. Specializing in software architecture design, I bring a strategic approach to every project, ensuring robust and efficient solutions. Proficient in C++ and utilizing the powerful Qt framework alongside the Qt-Creator IDE, I deliver high-quality, cross-platform software that meets diverse client needs. Let’s collaborate to turn your software vision into reality!👨🏻‍ 👨🏻‍💻
+I am Mubashir Iqbal, a Computer Science professional with a Master’s from COMSATS University Islamabad and a Bachelor’s from Virtual University Pakistan. Currently, I serve as a Lecturer at HITEC University, teaching and mentoring undergraduate students. My expertise includes AI, machine learning, data science, and software engineering, with a strong focus on system reliability and reusability. Passionate about eXplainable AI (XAI) to see how these AI blackbox model works. As a Software Engineer, I specialize in creating robust systems for both desktop and embedded environments using Qt C++. My skills also include Apache Server, PHP, MySQL, HTML5, CSS3, Bootstrap, JavaScript, Django, WordPress, and E-Commerce development, allowing me to effectively integrate and optimize systems. 
+
+Looking forward to collaborating and making a meaningful impact!👨🏻‍ 👨🏻‍💻
 
 ### Connect with me:
 <a href="https://fb.com/https://www.facebook.com/mubshr07/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="https://www.facebook.com/mubshr07/" height="30" width="40" /></a> 
@@ -29,4 +31,6 @@ This Qt C++ Embedded Linux software, running on the DE10-Nano Development Kit (L
 ### Tools & Technologies: 
 Qt C++ Framework version 5.12, QWidgetApplication, Open-Source
 
- 
+
+
+ #
