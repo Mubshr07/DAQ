@@ -22,7 +22,7 @@ Looking forward to collaborating and making a meaningful impact!👨🏻‍ 👨
 Email to: <a href="emailto:mubshr07@gmail.com"> mubshr07@gmail.com </a>
 
 ## 🙏 Support
-This project needs a ⭐️ from you. Don't forget to leave a star ⭐️.
+This project needs a ⭐️ from you. Don't forget to leave a star ⭐️ and follow for more.
  
 
 ## Details
